@@ -8,7 +8,7 @@ tech:
   - GraphQL
   - Apollo
   - Heroku
-  - Bootstrap
+  - Bootstrap / ReactStrap
 show: 'true'
 ---
 
