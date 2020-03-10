@@ -1,0 +1,64 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": ["prettier", "lodash", "react"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "strict": 0,
+    "curly": "off",
+    "quotes": "off",
+    "react/prop-types": "off",
+    "react/no-danger": "off",
+    "import/no-unresolved": "off",
+    "react/forbid-prop-types": "off",
+    "react/no-array-index-key": "off",
+    "import/newline-after-import": "off",
+    "no-return-assign": "off",
+    "no-shadow": "off",
+    "no-nested-ternary": "off",
+    "no-unneeded-ternary": "off",
+    "no-underscore-dangle": "off",
+    "react/require-default-props": "off",
+    "import/no-named-as-default": "off",
+    "react/jsx-filename-extension": "off",
+    "consistent-return": "off",
+    "no-undef": "off",
+    "no-console": "off",
+    "no-else-return": "off",
+    "no-plusplus": "off",
+    "react/jsx-curly-brace-presence": "off",
+    "react/jsx-boolean-value": "off",
+    "react/destructuring-assignment": "off",
+    "react/no-access-state-in-setstate": "off",
+    "react/state-in-constructor": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "import/order": "off",
+    "camelcase": "off",
+    "global-require": "off",
+    "import/prefer-default-export": "off",
+    "func-names": "off",
+    "react/jsx-props-no-spreading": "off"
+  }
+}
