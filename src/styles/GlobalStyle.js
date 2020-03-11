@@ -5,14 +5,8 @@ import media from './media'
 import * as fontFamilies from './fonts'
 import mixins from './mixins'
 
-const {
-  fontSizes: { lg, md },
-  fonts,
-  flat,
-  lineHeights,
-  transition,
-  easing,
-} = theme
+const { fontSizes, fonts, flat, lineHeights, transition, easing } = theme
+
 const { textSelectShadow } = mixins
 
 const GlobalStyle = createGlobalStyle`
@@ -204,8 +198,8 @@ const GlobalStyle = createGlobalStyle`
     color: ${flat.dark.paragraph};
     line-height: ${lineHeights.body};
     font-family: ${fonts.Montserrat};
-    font-size: ${lg};
-    ${media.phablet`font-size: ${md};`}
+    font-size: ${fontSizes.lg};
+    ${media.phablet`font-size: ${fontSizes.md};`}
     &.hidden {
       overflow: hidden;
     }

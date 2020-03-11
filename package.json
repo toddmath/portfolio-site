@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "private": true,
-  "description": "My personall Portfolio website",
+  "description": "My personal Portfolio website",
   "version": "0.1.0",
   "author": "Todd Matheson <tmatheson11186@gmail.com>",
   "dependencies": {
@@ -28,8 +28,10 @@
     "react-helmet": "^5.2.1",
     "react-reveal": "^1.2.2",
     "react-spring": "^8.0.27",
+    "react-transition-group": "^4.3.0",
     "scrollreveal": "^4.0.5",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "terser": "^4.6.6"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
