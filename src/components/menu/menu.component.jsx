@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 import { navLinks } from '@config'
@@ -27,14 +27,13 @@ const Menu = ({ menuOpen, toggleMenu }) => {
       <Sidebar>
         <NavLinks>
           <NavList role='list'>
-            {navLinks &&
-              navLinks.map(({ url, name }) => (
-                <NavItem role='listitem' key={name.trim().toLowerCase()}>
-                  <NavLink role='link' to={url}>
-                    {name}
-                  </NavLink>
-                </NavItem>
-              ))}
+            {navLinks?.map(({ url, name }) => (
+              <NavItem role='listitem' key={name.trim().toLowerCase()}>
+                <NavLink role='link' to={url}>
+                  {name}
+                </NavLink>
+              </NavItem>
+            ))}
           </NavList>
           <Resume href='/resume.pdf' target='_blank' rel='nofollow noopener noreferrer'>
             Resume
