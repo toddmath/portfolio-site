@@ -1,8 +1,18 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
+import { mixins } from '@styles'
 import { navLinks } from '@config'
-import { Sidebar, NavList, StyledContainer, NavLinks, NavLink, NavItem, Resume } from './menu.styles'
+// import { Button } from '@components'
+import {
+  Sidebar,
+  NavList,
+  StyledContainer,
+  NavLinks,
+  NavLink,
+  NavItem,
+  StyledResumeButton,
+} from './menu.styles'
 
 const Menu = ({ menuOpen, toggleMenu }) => {
   const onMenuClick = evt => {
@@ -35,9 +45,7 @@ const Menu = ({ menuOpen, toggleMenu }) => {
               </NavItem>
             ))}
           </NavList>
-          <Resume href='/resume.pdf' target='_blank' rel='nofollow noopener noreferrer'>
-            Resume
-          </Resume>
+          <StyledResumeButton href='/resume.pdf'>Resume</StyledResumeButton>
         </NavLinks>
       </Sidebar>
     </StyledContainer>

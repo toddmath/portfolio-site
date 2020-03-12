@@ -21,7 +21,7 @@ const {
 
 const { flexBetween, flexCenter } = mixins
 
-export const StyledHeader = styled.header`
+export const StyledContainer = styled.header`
   ${flexBetween};
   position: fixed;
   top: 0;
@@ -33,12 +33,12 @@ export const StyledHeader = styled.header`
   pointer-events: auto !important;
   user-select: auto !important;
   width: 100%;
-  height: ${props => (props.scrollDirection === 'none' ? navHeight : navScrollHeight)};
-  box-shadow: ${props =>
-    props.scrollDirection === 'up' ? `0 8px 8px -8px ${flat.dark.headerShadow}` : 'none'};
-  transform: translateY(${props => (props.scrollDirection === 'down' ? `-100%` : '0px')});
-  border-bottom: ${props =>
-    props.scrollDirection === 'up' ? `1px solid ${flat.dark.headerBorder}` : 'none'};
+  height: ${({ scrollDirection }) => (scrollDirection === 'none' ? navHeight : navScrollHeight)};
+  box-shadow: ${({ scrollDirection }) =>
+    scrollDirection === 'up' ? `0 8px 8px -8px ${flat.dark.headerShadow}` : 'none'};
+  transform: translateY(${({ scrollDirection }) => (scrollDirection === 'down' ? `-100%` : '0px')});
+  border-bottom: ${({ scrollDirection }) =>
+    scrollDirection === 'up' ? `1px solid ${flat.dark.headerBorder}` : 'none'};
   ${media.desktop`padding: 0 40px;`};
   ${media.tablet`padding: 0 25px;`};
 `
@@ -48,6 +48,7 @@ export const StyledNav = styled.nav`
   align-items: stretch;
   position: relative;
   width: 100%;
+  background-color: ${flat.dark.background};
   color: ${flat.dark.paragraph};
   font-family: ${SFMono};
   counter-reset: item 0;
@@ -90,6 +91,7 @@ export const StyledHamburger = styled.div`
   border: 0;
   background-color: transparent;
   display: none;
+  z-index: 500;
   ${media.tablet`display: flex;`};
 `
 

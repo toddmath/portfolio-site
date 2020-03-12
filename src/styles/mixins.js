@@ -215,6 +215,15 @@ const mixins = {
     ${media.phablet`padding: 38.832px 18px;`};
   `,
 
+  articlePadding: css`
+    padding: 165px 76.25px;
+    ${media.bigDesktop`padding: 124.5px 29px;`};
+    ${media.desktop`padding: 100px 29px;`};
+    ${media.tablet`padding: 100px 29px;`};
+    ${media.thone`padding: 63px 29px;`};
+    ${media.phablet`padding: 39px 18px;`};
+  `,
+
   boxShadow: css`
     box-shadow: 0 10px 30px -15px ${flat.dark.shadow};
     transition: ${transition};

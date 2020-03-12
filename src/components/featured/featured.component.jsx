@@ -28,8 +28,14 @@ export default function Featured() {
   const cleanKey = key => key.replace(/(\s+)/g, '')
 
   return (
-    <StyledContainer id='projects'>
-      <Heading ref={ref => handleTitleRef(ref)}>Some Things I&apos;ve Built</Heading>
+    <StyledContainer
+      maxWidth='1045px'
+      bigDesktopStyles={`max-width: 845px;`}
+      desktopStyles={`max-width: 696px;`}
+    >
+      <Heading id='projects' ref={ref => handleTitleRef(ref)}>
+        Some Things I&apos;ve Built
+      </Heading>
 
       <div>
         {featuredProjects &&

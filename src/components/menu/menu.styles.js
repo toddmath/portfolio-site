@@ -1,6 +1,8 @@
 import styled from 'styled-components'
-import { theme, mixins, media } from '@styles'
 import { Link } from 'gatsby'
+
+import { theme, mixins, media } from '@styles'
+import { Button } from '@components'
 
 const {
   flat,
@@ -8,7 +10,7 @@ const {
   fonts: { SFMono },
 } = theme
 
-const { flexCenter, flexBetween, link, smallButton, largeShadow, sectionCounter } = mixins
+const { flexCenter, flexBetween, link, largeShadow, sectionCounter } = mixins
 
 export const StyledContainer = styled.div`
   position: fixed;
@@ -65,9 +67,36 @@ export const NavLink = styled(Link)`
   width: 100%;
 `
 
-export const Resume = styled.a`
-  ${smallButton};
+// export const Resume = styled.a`
+//   ${smallButton};
+//   padding: 18px 50px;
+//   margin: 10% auto 0;
+//   width: max-content;
+// `
+
+// export const ButtonWrapper = styled.div`
+//   margin: 10% auto 0;
+// `
+
+export const StyledResumeButton = styled(Button).attrs(() => ({
+  outline: false,
+  as: 'a',
+  responsive: 'false',
+  size: 'large',
+  target: '_blank',
+  rel: 'nofollow noopener noreferrer',
+}))`
+  --bg: ${flat.dark.button};
+  --fg: ${flat.dark.buttonText};
+  box-sizing: border-box;
   padding: 18px 50px;
+  background: var(--bg);
+  border: 1px solid var(--bg);
+  color: var(--fg);
   margin: 10% auto 0;
   width: max-content;
+  &:hover {
+    background: transparent;
+    color: var(--bg);
+  }
 `

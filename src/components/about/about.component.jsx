@@ -22,9 +22,14 @@ const About = () => {
   const cleanKey = key => key.replace(/(\s+)/g, '')
 
   return (
-    <Article id='about' ariaLabel='About me section' maxWidth='820px'>
+    <Article
+      ariaLabel='About me section'
+      maxWidth='1045px'
+      bigDesktopStyles={`max-width: 820px;`}
+      desktopStyles={`max-width: 696px;`}
+    >
       <Flex width='100%' flexDirection='column' justifyContent='center' alignItems='flex-start'>
-        <Heading as='h2' ref={revealContainer}>
+        <Heading id='about' as='h2' ref={revealContainer}>
           {title}
         </Heading>
         <StyledFlexContainer>

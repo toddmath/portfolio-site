@@ -15,8 +15,9 @@ export default function Contact() {
     <Article
       ariaLabel='Contact me section'
       textAlign='center'
-      maxWidth='820px'
+      maxWidth='845px'
       margin='0 auto 30px'
+      desktopStyles={`max-width: 696px;`}
       tabletStyles={`margin-bottom: 20px; padding-bottom: 50px;`}
     >
       <StyledHeading id='contact' ref={revealContainer}>

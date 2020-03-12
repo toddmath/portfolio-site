@@ -25,11 +25,19 @@ const handleBtnSize = ({ size }) => {
   }
 }
 
+const handleOtherStyles = ({ otherStyles }) => {
+  if (otherStyles) {
+    return css`
+      ${otherStyles};
+    `
+  }
+}
+
 const baseButtonStyles = css`
   border: 1px solid ${flat.dark.button};
   border-radius: ${borderRadius};
   background: ${props => (props.outline ? 'transparent' : flat.dark.button)};
-  color: ${props => (props.outline ? flat.dark.button : flat.dark.background)};
+  color: ${props => (props.outline ? flat.dark.button : flat.dark.buttonText)};
   font-family: ${props => (props.mono ? fonts.SFMono : fonts.Montserrat)};
   word-spacing: ${props => (props.mono ? '-0.059em' : 'unset')};
   letter-spacing: ${props => (props.mono ? '-0.059em' : 'unset')};
@@ -41,13 +49,13 @@ const baseButtonStyles = css`
   box-sizing: border-box;
   &:hover {
     background: ${props => (props.outline ? flat.dark.button : 'transparent')};
-    color: ${props => (props.outline ? flat.dark.background : flat.dark.button)};
+    color: ${props => (props.outline ? flat.dark.buttonText : flat.dark.button)};
   }
   &:focus {
     outline-offset: 0.5rem;
     outline: solid 2px ${flat.dark.button};
     background: ${props => (props.outline ? flat.dark.button : 'transparent')};
-    color: ${props => (props.outline ? flat.dark.background : flat.dark.button)};
+    color: ${props => (props.outline ? flat.dark.buttonText : flat.dark.button)};
   }
 `
 
@@ -63,9 +71,11 @@ export const StyledResponsiveButton = styled.button`
     padding: 0.58rem 0.75rem;
     font-size: ${fontSizes.xs};
   `}
+  ${props => handleOtherStyles(props)};
 `
 
 export const StyledButton = styled.button`
   ${baseButtonStyles};
-  ${props => handleBtnSize(props)}
+  ${props => handleBtnSize(props)};
+  ${props => handleOtherStyles(props)};
 `

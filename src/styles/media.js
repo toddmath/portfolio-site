@@ -43,13 +43,11 @@ export const toEm = px => `${(Number(px) / 16).toFixed(2)}em`
  */
 export const mediaType = (type = 'screen', max = true) =>
   Object.keys(sizes).reduce((acc, key) => {
-    if (key in sizes) {
-      acc[key] = (...args) => css`
+    acc[key] = (...args) => css`
       @media ${type.length > 0 && `${type} and`} (${max ? 'max' : 'min'}-width: ${toEm(sizes[key])}) {
         ${css(...args)};
       }
     `
-    }
     return acc
   }, {})
 

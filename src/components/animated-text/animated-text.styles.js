@@ -19,6 +19,7 @@ export const StyledTextContainer = styled.div`
   --maskX: 0;
   --maskY: 0;
   transition: all 200ms ease-in-out;
+  text-align: start;
 `
 
 const textTitleStyles = css`
@@ -26,6 +27,10 @@ const textTitleStyles = css`
   line-height: 1;
   margin: 0;
   font-weight: 500;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  line-break: strict;
+  hyphens: auto;
   ${media.desktop`font-size: 68px;`};
   ${media.tablet`font-size: 56px;`};
   ${media.phablet`font-size: 50px;`};
@@ -38,6 +43,10 @@ const textSubtitleStyles = css`
   margin: 0 0;
   letter-spacing: -0.048rem;
   font-weight: 500;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  line-break: strict;
+  hyphens: auto;
   ${media.desktop`font-size: 52px;`};
   ${media.tablet`font-size: 48px;`};
   ${media.phablet`font-size: 44px;`};

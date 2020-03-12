@@ -12,6 +12,7 @@ const Button = ({
   responsive = false,
   as = 'button',
   href,
+  otherStyles,
   children,
 }) => {
   const [activated, toggleActivated] = useToggle(false)
@@ -31,6 +32,7 @@ const Button = ({
         outline={outline}
         mono={mono}
         as={as}
+        otherStyles={otherStyles}
         {...extraProps}
       >
         {children}
@@ -47,6 +49,7 @@ const Button = ({
       mono={mono}
       size={size}
       as={as}
+      otherStyles={otherStyles}
       {...extraProps}
     >
       {children}
@@ -67,6 +70,7 @@ Button.propTypes = {
   mono: PropTypes.bool,
   outline: PropTypes.bool,
   responsive: PropTypes.bool,
+  otherStyles: PropTypes.string,
   size: PropTypes.oneOf(['large', 'medium', 'small']),
 }
 

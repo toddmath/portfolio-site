@@ -7,7 +7,7 @@ import { useNav } from '@hooks'
 import { Menu, Button } from '@components'
 
 import {
-  StyledHeader,
+  StyledContainer,
   StyledNav,
   StyledHamburger,
   StyledHamburgerBox,
@@ -23,12 +23,12 @@ const Nav = () => {
   const { menuOpen, isMounted, scrollDirection, toggleMenu } = useNav()
 
   return (
-    <StyledHeader scrolllDirection={scrollDirection}>
+    <StyledContainer scrollDirection={scrollDirection}>
       <Helmet>
         <body className={menuOpen ? 'blur' : ''} />
       </Helmet>
 
-      <StyledNav role='navigation' aria-label='Section  links'>
+      <StyledNav role='navigation' id='header-nav' aria-label='Section links'>
         <TransitionGroup component={null}>
           {isMounted && (
             <CSSTransition classNames='fade' timeout={3000}>
@@ -78,7 +78,7 @@ const Nav = () => {
       </StyledNav>
 
       <Menu menuOpen={menuOpen} toggleMenu={toggleMenu} aria-expanded={menuOpen} aria-haspopup='menu' />
-    </StyledHeader>
+    </StyledContainer>
   )
 }
 

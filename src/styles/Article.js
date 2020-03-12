@@ -6,7 +6,7 @@ import mixins from './mixins'
 
 const { flat } = theme
 
-function handleTabletQuery({ tabletStyles }) {
+const handleTabletQuery = ({ tabletStyles }) => {
   if (tabletStyles) {
     return css`
       ${media.tablet`
@@ -15,8 +15,7 @@ function handleTabletQuery({ tabletStyles }) {
     `
   }
 }
-
-function handleBigDesktopQuery({ bigDesktopStyles }) {
+const handleBigDesktopQuery = ({ bigDesktopStyles }) => {
   if (bigDesktopStyles) {
     return css`
       ${media.bigDesktop`
@@ -25,8 +24,7 @@ function handleBigDesktopQuery({ bigDesktopStyles }) {
     `
   }
 }
-
-function handleDesktopQuery({ desktopStyles }) {
+const handleDesktopQuery = ({ desktopStyles }) => {
   if (desktopStyles) {
     return css`
       ${media.desktop`
@@ -43,10 +41,11 @@ const Article = styled.article`
   text-align: ${props => props.textAlign || 'start'};
   background-color: ${flat.light.background};
   max-width: ${props => props.maxWidth || '1045px'};
+  scroll-snap-align: start;
+  ${mixins.articlePadding};
   ${props => handleBigDesktopQuery(props)};
   ${props => handleDesktopQuery(props)};
   ${props => handleTabletQuery(props)};
-  ${mixins.sectionPadding};
 `
 
 export default Article

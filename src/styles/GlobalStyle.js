@@ -157,6 +157,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    scroll-padding: 8rem;
     visibility: hidden;
     &.sr {
       visibility: visible;
@@ -165,6 +166,7 @@ const GlobalStyle = createGlobalStyle`
   @media screen and (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+      scroll-padding: 8rem;
     }
   }
   *,
@@ -206,8 +208,7 @@ const GlobalStyle = createGlobalStyle`
     &.blur {
       overflow: hidden;
       #root > #content > * {
-        filter: blur(3px) brightness(0.5);
-        transition: ${transition};
+        filter: blur(3px);
         pointer-events: none;
         user-select: none;
       }

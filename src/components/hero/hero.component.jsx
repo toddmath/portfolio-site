@@ -21,7 +21,11 @@ export default function Hero() {
   const emailBody = encodeURIComponent(`Hi Todd, my name is ...\n\nI just wanted to say ...`)
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      maxWidth='1045px'
+      bigDesktopStyles={`max-width: 820px;`}
+      desktopStyles={`max-width: 696px;`}
+    >
       <>
         <StyledOverline className='hero'>{title}</StyledOverline>
         {reducedMotion ? (
