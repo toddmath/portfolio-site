@@ -20,3 +20,8 @@ export { default as FeaturedLink } from './featured-link/featured-link.component
 export { default as FeaturedLinks } from './featured-links/featured-links.component'
 export { default as ProjectLink } from './project-link/project-link.component'
 export { default as TechList } from './tech-list/tech-list.component'
+export { default as Main } from './main/main.component'
+export { default as CSSDebugger } from './css-debug/css-debug.component'
+export { default as ProgressBar } from './progress-bar/progress-bar.component'
+export { default as NavLinks } from './nav-links/nav-links.component'
+export { default as ThemeToggle } from './theme-toggle/theme-toggle.component'

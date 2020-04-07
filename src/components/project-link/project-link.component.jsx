@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 const ProjectLink = ({ to, label, children }) => (
@@ -13,4 +13,4 @@ ProjectLink.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
 }
 
-export default ProjectLink
+export default memo(ProjectLink)

@@ -1,5 +1,5 @@
 const throttle = (func, wait = 100) => {
-  let timer = null
+  let timer
   return (...args) => {
     if (!timer) {
       timer = setTimeout(() => {

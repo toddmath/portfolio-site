@@ -17,6 +17,9 @@
     "node": true,
     "es6": true
   },
+  "globals": {
+    "__PATH_PREFIX": true
+  },
   "plugins": ["prettier", "lodash", "react"],
   "parserOptions": {
     "ecmaFeatures": {

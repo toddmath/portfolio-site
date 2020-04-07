@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 
 import { email } from '@config'
-import { useContactQuery, useReveal } from '@hooks'
+// import { useContactQuery, useReveal } from '@hooks'
+import { useContactQuery } from '@hooks'
 import { Article, Button } from '@components'
 
 import { StyledHeading, StyledButtonContainer } from './contact.styles'
@@ -9,7 +10,7 @@ import { StyledHeading, StyledButtonContainer } from './contact.styles'
 export default function Contact() {
   const { title, html } = useContactQuery()
   const revealContainer = useRef(null)
-  useReveal(revealContainer)
+  // useReveal(revealContainer)
 
   return (
     <Article

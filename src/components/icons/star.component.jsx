@@ -2,6 +2,7 @@ import React from 'react'
 
 const IconStar = () => (
   <svg
+    xmlns='http://www.w3.org/2000/svg'
     aria-labelledby='title'
     viewBox='0 0 14 16'
     version='1.1'

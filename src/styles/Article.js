@@ -1,51 +1,27 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import theme from './theme'
 import media from './media'
 import mixins from './mixins'
+import styledTheme from './StyledTheme'
 
 const { flat } = theme
 
-const handleTabletQuery = ({ tabletStyles }) => {
-  if (tabletStyles) {
-    return css`
-      ${media.tablet`
-        ${tabletStyles};
-      `}
-    `
-  }
-}
-const handleBigDesktopQuery = ({ bigDesktopStyles }) => {
-  if (bigDesktopStyles) {
-    return css`
-      ${media.bigDesktop`
-        ${bigDesktopStyles};
-      `}
-    `
-  }
-}
-const handleDesktopQuery = ({ desktopStyles }) => {
-  if (desktopStyles) {
-    return css`
-      ${media.desktop`
-        ${desktopStyles};
-      `}
-    `
-  }
-}
+const backgroundColor = styledTheme([flat.dark.background, flat.dark.cardBackground])
+const textColor = styledTheme([flat.dark.paragraph, flat.dark.cardParagraph])
 
 const Article = styled.article`
   width: ${props => props.width || '100%'};
   margin: ${props => props.margin || '0 auto'};
   padding: ${props => props.padding || '0'};
   text-align: ${props => props.textAlign || 'start'};
-  background-color: ${flat.light.background};
   max-width: ${props => props.maxWidth || '1045px'};
-  scroll-snap-align: start;
+  background-color: ${backgroundColor};
+  color: ${textColor};
   ${mixins.articlePadding};
-  ${props => handleBigDesktopQuery(props)};
-  ${props => handleDesktopQuery(props)};
-  ${props => handleTabletQuery(props)};
+  ${({ bigDesktopStyles }) => bigDesktopStyles && media.bigDesktop`${bigDesktopStyles};`}
+  ${({ desktopStyles }) => desktopStyles && media.desktop`${desktopStyles};`}
+  ${({ tabletStyles }) => tabletStyles && media.tablet`${tabletStyles};`}
 `
 
 export default Article

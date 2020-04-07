@@ -1,6 +1,8 @@
-import styled from 'styled-components'
+/* eslint-disable no-unused-vars */
+import styled, { css } from 'styled-components'
 import { Link } from 'gatsby'
-import { theme, mixins, media } from '@styles'
+
+import { theme, mixins, media, styledTheme } from '@styles'
 
 const {
   flat,
@@ -10,6 +12,10 @@ const {
   navHeight,
   navScrollHeight,
   hamburgerWidth,
+  hamBefore,
+  hamAfter,
+  hamBeforeActive,
+  hamAfterActive,
   hamBefore2,
   hamAfter2,
   hamBeforeActive2,
@@ -21,24 +27,40 @@ const {
 
 const { flexBetween, flexCenter } = mixins
 
+const backgroundColor = styledTheme([flat.dark.background, flat.dark.cardBackground])
+
+const isUp = dir => dir === 'up'
+const isNone = dir => dir === 'none'
+const isDown = dir => dir === 'down'
+
 export const StyledContainer = styled.header`
+  --navCubicBenz: ${theme.easing};
   ${flexBetween};
+  background-color: ${backgroundColor};
   position: fixed;
   top: 0;
   padding: 0px 50px;
-  background-color: ${flat.dark.background};
-  transition: ${transition};
+  /* transition: transform 250ms var(--navCubicBenz), box-shadow 250ms var(--navCubicBenz), border 250ms var(--navCubicBenz); */
+  /* transition-property: transform; */
+  transition: border-bottom 0.35s var(--navCubicBenz), box-shadow 0.35s var(--navCubicBenz), height 0.35s var(--navCubicBenz), transform 0.35s var(--navCubicBenz), background 0s var(--navCubicBenz) !important;
   z-index: 11;
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
   width: 100%;
-  height: ${({ scrollDirection }) => (scrollDirection === 'none' ? navHeight : navScrollHeight)};
-  box-shadow: ${({ scrollDirection }) =>
-    scrollDirection === 'up' ? `0 8px 8px -8px ${flat.dark.headerShadow}` : 'none'};
-  transform: translateY(${({ scrollDirection }) => (scrollDirection === 'down' ? `-100%` : '0px')});
-  border-bottom: ${({ scrollDirection }) =>
-    scrollDirection === 'up' ? `1px solid ${flat.dark.headerBorder}` : 'none'};
+  ${({ scrollDirection }) =>
+    isUp(scrollDirection)
+      ? css`
+          box-shadow: 0 8px 8px -8px ${flat.dark.headerShadow};
+          border-bottom: 1px solid ${flat.dark.headerBorder};
+        `
+      : css`
+          box-shadow: none;
+          border-bottom: none;
+        `}
+  height: ${({ scrollDirection }) => (isNone(scrollDirection) ? navHeight : navScrollHeight)};
+  transform: ${({ scrollDirection }) =>
+    isDown(scrollDirection) ? 'translateY(-100%)' : 'translateY(0px)'};
   ${media.desktop`padding: 0 40px;`};
   ${media.tablet`padding: 0 25px;`};
 `
@@ -48,22 +70,22 @@ export const StyledNav = styled.nav`
   align-items: stretch;
   position: relative;
   width: 100%;
-  background-color: ${flat.dark.background};
+  background-color: ${backgroundColor};
   color: ${flat.dark.paragraph};
   font-family: ${SFMono};
   counter-reset: item 0;
-  z-index: 12;
   box-sizing: border-box;
   justify-content: flex-end;
 `
 
 export const StyledLogo = styled.div`
+  --length: 24px;
   ${flexCenter};
   a {
     display: block;
     color: ${flat.dark.link} !important;
-    width: 72px;
-    height: 42px;
+    width: calc(var(--length) * 3);
+    height: calc(var(--length) * 1.75);
     &:hover,
     &:focus {
       svg {
@@ -113,9 +135,42 @@ export const StyledHamburgerInner = styled.div`
   right: 0;
   transition-duration: 0.22s;
   transition-property: transform;
-  transition-delay: ${props => (props.menuOpen ? `0.12s` : `0s`)};
-  transform: rotate(${props => (props.menuOpen ? `225deg` : `0deg`)});
-  transition-timing-function: ${props => (props.menuOpen ? easeOutCirc : easeInCirc)};
+  ${({ menuOpen }) =>
+    menuOpen
+      ? css`
+          transition-delay: 0.12s;
+          transform: rotate(225deg);
+          transition-timing-function: ${easeOutCirc};
+          &:before {
+            width: 100%;
+            top: 0;
+            opacity: 0;
+            transition: ${hamBeforeActive};
+          }
+          &:after {
+            width: 100%;
+            bottom: 0;
+            transform: rotate(-90deg);
+            transition: ${hamAfterActive};
+          }
+        `
+      : css`
+          transition-delay: 0s;
+          transform: rotate(0deg);
+          transition-timing-function: ${easeInCirc};
+          &:before {
+            width: 120%;
+            top: -10px;
+            opacity: 1;
+            transition: ${hamBefore};
+          }
+          &:after {
+            width: 80%;
+            bottom: -10px;
+            transform: rotate(0deg);
+            transition: ${hamAfter};
+          }
+        `}
   &:before,
   &:after {
     content: '';
@@ -123,7 +178,6 @@ export const StyledHamburgerInner = styled.div`
     position: absolute;
     left: auto;
     right: 0;
-    width: ${hamburgerWidth}px;
     height: 2px;
     background-color: ${flat.dark.link};
     border-radius: 4px;
@@ -148,26 +202,26 @@ export const StyledLink = styled.div`
   ${media.tablet`display: none;`};
 `
 
-export const StyledList = styled.ol`
-  ${flexBetween};
-`
+// export const StyledList = styled.ol`
+//   ${flexBetween};
+// `
 
-export const StyledListItem = styled.li`
-  margin: 0 10px;
-  position: relative;
-  font-size: ${smish};
-  counter-increment: item 1;
-  &:before {
-    content: '0' counter(item) '.';
-    text-align: right;
-    color: ${flat.dark.link};
-    font-size: ${xs};
-  }
-`
+// export const StyledListItem = styled.li`
+//   margin: 0 10px;
+//   position: relative;
+//   font-size: ${smish};
+//   counter-increment: item 1;
+//   &:before {
+//     content: '0' counter(item) '.';
+//     text-align: right;
+//     color: ${flat.dark.link};
+//     font-size: ${xs};
+//   }
+// `
 
-export const StyledListLink = styled(Link)`
-  padding: 12px 10px 12px 4px;
-`
+// export const StyledListLink = styled(Link)`
+//   padding: 12px 10px 12px 4px;
+// `
 
 export const StyledButtonContainer = styled.div`
   display: inline-flex;

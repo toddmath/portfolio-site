@@ -4,7 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { navLinks } from '@config'
 import { useNav } from '@hooks'
-import { Menu, Button } from '@components'
+import { Menu, NavLinks, Button, ThemeToggle } from '@components'
 
 import {
   StyledContainer,
@@ -13,9 +13,6 @@ import {
   StyledHamburgerBox,
   StyledHamburgerInner,
   StyledLink,
-  StyledList,
-  StyledListItem,
-  StyledListLink,
   StyledButtonContainer,
 } from './nav.styles'
 
@@ -32,7 +29,11 @@ const Nav = () => {
         <TransitionGroup component={null}>
           {isMounted && (
             <CSSTransition classNames='fade' timeout={3000}>
-              <StyledHamburger onClick={toggleMenu} aria-expanded={menuOpen} aria-haspopup='menu'>
+              <StyledHamburger
+                onClick={toggleMenu}
+                aria-expanded={menuOpen}
+                aria-haspopup='menu'
+              >
                 <StyledHamburgerBox>
                   <StyledHamburgerInner menuOpen={menuOpen} aria-expanded={menuOpen} />
                 </StyledHamburgerBox>
@@ -42,7 +43,10 @@ const Nav = () => {
         </TransitionGroup>
 
         <StyledLink>
-          <StyledList role='list'>
+          <NavLinks isMounted={isMounted} />
+          <ThemeToggle />
+
+          {/* <StyledList role='list'>
             <TransitionGroup component={null}>
               {isMounted &&
                 navLinks &&
@@ -52,7 +56,7 @@ const Nav = () => {
                       key={i}
                       style={{ transitionDelay: `${(i + 1) * 100}ms` }}
                       role='listitem'
-                      araia-posinset={i + 1}
+                      aria-posinset={i + 1}
                     >
                       <StyledListLink role='link' to={url}>
                         {name}
@@ -61,13 +65,13 @@ const Nav = () => {
                   </CSSTransition>
                 ))}
             </TransitionGroup>
-          </StyledList>
+          </StyledList> */}
 
           <TransitionGroup component={null}>
             {isMounted && (
               <CSSTransition in={true} classNames='fade' timeout={3000}>
                 <StyledButtonContainer delay={navLinks.length * 100 + 100}>
-                  <Button responsive={true} href='/resume.pdf'>
+                  <Button outline size='medium' href='/resume.pdf'>
                     Resume
                   </Button>
                 </StyledButtonContainer>
@@ -77,7 +81,12 @@ const Nav = () => {
         </StyledLink>
       </StyledNav>
 
-      <Menu menuOpen={menuOpen} toggleMenu={toggleMenu} aria-expanded={menuOpen} aria-haspopup='menu' />
+      <Menu
+        menuOpen={menuOpen}
+        toggleMenu={toggleMenu}
+        aria-expanded={menuOpen}
+        aria-haspopup='menu'
+      />
     </StyledContainer>
   )
 }

@@ -10,7 +10,7 @@ const {
   fonts: { SFMono },
 } = theme
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.aside`
   width: 40px;
   position: fixed;
   bottom: 0;
@@ -44,5 +44,5 @@ export const StyledEmailLink = styled(animated.a)`
   margin: 20px auto;
   padding: 10px;
   color: ${flat.dark.link};
-  perspective: 100rem;
+  perspective: 50rem;
 `

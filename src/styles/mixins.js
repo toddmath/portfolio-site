@@ -7,7 +7,9 @@ const {
   flat,
   borderRadius,
   gradients,
+  link,
   transition,
+  lineHeights,
   fonts: { SFMono },
   fontSizes: { sm, smish, md, lg },
 } = theme
@@ -28,10 +30,11 @@ const rippleEffect = keyframes`
 `
 
 const buttonStyles = css`
+  --mainColor: ${flat.dark.button};
   box-sizing: border-box;
-  color: ${flat.dark.button};
+  color: var(--mainColor);
   background-color: transparent;
-  border: 1px solid ${flat.dark.button};
+  border: 1px solid var(--mainColor);
   border-radius: ${borderRadius};
   font-family: ${SFMono};
   line-height: 1;
@@ -41,7 +44,7 @@ const buttonStyles = css`
   &:hover,
   &:focus,
   &:active {
-    background-color: ${flat.dark.button};
+    background-color: var(--mainColor);
     color: ${flat.dark.buttonText};
   }
   &:after {
@@ -133,18 +136,19 @@ const mixins = {
   `,
 
   inlineLink: css`
+    --mainColor: ${flat.dark.link};
     display: inline-block;
     text-decoration: none;
     text-decoration-skip-ink: auto;
     position: relative;
     transition: ${transition};
     cursor: pointer;
-    color: ${flat.dark.link};
-    line-height: 0.7;
+    color: var(--mainColor);
+    line-height: 18.8px;
     &:hover,
     &:focus,
     &:active {
-      color: ${flat.dark.link};
+      color: var(--mainColor);
       outline: 0;
       &:after {
         width: 100%;
@@ -157,9 +161,45 @@ const mixins = {
       height: 1px;
       position: relative;
       bottom: 0;
-      background-color: ${flat.dark.link};
+      background-color: var(--mainColor);
       transition: ${transition};
       opacity: 0.7;
+    }
+  `,
+
+  linkCenterUL: css`
+    --ulHeight: 1px;
+    --mainColor: ${flat.dark.link};
+    --textColor: ${flat.dark.paragraph};
+    position: relative;
+    color: var(--mainColor);
+    text-decoration: none;
+    cursor: pointer;
+    line-height: calc(${lineHeights.body} - var(--ulHeight));
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: var(--ulHeight);
+      bottom: var(--ulHeight);
+      left: 0;
+      background: linear-gradient(
+        to right,
+        var(--mainColor) 0%,
+        var(--mainColor) 5px,
+        transparent
+      );
+      visibility: hidden;
+      transform: scaleX(0) scaleY(3.5);
+      transition: all 300ms ease-in-out 0s;
+    }
+    &:hover,
+    &:focus {
+      color: var(--mainColor);
+      &:before {
+        visibility: visible;
+        transform: scaleX(1.05) scaleY(1);
+      }
     }
   `,
 
@@ -175,9 +215,28 @@ const mixins = {
     ${buttonStyles};
   `,
 
+  btnSm: css`
+    padding: 0.75em 1em;
+    font-size: ${smish};
+    ${buttonStyles};
+  `,
+
+  btnMd: css`
+    padding: 1em 1.25em;
+    font-size: ${sm};
+    ${buttonStyles};
+  `,
+
+  btnLg: css`
+    padding: 1.25em 1.75em;
+    font-size: ${md};
+    ${buttonStyles};
+  `,
+
   ripple: css`
-    width: 20px;
-    height: 20px;
+    --size: 20px;
+    width: var(--size);
+    height: var(--size);
     position: absolute;
     ${gradients.blueTeal};
     display: block;
@@ -201,9 +260,7 @@ const mixins = {
   `,
 
   sidePadding: css`
-    padding: 0 24px;
-    ${media.phablet`padding: 0;`}
-    ${media.tablet`padding: 0;`}
+    padding: 0;
   `,
 
   sectionPadding: css`
@@ -225,11 +282,14 @@ const mixins = {
   `,
 
   boxShadow: css`
-    box-shadow: 0 10px 30px -15px ${flat.dark.shadow};
+    --shadowColor: ${flat.dark.shadow};
+    --shadowBlur: -15px;
+    --shadowSpread: 30px;
+    box-shadow: 0 10px var(--shadowSpread) var(--shadowBlur) var(--shadowColor);
     transition: ${transition};
     &:hover,
     &:focus {
-      box-shadow: 0 20px 30px -15px ${flat.dark.shadow};
+      box-shadow: 0 20px var(--shadowSpread) var(--shadowBlur) var(--shadowColor);
     }
   `,
 
@@ -255,20 +315,21 @@ const mixins = {
   `,
 
   img: css`
-    width: 100%;
+    --dimension: 100%;
+    width: var(--dimension);
     z-index: 1;
     display: block;
     margin: auto;
     height: auto;
-    max-height: 100%;
-    max-width: 100%;
+    max-height: var(--dimension);
+    max-width: var(--dimension);
   `,
 
   nashville: css`
     filter: sepia(0.2) contrast(1.2) brightness(1.05) saturate(1.2);
     ${figStyles};
     &:before {
-      background: ${flat.dark.transLink};
+      background: ${link('0.6')};
       mix-blend-mode: darken;
     }
     &:after {
@@ -299,30 +360,32 @@ const mixins = {
   `,
 
   textSelectShadow: css`
+    --highlite: ${flat.dark.highlight};
+    --textFG: ${flat.dark.paragraph};
     position: relative;
     color: inherit;
     background: none repeat scroll 0% 0% transparent;
-    text-shadow: 0 0 0 ${flat.dark.paragraph}, 0 0 0 ${flat.dark.highlight},
-      0.0025em 0.0025em 0 ${flat.dark.highlight}, 0.005em 0.005em 0 ${flat.dark.highlight},
-      0.0075em 0.0075em 0 ${flat.dark.highlight}, 0.01em 0.01em 0 ${flat.dark.highlight},
-      0.0125em 0.0125em 0 ${flat.dark.highlight}, 0.015em 0.015em 0 ${flat.dark.highlight},
-      0.0175em 0.0175em 0 ${flat.dark.highlight}, 0.02em 0.02em 0 ${flat.dark.highlight},
-      0.0225em 0.0225em 0 ${flat.dark.highlight}, 0.025em 0.025em 0 ${flat.dark.highlight},
-      0.0275em 0.0275em 0 ${flat.dark.highlight}, 0.03em 0.03em 0 ${flat.dark.highlight},
-      0.0325em 0.0325em 0 ${flat.dark.highlight}, 0.035em 0.035em 0 ${flat.dark.highlight},
-      0.0375em 0.0375em 0 ${flat.dark.highlight}, 0.04em 0.04em 0 ${flat.dark.highlight},
-      0.0425em 0.0425em 0 ${flat.dark.highlight}, 0.045em 0.045em 0 ${flat.dark.highlight},
-      0.0475em 0.0475em 0 ${flat.dark.highlight}, 0.05em 0.05em 0 ${flat.dark.highlight},
-      0.0525em 0.0525em 0 ${flat.dark.highlight}, 0.055em 0.055em 0 ${flat.dark.highlight},
-      0.0575em 0.0575em 0 ${flat.dark.highlight}, 0.06em 0.06em 0 ${flat.dark.highlight},
-      0.0625em 0.0625em 0 ${flat.dark.highlight}, 0.065em 0.065em 0 ${flat.dark.highlight},
-      0.0675em 0.0675em 0 ${flat.dark.highlight}, 0.07em 0.07em 0 ${flat.dark.highlight},
-      0.0725em 0.0725em 0 ${flat.dark.highlight}, 0.075em 0.075em 0 ${flat.dark.highlight},
-      0.0775em 0.0775em 0 ${flat.dark.highlight}, 0.08em 0.08em 0 ${flat.dark.highlight},
-      0.0825em 0.0825em 0 ${flat.dark.highlight}, 0.085em 0.085em 0 ${flat.dark.highlight},
-      0.0875em 0.0875em 0 ${flat.dark.highlight}, 0.09em 0.09em 0 ${flat.dark.highlight},
-      0.0925em 0.0925em 0 ${flat.dark.highlight}, 0.095em 0.095em 0 ${flat.dark.highlight},
-      0.0975em 0.0975em 0 ${flat.dark.highlight}, 0.1em 0.1em 0 ${flat.dark.highlight};
+    text-shadow: 0 0 0 var(--textFG), 0 0 0 var(--highlite),
+      0.0025em 0.0025em 0 var(--highlite), 0.005em 0.005em 0 var(--highlite),
+      0.0075em 0.0075em 0 var(--highlite), 0.01em 0.01em 0 var(--highlite),
+      0.0125em 0.0125em 0 var(--highlite), 0.015em 0.015em 0 var(--highlite),
+      0.0175em 0.0175em 0 var(--highlite), 0.02em 0.02em 0 var(--highlite),
+      0.0225em 0.0225em 0 var(--highlite), 0.025em 0.025em 0 var(--highlite),
+      0.0275em 0.0275em 0 var(--highlite), 0.03em 0.03em 0 var(--highlite),
+      0.0325em 0.0325em 0 var(--highlite), 0.035em 0.035em 0 var(--highlite),
+      0.0375em 0.0375em 0 var(--highlite), 0.04em 0.04em 0 var(--highlite),
+      0.0425em 0.0425em 0 var(--highlite), 0.045em 0.045em 0 var(--highlite),
+      0.0475em 0.0475em 0 var(--highlite), 0.05em 0.05em 0 var(--highlite),
+      0.0525em 0.0525em 0 var(--highlite), 0.055em 0.055em 0 var(--highlite),
+      0.0575em 0.0575em 0 var(--highlite), 0.06em 0.06em 0 var(--highlite),
+      0.0625em 0.0625em 0 var(--highlite), 0.065em 0.065em 0 var(--highlite),
+      0.0675em 0.0675em 0 var(--highlite), 0.07em 0.07em 0 var(--highlite),
+      0.0725em 0.0725em 0 var(--highlite), 0.075em 0.075em 0 var(--highlite),
+      0.0775em 0.0775em 0 var(--highlite), 0.08em 0.08em 0 var(--highlite),
+      0.0825em 0.0825em 0 var(--highlite), 0.085em 0.085em 0 var(--highlite),
+      0.0875em 0.0875em 0 var(--highlite), 0.09em 0.09em 0 var(--highlite),
+      0.0925em 0.0925em 0 var(--highlite), 0.095em 0.095em 0 var(--highlite),
+      0.0975em 0.0975em 0 var(--highlite), 0.1em 0.1em 0 var(--highlite);
   `,
 }
 

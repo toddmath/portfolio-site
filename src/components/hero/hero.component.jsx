@@ -17,8 +17,9 @@ export default function Hero() {
   const { title, name, subtitle, contactText, html } = useHeroQuery()
   const reducedMotion = useReducedMotion()
 
-  const emailSubject = encodeURIComponent(`Just trying to ${contactText.toLowerCase()}!`)
-  const emailBody = encodeURIComponent(`Hi Todd, my name is ...\n\nI just wanted to say ...`)
+  const encode = encodeURIComponent
+  const emailSubject = encode(`Just trying to ${contactText.toLowerCase()}!`)
+  const emailBody = encode(`Hi Todd, my name is ...\n\nI just wanted to say ...`)
 
   return (
     <StyledContainer

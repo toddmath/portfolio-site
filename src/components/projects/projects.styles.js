@@ -10,7 +10,7 @@ const {
   transition,
 } = theme
 
-const { inlineLink, boxShadow, flexBetween } = mixins
+const { linkCenterUL, boxShadow, flexBetween } = mixins
 
 export const StyledTitle = styled.h3`
   margin: 0 auto;
@@ -26,13 +26,13 @@ export const StyledGrid = styled.div`
   margin-top: 50px;
   .projects {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     /* grid-gap: 15px; */
     grid-gap: 2vw;
     position: relative;
     ${media.desktop`
       grid-gap: 3vw;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     `};
   }
 `
@@ -105,7 +105,7 @@ export const StyledProjectDescription = styled.div`
   font-size: 17px;
   color: ${flat.dark.cardParagraph};
   a {
-    ${inlineLink};
+    ${linkCenterUL};
   }
 `
 

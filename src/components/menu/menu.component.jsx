@@ -1,16 +1,17 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-import { mixins } from '@styles'
 import { navLinks } from '@config'
+// import { mixins } from '@styles'
 // import { Button } from '@components'
+
 import {
   Sidebar,
-  NavList,
   StyledContainer,
-  NavLinks,
-  NavLink,
-  NavItem,
+  AsideNav,
+  AsideNavList,
+  AsideNavItem,
+  AsideNavLink,
   StyledResumeButton,
 } from './menu.styles'
 
@@ -35,18 +36,20 @@ const Menu = ({ menuOpen, toggleMenu }) => {
       tabIndex={menuOpen ? 1 : -1}
     >
       <Sidebar>
-        <NavLinks>
-          <NavList role='list'>
+        <AsideNav>
+          <AsideNavList role='list'>
             {navLinks?.map(({ url, name }) => (
-              <NavItem role='listitem' key={name.trim().toLowerCase()}>
-                <NavLink role='link' to={url}>
+              <AsideNavItem role='listitem' key={name.trim().toLowerCase()}>
+                <AsideNavLink role='link' to={url}>
                   {name}
-                </NavLink>
-              </NavItem>
+                </AsideNavLink>
+              </AsideNavItem>
             ))}
-          </NavList>
-          <StyledResumeButton href='/resume.pdf'>Resume</StyledResumeButton>
-        </NavLinks>
+          </AsideNavList>
+          <StyledResumeButton responsive={true} href='/resume.pdf'>
+            Resume
+          </StyledResumeButton>
+        </AsideNav>
       </Sidebar>
     </StyledContainer>
   )

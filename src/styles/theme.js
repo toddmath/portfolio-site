@@ -26,6 +26,17 @@ const theme = {
     shadowNavy: 'rgba(2, 12, 27, 0.7)',
   },
 
+  mode: {
+    light: {
+      text: 'rgba(96, 96, 89, 1)',
+      header: 'rgba(96, 102, 140, 1)',
+    },
+    dark: {
+      text: 'rgba(169, 189, 204, 1)',
+      header: 'rgba(131, 146, 158, 1)',
+    },
+  },
+
   flat: {
     dark: {
       background: 'rgba(247, 248, 255, 1)',
@@ -37,7 +48,8 @@ const theme = {
       headerBorder: 'rgba(194, 199, 204, 1)',
       link: 'rgba(74, 131, 255, 1)',
       transLink: 'rgba(74, 131, 255, 0.5)',
-      iconLink: 'rgba(74, 131, 255, 0.75)',
+      iconLink: 'rgba(74, 131, 255, 0.85)',
+      progressBg: 'rgba(74, 131, 255, 0.5)',
       imgBackground: 'rgba(255, 251, 237, 0.2)',
       cardBackground: 'rgba(43, 61, 80, 1)',
       cardHeadline: 'rgba(247, 248, 255, 1)',
@@ -55,6 +67,7 @@ const theme = {
       formButton: 'rgba(74, 131, 255, 1)',
       formButtonText: '#fffffe',
       grey: 'rgba(76, 87, 114, 1)',
+      teal: 'rgba(0, 242, 254, 1)',
     },
     light: {
       background: 'rgba(247, 248, 255, 1)',
@@ -69,6 +82,9 @@ const theme = {
       tertiary: '#e45858',
     },
   },
+
+  /** Theme helper that takes an alpha value  and creates a rgba main color with it. */
+  link: (alpha = '1') => `rgba(74, 131, 255, ${alpha})`,
 
   fonts: {
     Calibre:
@@ -109,6 +125,15 @@ const theme = {
   radius: 3,
 
   gradient: `linear-gradient(0.4turn, #64d6ff, #64ffda)`,
+  grad: `linear-gradient(to right, rgba(74, 131, 255, 1) 0%, rgba(74, 131, 255, 1) 5%, #00f2fe)`,
+  gradTL: `linear-gradient(to left, rgba(74, 131, 255, 1) 0%, rgba(74, 131, 255, 1) 5%, #00f2fe)`,
+  gradTrans: `linear-gradient(to right, rgba(74, 131, 255, 1) 4%, transparent 85%, transparent 95%, #00f2fe 96%)`,
+  gradAlt: `linear-gradient(to right, transparent 4%, rgba(74, 131, 255, 1))`,
+
+  grads: {
+    rad: `radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%)`,
+    rads: `radial-gradient(circle 248px at center, rgba(74, 131, 255, 1) 0%, #30c7ec 47%, rgba(74, 131, 255, 1) 100%)`,
+  },
 
   gradients: {
     blueTeal: `background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);`,

@@ -207,8 +207,8 @@ const GlobalStyle = createGlobalStyle`
     }
     &.blur {
       overflow: hidden;
-      #root > #content > * {
-        filter: blur(3px);
+      #root > * {
+        filter: blur(3px) grayscale(60%) saturate(2);
         pointer-events: none;
         user-select: none;
       }
@@ -231,6 +231,9 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 600;
     color: ${flat.dark.headline};
     margin: 0 0 10px 0;
+  }
+  ::selection {
+    ${textSelectShadow};
   }
   #root {
     min-height: 100vh;
@@ -276,7 +279,8 @@ const GlobalStyle = createGlobalStyle`
       outline-color: ${flat.dark.button};
     }
   }
-  input, textarea {
+  input,
+  textarea {
     border-radius: 0;
     outline: 0;
     &:focus {
@@ -294,7 +298,8 @@ const GlobalStyle = createGlobalStyle`
   p {
     margin: 0 0 15px 0;
   }
-  ul, ol {
+  ul,
+  ol {
     padding: 0;
     margin: 0;
     list-style: none;

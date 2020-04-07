@@ -1,27 +1,20 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Head, Nav, Social, Email, Footer } from '@components'
+// import { Head, Nav, Social, Email, Footer } from '@components'
+import { Head, Main } from '@components'
 import { GlobalStyle } from '@styles'
 
-import { StyledContent } from './layout.styles'
-
 const Layout = ({ children }) => (
-  <div id='root'>
+  <Main>
     <Head />
     <GlobalStyle />
-    <StyledContent id='content'>
-      <Nav />
-      <Social />
-      <Email />
-      {children}
-      <Footer />
-    </StyledContent>
-  </div>
+    <>{children}</>
+  </Main>
 )
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default memo(Layout)
+export default Layout

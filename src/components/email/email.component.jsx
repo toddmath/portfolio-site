@@ -15,14 +15,12 @@ export default function Email() {
   useTimeout(mountIt, 2000)
 
   const isReducedOrNotHovered = reducedMotion || !isHovered
-  const isReducedOrIsHovered = reducedMotion || isHovered
+  // const isReducedOrIsHovered = reducedMotion || isHovered
 
   const props = useSpring({
-    opacity: isReducedOrIsHovered ? '1' : '0.85',
-    letterSpacing: isReducedOrNotHovered ? 0 : 2.57,
-    fontWeight: isReducedOrNotHovered ? 400 : 900,
-    fontSize: isReducedOrNotHovered ? 12 : 13,
-    transform: isReducedOrNotHovered ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, -4px, 0px)',
+    transform: `translate3d(0px, ${isReducedOrNotHovered ? '0px' : '-4px'}, 0px) scale(${
+      isReducedOrNotHovered ? 1 : 1.2
+    })`,
   })
 
   const handleOnHover = () => {
@@ -40,6 +38,7 @@ export default function Email() {
             <StyledLinkWrapper>
               <StyledEmailLink
                 style={props}
+                role='link'
                 onMouseOver={handleOnHover}
                 onFocus={handleOnHover}
                 onMouseLeave={handleOnLeave}

@@ -1,9 +1,10 @@
-import React, { memo, useMemo, useCallback } from 'react'
+import React, { memo, useRef } from 'react'
 import PropTypes from 'prop-types'
 
-import { useMousePosition } from '@hooks'
+import { useAnimatedText } from '@hooks'
 
 import {
+  StyledHeroTitleContainer,
   StyledTextContainer,
   StyledTextTitleContent,
   StyledTextTitleContentClone,
@@ -11,32 +12,45 @@ import {
   StyledTextSubtitleContentClone,
 } from './animated-text.styles'
 
-const AnimatedText = ({ title, subtitle, ...props }) => {
-  const { x, y } = useMousePosition()
-  const toFixed = num => num.toFixed(5)
-  const fixedX = useMemo(() => toFixed(x), [x])
-  const fixedY = useMemo(() => toFixed(y), [y])
+// const toFixed = num => num.toFixed(2)
+// eslint-disable-next-line no-bitwise
+// const toInt = num => ~~num
 
-  const handleMouseX = useCallback(fixedX => toFixed(fixedX / 14), [fixedX])
-  const handleMouseY = useCallback(fixedY => toFixed(fixedY / 14), [fixedY])
+const AnimatedText = ({ title, subtitle }) => {
+  const titleRef = useRef(null)
+
+  // // const { x, y } = useMousePosition()
+  // const [x, y] = useMouseMove()
+  // const fixedX = toInt(x)
+  // const fixedY = toInt(y)
+
+  // const mouseX = useMemo(() => toFixed(fixedX / 14), [fixedX])
+  // const mouseY = useMemo(() => toFixed(fixedY / 14), [fixedY])
+  // const intersection = useObserver(titleRef)
+  // const { isIntersecting } = intersection || true
+  const [mouseX, mouseY] = useAnimatedText(titleRef)
+
+  // useEffect(() => {
+  // })
 
   return (
-    <>
-      <StyledTextContainer
-        style={{ '--maskX': handleMouseX(fixedX), '--maskY': handleMouseY(fixedY) }}
-        {...props}
-      >
+    <StyledHeroTitleContainer
+      ref={titleRef}
+      style={{
+        '--maskX': mouseX,
+        '--maskY': mouseY,
+      }}
+    >
+      <StyledTextContainer>
         <StyledTextTitleContent>{title}</StyledTextTitleContent>
         <StyledTextTitleContentClone>{title}</StyledTextTitleContentClone>
       </StyledTextContainer>
-      <StyledTextContainer
-        style={{ '--maskX': handleMouseX(fixedX), '--maskY': handleMouseY(fixedY) }}
-        {...props}
-      >
+
+      <StyledTextContainer>
         <StyledTextSubtitleContent>{subtitle}</StyledTextSubtitleContent>
         <StyledTextSubtitleContentClone>{subtitle}</StyledTextSubtitleContentClone>
       </StyledTextContainer>
-    </>
+    </StyledHeroTitleContainer>
   )
 }
 

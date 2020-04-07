@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components'
 
-import { theme, mixins, media, Article } from '@styles'
+import { theme, mixins, media, Article, styledTheme } from '@styles'
 
 const { flat, fontSizes, fonts, transition } = theme
 const { flexCenter, inlineLink, bigButton } = mixins
+
+const overlineColor = styledTheme([flat.dark.paragraph, flat.dark.cardParagraph])
+const headlineText = styledTheme([flat.dark.paragraph, theme.mode.dark.header])
 
 const titleStyles = css`
   h2 {
@@ -11,6 +14,7 @@ const titleStyles = css`
     line-height: 1;
     margin: 0;
     font-weight: 500;
+    color: ${headlineText};
     ${media.tablet`
       font-size: 3.5rem;
       line-height: 0.9;
@@ -30,6 +34,7 @@ const subTitleStyles = css`
     margin-left: 0.3rem;
     letter-spacing: -0.048rem;
     font-weight: 500;
+    color: ${headlineText};
     ${media.tablet`
       font-size: 2.7rem;
       margin: 0 auto 0 0.5rem;
@@ -58,7 +63,7 @@ export const StyledContainer = styled(Article)`
 `
 
 export const StyledOverline = styled.h1`
-  color: ${flat.dark.paragraph};
+  color: ${overlineColor};
   /* margin: 0 0 20px 3px; */
   margin: 0 0 1rem 0.3rem;
   font-size: ${fontSizes.lg};
@@ -96,12 +101,12 @@ export const StyledEmailLink = styled.a`
 
 export const StyledTitle = styled.h2`
   ${titleStyles};
-  color: ${flat.dark.paragraph};
+  /* color: ${flat.dark.paragraph}; */
 `
 
 export const StyledSubtitle = styled.h3`
   ${subTitleStyles};
-  color: ${flat.dark.paragraph};
+  /* color: ${flat.dark.paragraph}; */
 `
 
 export const ButtonContainer = styled.div`

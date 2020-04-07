@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { theme, mixins, media, Article } from '@styles'
+import { theme, mixins, media, Article, styledTheme } from '@styles'
 
 const {
   willow,
@@ -13,9 +13,12 @@ const {
   flexCenter,
   flexColumn,
   inlineLink,
+  linkCenterUL,
   gridImplicit,
 } = mixins
 const { colors, flat, fontSizes, fonts, transition, borderRadius } = theme
+
+const gridItemColor = styledTheme([flat.dark.paragraph, flat.dark.background])
 
 export const StyledContainer = styled(Article)`
   position: relative;
@@ -50,7 +53,7 @@ export const StyledGridContent = styled.div`
   width: 100%;
   grid-column: span 5;
   a {
-    ${inlineLink};
+    ${linkCenterUL};
   }
   ${media.desktop`
     grid-column: 1 / -1;
@@ -62,39 +65,63 @@ export const StyledContent = styled.div`
   width: 100%;
   flex-basis: 800px;
   a {
-    ${inlineLink};
-    line-height: 20.8px;
-  }
-  p {
-    a {
-      line-height: 20.8px;
-    }
+    ${linkCenterUL};
   }
 `
 
-export const SkillsContainer = styled.ul`
+// export const SkillsContainer = styled.ul`
+//   display: grid;
+//   grid-template-columns: repeat(2, minmax(140px, 200px));
+//   overflow: hidden;
+//   margin-top: 20px;
+// `
+
+export const SkillsGridList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(2, minmax(140px, 200px));
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  row-gap: 0.25rem;
+  column-gap: 0.5rem;
   overflow: hidden;
-  margin-top: 20px;
 `
 
-export const Skill = styled.li`
+export const SkillGridItem = styled.li`
   position: relative;
-  margin-bottom: 10px;
-  padding-left: 20px;
+  margin: 0;
+  padding-left: 1rem;
   font-family: ${fonts.SFMono};
   font-size: ${fontSizes.smish};
-  color: ${colors.grey};
+  color: ${gridItemColor};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   &:before {
     content: '▹';
     position: absolute;
     left: 0;
     color: ${flat.dark.tertiary};
-    font-size: ${fontSizes.sm};
-    line-height: 15px;
+    font-family: ${fonts.SFMono};
+    font-size: ${fontSizes.md};
+    font-weight: bold;
+    line-height: inherit;
   }
 `
+
+// export const Skill = styled.li`
+//   position: relative;
+//   margin-bottom: 10px;
+//   padding-left: 20px;
+//   font-family: ${fonts.SFMono};
+//   font-size: ${fontSizes.smish};
+//   color: ${colors.grey};
+//   &:before {
+//     content: '▹';
+//     position: absolute;
+//     left: 0;
+//     color: ${flat.dark.tertiary};
+//     font-size: ${fontSizes.md};
+//     line-height: 15px;
+//   }
+// `
 
 export const StyledGridPic = styled.div`
   grid-column: -1 / -4;

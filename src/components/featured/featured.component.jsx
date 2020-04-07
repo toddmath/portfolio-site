@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 
-import { useReveals, useFeaturedQuery } from '@hooks'
+// import { useReveals, useFeaturedQuery } from '@hooks'
+import { useFeaturedQuery } from '@hooks'
 import { ProjectLink, FeaturedLinks } from '@components'
 import { Heading } from '@styles'
 
@@ -15,17 +16,17 @@ import {
   StyledProject,
 } from './featured.styles'
 
+const cleanKey = key => key.replace(/(\s+)/g, '')
+const isOdd = i => i % 2 === 1
+
 export default function Featured() {
   const revealTitles = useRef([])
   const revealDescriptions = useRef([])
   const featuredProjects = useFeaturedQuery()
 
-  useReveals(revealTitles)
-  useReveals(revealDescriptions, { delay: 280, distance: '0px', opacity: 0.25 })
-
-  const handleTitleRef = ref => revealTitles.current.push(ref)
-  const handleDescRef = ref => revealDescriptions.current.push(ref)
-  const cleanKey = key => key.replace(/(\s+)/g, '')
+  // useReveals(revealTitles)
+  // useReveals(revealDescriptions, { delay: 280, distance: '0px', opacity: 0.25 })
+  const handleRefs = (ref, array) => array.current.push(ref)
 
   return (
     <StyledContainer
@@ -33,18 +34,18 @@ export default function Featured() {
       bigDesktopStyles={`max-width: 845px;`}
       desktopStyles={`max-width: 696px;`}
     >
-      <Heading id='projects' ref={ref => handleTitleRef(ref)}>
+      <Heading id='projects' ref={ref => handleRefs(ref, revealTitles)}>
         Some Things I&apos;ve Built
       </Heading>
 
       <div>
         {featuredProjects &&
           featuredProjects.map(({ node: { frontmatter: fm, html } }, i) => (
-            <StyledProject key={i}>
+            <StyledProject key={cleanKey(fm.title)}>
               <StyledContent>
-                <StyledProjectName ref={ref => handleTitleRef(ref)}>
+                <StyledProjectName ref={ref => handleRefs(ref, revealTitles)}>
                   {fm.external ? (
-                    <ProjectLink to={fm.external} label='External'>
+                    <ProjectLink to={fm.external} label='Demo'>
                       {fm.title}
                     </ProjectLink>
                   ) : (
@@ -53,7 +54,7 @@ export default function Featured() {
                 </StyledProjectName>
 
                 <StyledDescription
-                  ref={ref => handleDescRef(ref)}
+                  ref={ref => handleRefs(ref, revealDescriptions)}
                   dangerouslySetInnerHTML={{ __html: html }}
                 />
 
@@ -65,12 +66,11 @@ export default function Featured() {
                   </StyledTechList>
                 )}
 
-                <FeaturedLinks isOdd={i % 2 === 1} github={fm.github} external={fm.external} />
+                <FeaturedLinks isOdd={isOdd(i)} github={fm.github} external={fm.external} />
               </StyledContent>
 
               <StyledImgContainer
-                key={i}
-                href={fm.external ? fm.external : fm.github ? fm.github : '#'}
+                href={fm.external ? fm.external : fm.github || '#'}
                 target='_blank'
                 rel='nofollow noopener noreferrer'
               >

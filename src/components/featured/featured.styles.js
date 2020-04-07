@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { theme, mixins, media, Article } from '@styles'
+import { theme, mixins, media, Article, styledTheme } from '@styles'
 
-const { flexCenter, boxShadow, inlineLink, img, willow } = mixins
-
+const { flexCenter, linkCenterUL, img, willow } = mixins
 const {
   colors,
   flat,
@@ -14,6 +13,9 @@ const {
   borderRadius,
   margin,
 } = theme
+
+const techColor = styledTheme([flat.dark.paragraph, flat.dark.background])
+const projectTitleColor = styledTheme([flat.dark.headline, flat.dark.cardParagraph])
 
 export const StyledContainer = styled(Article)`
   ${flexCenter};
@@ -34,21 +36,12 @@ export const StyledContent = styled.div`
   ${media.phablet`padding: 30px 25px 20px;`};
 `
 
-export const StyledLabel = styled.h4`
-  font-size: ${smish};
-  font-weight: normal;
-  color: ${flat.dark.cardHeadline};
-  font-family: ${SFMono};
-  margin-top: 10px;
-  padding-top: 0;
-`
-
-export const StyledProjectName = styled.h5`
+export const StyledProjectName = styled.h4`
   z-index: 100;
   font-size: 28px;
   font-weight: 600;
   margin: 0 0 20px;
-  color: ${flat.dark.headline};
+  color: ${projectTitleColor};
   ${media.tablet`font-size: 24px;`};
   ${media.thone`color: ${flat.dark.headline};`};
   a {
@@ -61,7 +54,7 @@ export const StyledProjectName = styled.h5`
 `
 
 export const StyledDescription = styled.div`
-  ${boxShadow};
+  box-shadow: 0 10px 30px -15px ${flat.dark.shadow};
   position: relative;
   z-index: 2;
   padding: 25px;
@@ -81,7 +74,7 @@ export const StyledDescription = styled.div`
     margin: 0;
   }
   a {
-    ${inlineLink};
+    ${linkCenterUL};
   }
 `
 
@@ -94,12 +87,11 @@ export const StyledTechList = styled.ul`
   li {
     font-family: ${SFMono};
     font-size: ${smish};
-    color: ${flat.dark.grey};
-    margin-right: ${margin};
+    color: ${techColor};
     margin-bottom: 7px;
     white-space: nowrap;
-    &:last-of-type {
-      margin-right: 0;
+    &:not(:last-of-type) {
+      margin-right: ${margin};
     }
     ${media.thone`
       color: ${colors.lightestSlate};
@@ -153,21 +145,20 @@ export const StyledImgContainer = styled.a`
   `};
 `
 
-export const StyledProject = styled.div`
+export const StyledProject = styled.section`
   transition: inherit;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(12, 1fr);
   align-items: center;
-  margin-bottom: 100px;
+  &:not(:last-of-type) {
+    margin-bottom: 100px;
+  }
   ${media.thone`
     margin-bottom: 70px;
     align-items: end;
   `};
   ${media.tablet`align-items: start;`};
-  &:last-of-type {
-    margin-bottom: 0;
-  }
   &:nth-of-type(odd) {
     ${StyledContent} {
       grid-column: 6 / -1;

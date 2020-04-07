@@ -5,7 +5,7 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "useTabs": false,
-  "printWidth": 105,
+  "printWidth": 95,
   "jsxSingleQuote": true,
   "arrowParens": "avoid",
   "quoteProps": "as-needed"

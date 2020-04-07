@@ -17,41 +17,31 @@ const Button = ({
 }) => {
   const [activated, toggleActivated] = useToggle(false)
 
-  let extraProps = {}
+  let linkProps = {}
   if (as === 'a' && href) {
-    extraProps = { href }
+    linkProps = { href }
   }
 
-  if (responsive)
+  let btnProps = {
+    className: `button ${className}`,
+    'aria-pressed': activated ? 'true' : 'false',
+    type: 'button',
+    outline,
+    mono,
+    as,
+    otherStyles,
+  }
+  if (responsive === false) btnProps = { ...btnProps, size }
+
+  if (responsive === true)
     return (
-      <StyledResponsiveButton
-        className={`button ${className}`}
-        aria-pressed={activated ? 'true' : 'false'}
-        onClick={toggleActivated}
-        type='button'
-        outline={outline}
-        mono={mono}
-        as={as}
-        otherStyles={otherStyles}
-        {...extraProps}
-      >
+      <StyledResponsiveButton onClick={toggleActivated} {...btnProps} {...linkProps}>
         {children}
       </StyledResponsiveButton>
     )
 
   return (
-    <StyledButton
-      className={`button ${className}`}
-      aria-pressed={activated ? 'true' : 'false'}
-      onClick={toggleActivated}
-      type='button'
-      outline={outline}
-      mono={mono}
-      size={size}
-      as={as}
-      otherStyles={otherStyles}
-      {...extraProps}
-    >
+    <StyledButton onClick={toggleActivated} size={size} {...btnProps} {...linkProps}>
       {children}
     </StyledButton>
   )
@@ -71,7 +61,7 @@ Button.propTypes = {
   outline: PropTypes.bool,
   responsive: PropTypes.bool,
   otherStyles: PropTypes.string,
-  size: PropTypes.oneOf(['large', 'medium', 'small']),
+  size: PropTypes.oneOf(['large', 'medium', 'small', 'lg', 'md', 'sm', 'l', 'm', 's']),
 }
 
 export default Button

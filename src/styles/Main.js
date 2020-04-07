@@ -1,12 +1,17 @@
 import styled from 'styled-components'
+import styledTheme from './StyledTheme'
 
+import theme from './theme'
 import mixins from './mixins'
+
+const { flat } = theme
+
+const backgroundColor = styledTheme([flat.dark.background, flat.dark.cardBackground])
 
 const Main = styled.main`
   ${mixins.sidePadding};
-  /* margin: 0 auto; */
   counter-reset: ${({ counter }) => counter || 'unset'};
-  scroll-snap-type: y mandatory;
+  background-color: ${backgroundColor};
 `
 
 export default Main

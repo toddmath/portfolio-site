@@ -63,7 +63,9 @@ const ThemeHydrationScriptTag = ({
     storageKey,
   })
 
-  const finalNoFlashScript = minify ? Terser.minify(noFlashScript).code || '' : noFlashScript
+  const finalNoFlashScript = minify
+    ? Terser.minify(noFlashScript, { ecma: 2017 }).code || ''
+    : noFlashScript
 
   return <script dangerouslySetInnerHTML={{ __html: finalNoFlashScript }} />
 }

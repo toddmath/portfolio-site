@@ -10,7 +10,7 @@ export function useAboutQuery() {
               title
               avatar {
                 childImageSharp {
-                  fluid(maxWidth: 700, quality: 90, traceSVG: { color: "#4a83ff" }) {
+                  fluid(maxWidth: 600, quality: 90, traceSVG: { color: "#4a83ff" }) {
                     ...GatsbyImageSharpFluid_withWebp_tracedSVG
                   }
                 }
