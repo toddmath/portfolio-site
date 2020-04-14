@@ -29,6 +29,7 @@ const Footer = () => {
                 target='_blank'
                 rel='nofollow noopener norefferer'
                 aria-label={name}
+                role='link'
               >
                 <FormattedIcon name={name} />
               </StyledSocialLink>

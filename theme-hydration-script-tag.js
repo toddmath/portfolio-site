@@ -1,5 +1,6 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types'
+import React from 'react'
 import Terser from 'terser'
 
 /**
@@ -10,64 +11,60 @@ import Terser from 'terser'
  * @param {string} options.storageKey Optional name for storage key (localStorage).
  * @see {@link https://github.com/donavon/use-dark-mode/blob/develop/noflash.js.txt}
  */
-const generateNoFlashScript = ({ classNameDark, classNameLight, storageKey }) => `
-  (function(classNameDark, classNameLight, storageKey) {
-    function setClassOnDocumentBody(darkMode) {
-      document.body.classList.add(darkMode ? classNameDark : classNameLight);
-      document.body.classList.remove(darkMode ? classNameLight : classNameDark);
-    }
-    var preferDarkQuery = '(prefers-color-scheme: dark)';
-    var mql = window.matchMedia(preferDarkQuery);
-    var supportsColorSchemeQuery = mql.media === preferDarkQuery;
-    var localStorageTheme = null;
-    try {
-      localStorageTheme = localStorage.getItem(storageKey);
-    } catch (err) {}
-    var localStorageExists = localStorageTheme !== null;
-    if (localStorageExists) {
-      localStorageTheme = JSON.parse(localStorageTheme);
-    }
-    // Determine the source of truth
-    if (localStorageExists) {
-      // source of truth from localStorage
-      setClassOnDocumentBody(localStorageTheme);
-    } else if (supportsColorSchemeQuery) {
-      // source of truth from system
-      setClassOnDocumentBody(mql.matches);
-      localStorage.setItem(storageKey, mql.matches);
-    } else {
-      // source of truth from document.body
-      var isDarkMode = document.body.classList.contains(classNameDark);
-      localStorage.setItem(storageKey, JSON.stringify(isDarkMode));
-    }
-  })('${classNameDark}', '${classNameLight}', '${storageKey}');
+const generateNoFlashScript = ({
+  classNameDark = 'dark',
+  classNameLight = 'light',
+  storageKey = 'theme-mode',
+} = {}) => `
+(function(classNameDark, classNameLight, storageKey) {
+  const setClassOnDocumentBody = darkMode => {
+    const activeTheme = darkMode ? classNameDark : classNameLight
+    const disabledTheme = darkMode ? classNameLight : classNameDark
+    document.body.classList.add(activeTheme)
+    document.body.classList.remove(disabledTheme)
+  }
+  const preferDarkQuery = '(prefers-color-scheme: dark)'
+  const mql = window.matchMedia(preferDarkQuery)
+  const supportsColorSchemeQuery = mql.media === preferDarkQuery
+  let localStorageTheme = null
+  try {
+    localStorageTheme = localStorage.getItem(storageKey)
+  } catch (error) {}
+  const localStorageExists = () => localStorageTheme !== null
+  if (localStorageExists()) {
+    localStorageTheme = JSON.parse(localStorageTheme)
+  }
+  if (localStorageExists()) {
+    setClassOnDocumentBody(localStorageTheme)
+  } else if (supportsColorSchemeQuery) {
+    setClassOnDocumentBody(mql.matches)
+    localStorage.setItem(storageKey, mql.matches)
+  } else {
+    const isDarkMode = document.body.classList.contains(classNameDark)
+    localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
+  }
+})('${classNameDark}', '${classNameLight}', '${storageKey})');
 `
 
 /**
  * Helper function that generates script tag for `dark-mode` / `light-mode` and injects it into the document.
  * @param {Object} options
- * @param {string} [options.classNameDark='dark-mode']
- * @param {string} [options.classNameLight='light-mode']
- * @param {string} [options.storageKey='darkMode']
+ * @param {string} [options.classNameDark='dark']
+ * @param {string} [options.classNameLight='light']
+ * @param {string} [options.storageKey='theme-mode']
  * @param {boolean} [options.minify=true]
  */
 const ThemeHydrationScriptTag = ({
-  classNameDark = 'dark-mode',
-  classNameLight = 'light-mode',
-  storageKey = 'darkMode',
+  classNameDark = 'dark',
+  classNameLight = 'light',
+  storageKey = 'theme-mode',
   minify = true,
 }) => {
-  const noFlashScript = generateNoFlashScript({
-    classNameDark,
-    classNameLight,
-    storageKey,
-  })
+  const noFlashScript = generateNoFlashScript()
 
-  const finalNoFlashScript = minify
-    ? Terser.minify(noFlashScript, { ecma: 2017 }).code || ''
-    : noFlashScript
+  const html = Terser.minify(noFlashScript).code || ''
 
-  return <script dangerouslySetInnerHTML={{ __html: finalNoFlashScript }} />
+  return <script type='text/javascript' async dangerouslySetInnerHTML={{ __html: html }} />
 }
 
 ThemeHydrationScriptTag.propTypes = {

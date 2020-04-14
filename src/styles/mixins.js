@@ -323,6 +323,7 @@ const mixins = {
     height: auto;
     max-height: var(--dimension);
     max-width: var(--dimension);
+    image-rendering: auto;
   `,
 
   nashville: css`

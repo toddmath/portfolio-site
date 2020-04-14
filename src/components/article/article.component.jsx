@@ -28,7 +28,9 @@ const Article = ({
     padding={padding}
     tabletStyles={tabletStyles}
   >
+    {/* <div data-sal='fade' data-sal-duration='2000' data-sal-easeing='easeInQuart'> */}
     {children}
+    {/* </div> */}
   </StyledArticle>
 )
 

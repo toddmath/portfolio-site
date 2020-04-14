@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+// import { CSSTransition, TransitionGroup } from 'react-transition-group'
+// import { AnimatePresence, motion } from 'framer-motion'
 import { useSpring } from 'react-spring'
 
-import { useTimeout, useReducedMotion } from '@hooks'
+import { useReducedMotion } from '@hooks'
 import { email } from '@config'
-import { StyledContainer, StyledLinkWrapper, StyledEmailLink } from './email.styles'
+import { Fade } from '@components'
+import { StyledContainer, StyledEmailLink, StyledLinkWrapper } from './email.styles'
 
 export default function Email() {
   const [isHovered, setIsHovered] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
+  // const [isMounted, setIsMounted] = useState(false)
   const reducedMotion = useReducedMotion()
 
-  const mountIt = () => setIsMounted(true)
-  useTimeout(mountIt, 2000)
+  // const mountIt = () => setIsMounted(true)
+  // useTimeout(mountIt, 2000)
 
   const isReducedOrNotHovered = reducedMotion || !isHovered
   // const isReducedOrIsHovered = reducedMotion || isHovered
@@ -32,25 +34,47 @@ export default function Email() {
 
   return (
     <StyledContainer>
-      <TransitionGroup component={null}>
-        {isMounted && (
-          <CSSTransition timeout={3000} classNames='fade'>
-            <StyledLinkWrapper>
-              <StyledEmailLink
-                style={props}
-                role='link'
-                onMouseOver={handleOnHover}
-                onFocus={handleOnHover}
-                onMouseLeave={handleOnLeave}
-                onBlur={handleOnLeave}
-                href={`mailto:${email}`}
-              >
-                {email}
-              </StyledEmailLink>
-            </StyledLinkWrapper>
-          </CSSTransition>
-        )}
-      </TransitionGroup>
+      <Fade>
+        <StyledLinkWrapper>
+          <StyledEmailLink
+            style={props}
+            role='link'
+            onMouseOver={handleOnHover}
+            onFocus={handleOnHover}
+            onMouseLeave={handleOnLeave}
+            onBlur={handleOnLeave}
+            href={`mailto:${email}`}
+          >
+            {email}
+          </StyledEmailLink>
+        </StyledLinkWrapper>
+      </Fade>
     </StyledContainer>
   )
 }
+
+/*
+return (
+  <StyledContainer>
+    <TransitionGroup component={null}>
+      {isMounted && (
+        <CSSTransition timeout={3000} classNames='fade'>
+          <StyledLinkWrapper>
+            <StyledEmailLink
+              style={props}
+              role='link'
+              onMouseOver={handleOnHover}
+              onFocus={handleOnHover}
+              onMouseLeave={handleOnLeave}
+              onBlur={handleOnLeave}
+              href={`mailto:${email}`}
+            >
+              {email}
+            </StyledEmailLink>
+          </StyledLinkWrapper>
+        </CSSTransition>
+      )}
+    </TransitionGroup>
+  </StyledContainer>
+)
+*/

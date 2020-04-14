@@ -34,6 +34,7 @@ export default function Featured() {
       bigDesktopStyles={`max-width: 845px;`}
       desktopStyles={`max-width: 696px;`}
     >
+      {/* <div data-sal='fade' data-sal-duration='2000' data-sal-easeing='easeInQuart'> */}
       <Heading id='projects' ref={ref => handleRefs(ref, revealTitles)}>
         Some Things I&apos;ve Built
       </Heading>
@@ -79,6 +80,7 @@ export default function Featured() {
             </StyledProject>
           ))}
       </div>
+      {/* </div> */}
     </StyledContainer>
   )
 }

@@ -9,6 +9,13 @@ const {
 
 const { flexCenter, flexBetween } = mixins
 
+// const footerBorder = styledTheme([
+//   `1px solid ${flat.dark.cardBackground}`,
+//   `1px solid ${flat.dark.headerBorder}`,
+// ])
+
+// const footerBg = styledTheme([flat.dark.cardBackground, flat.dark.stroke])
+
 export const StyledContainer = styled.footer`
   ${flexCenter};
   flex-direction: column;

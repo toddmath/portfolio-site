@@ -1,24 +1,14 @@
 import { useEffect, useState, useCallback } from 'react'
 
-/** Custom hook for using the IntersectionObserver API, returns an IntersectionObserverEntry object
- * @param {React.MutableRefObject} node Ref object to attach to.
- * @param {object} options
- * @param {*} [options.root=null]
- * @param {string} [options.rootMargin='0px 0px 0px 0px']
- * @param {number|number[]} [options.threshold=0]
- */
-const useObserver = (
+const useIntersecting = (
   node,
   options = { root: null, rootMargin: '0px 0px 0px 0px', threshold: 0 }
 ) => {
   const [entry, setEntry] = useState(null)
-
   const handleObserver = useCallback(([entry]) => setEntry(entry), [setEntry])
 
   useEffect(() => {
-    if (!node || !node.current) {
-      return
-    }
+    if (!node || !node.current) return
 
     const element = node.current
     let observer = new IntersectionObserver(handleObserver, options)
@@ -30,7 +20,9 @@ const useObserver = (
     }
   }, [node, options.root, options.rootMargin, options.threshold])
 
-  return entry
+  const { target, isIntersecting, intersectionRatio } = entry
+
+  return { target, isIntersecting, intersectionRatio }
 }
 
-export default useObserver
+export default useIntersecting

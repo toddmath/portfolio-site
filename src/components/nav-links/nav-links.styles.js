@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import { Link } from 'gatsby'
 
 import { theme, mixins, media, styledTheme } from '@styles'
@@ -8,7 +9,7 @@ const { link } = mixins
 
 const counterColors = styledTheme([flat.dark.paragraph, flat.dark.cardParagraph])
 
-export const NavList = styled.ol`
+export const MotionNavList = styled(motion.ol)`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -20,7 +21,7 @@ export const NavList = styled.ol`
   background-color: inherit;
 `
 
-export const NavListItem = styled.li`
+export const MotionNavListItem = styled(motion.li)`
   --altColor: ${flat.dark.cardBackground};
   --mainColor: ${flat.dark.paragraph};
   --textColor: ${flat.dark.background};

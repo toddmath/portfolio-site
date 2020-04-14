@@ -7,7 +7,7 @@ const IconArrow = () => (
     role='img'
     aria-labelledby='title'
     viewBox='0 0 467.937 467.937'
-    id='icon_arrow'
+    className='icon_arrow'
   >
     <title>Arrow</title>
     <path

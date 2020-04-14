@@ -9,7 +9,7 @@ const ProgressBar = () => {
 
   return (
     <ProgressContainer>
-      <Progress scroll={progress} />
+      <Progress style={{ '--scroll': progress, '--opacity': `${Number(progress) + 0.3}` }} />
     </ProgressContainer>
   )
 }

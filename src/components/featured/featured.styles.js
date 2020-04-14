@@ -12,16 +12,19 @@ const {
   transition,
   borderRadius,
   margin,
+  easing,
 } = theme
 
 const techColor = styledTheme([flat.dark.paragraph, flat.dark.background])
 const projectTitleColor = styledTheme([flat.dark.headline, flat.dark.cardParagraph])
 
 export const StyledContainer = styled(Article)`
+  --projBenz: ${easing};
   ${flexCenter};
   flex-direction: column;
   align-items: flex-start;
-  transition: ${transition};
+  /* transition: ${transition}; */
+  transition: transform 0.25s var(--projBenz), background 0s var(--projBenz);
 `
 
 export const StyledContent = styled.div`
@@ -35,6 +38,14 @@ export const StyledContent = styled.div`
   `};
   ${media.phablet`padding: 30px 25px 20px;`};
 `
+
+/*
+${media.thone`
+  grid-column: 1 / -1;
+  padding: 40px 40px 30px;
+  z-index: 5;
+`};
+*/
 
 export const StyledProjectName = styled.h4`
   z-index: 100;
@@ -53,6 +64,11 @@ export const StyledProjectName = styled.h4`
   }
 `
 
+const descriptionBorderColor = styledTheme([
+  `2px solid ${flat.dark.cardBackground}`,
+  `2px solid ${flat.dark.headline}`,
+])
+
 export const StyledDescription = styled.div`
   box-shadow: 0 10px 30px -15px ${flat.dark.shadow};
   position: relative;
@@ -62,10 +78,12 @@ export const StyledDescription = styled.div`
   color: ${flat.dark.cardParagraph};
   font-size: ${lg};
   border-radius: ${borderRadius};
+  border: ${descriptionBorderColor};
   ${media.thone`
-    background-color: transparent;
-    padding: 20px 0;
+    background-color: ${flat.dark.semiCardBackground};
+    padding: 20px;
     box-shadow: none;
+    width: 100%;
     &:hover {
       box-shadow: none;
     }
@@ -98,6 +116,16 @@ export const StyledTechList = styled.ul`
       margin-right: 10px;
     `};
   }
+  ${media.thone`
+    li {
+      margin-bottom: 0;
+      margin: 0 !important;
+      &:not(:last-of-type) {
+        margin-right: ${margin} !important;
+        margin-left: 0 !important;
+      }
+    }
+  `}
 `
 
 export const StyledLinkWrapper = styled.div`
@@ -114,6 +142,9 @@ export const StyledLinkWrapper = styled.div`
       height: 22px;
     }
   }
+  ${media.thone`
+    margin: 0;
+  `}
 `
 
 export const StyledFeaturedImg = styled(Img)`
@@ -155,8 +186,27 @@ export const StyledProject = styled.section`
     margin-bottom: 100px;
   }
   ${media.thone`
-    margin-bottom: 70px;
-    align-items: end;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: no-wrap;
+    align-items: center;
+    justify-content: space-around;
+    & > * {
+      width: 100%;
+      display: block;
+    }
+    ${StyledContent} {
+      width: 100%;
+      display: block;
+      padding: 0;
+      text-align: unset;
+    }
+    ${StyledDescription} {
+      padding: 2em;
+    }
+    ${StyledLinkWrapper} {
+      margin-top: 0;
+    }
   `};
   ${media.tablet`align-items: start;`};
   &:nth-of-type(odd) {
@@ -165,7 +215,8 @@ export const StyledProject = styled.section`
       text-align: right;
       ${media.thone`
         grid-column: 1 / -1;
-        padding: 40px 40px 30px;
+        text-align: unset;
+        /* padding: 40px 40px 30px; */
       `};
       ${media.phablet`padding: 30px 25px 20px;`};
     }
@@ -175,6 +226,9 @@ export const StyledProject = styled.section`
         margin-left: ${margin};
         margin-right: 0;
       }
+      ${media.thone`
+        justify-content: flex-start;
+      `}
     }
     ${StyledLinkWrapper} {
       justify-content: flex-end;
@@ -194,3 +248,53 @@ export const StyledProject = styled.section`
     }
   }
 `
+
+// export const StyledProject = styled.section`
+//   transition: inherit;
+//   display: grid;
+//   grid-gap: 10px;
+//   grid-template-columns: repeat(12, 1fr);
+//   align-items: center;
+//   &:not(:last-of-type) {
+//     margin-bottom: 100px;
+//   }
+//   ${media.thone`
+//     margin-bottom: 70px;
+//     align-items: end;
+//   `};
+//   ${media.tablet`align-items: start;`};
+//   &:nth-of-type(odd) {
+//     ${StyledContent} {
+//       grid-column: 6 / -1;
+//       text-align: right;
+//       ${media.thone`
+//         grid-column: 1 / -1;
+//         padding: 40px 40px 30px;
+//       `};
+//       ${media.phablet`padding: 30px 25px 20px;`};
+//     }
+//     ${StyledTechList} {
+//       justify-content: flex-end;
+//       li {
+//         margin-left: ${margin};
+//         margin-right: 0;
+//       }
+//     }
+//     ${StyledLinkWrapper} {
+//       justify-content: flex-end;
+//       margin-left: 0;
+//       margin-right: -10px;
+//     }
+//     ${StyledImgContainer} {
+//       grid-column: 1 / 8;
+//       ${media.tablet`
+//         height: 80%;
+//         grid-column: 1 / 9;
+//         align-self: end;
+//         `};
+//       ${media.thone`
+//         grid-column: 1 / -1;
+//       `};
+//     }
+//   }
+// `

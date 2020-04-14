@@ -50,3 +50,4 @@ export { default as MontserratRegularItalicWOFF2 } from '@fonts/Montserrat/Monts
 export { default as MontserratThinEOT } from '@fonts/Montserrat/Montserrat-Thin.eot'
 export { default as MontserratThinWOFF } from '@fonts/Montserrat/Montserrat-Thin.woff'
 export { default as MontserratThinWOFF2 } from '@fonts/Montserrat/Montserrat-Thin.woff2'
+export { default as MetaVariableWOFF2 } from '@fonts/MetaVariableDemo-Set.woff2'

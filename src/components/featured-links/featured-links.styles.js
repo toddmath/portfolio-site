@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { theme, mixins } from '@styles'
+import { theme, mixins, media } from '@styles'
 
 const { flat } = theme
 
@@ -26,4 +26,10 @@ export const StyledLinkWrapper = styled.div`
       transition: shadow 250ms ${theme.easing};
     }
   }
+  ${media.thone`
+    margin: 0;
+    a {
+      padding: calc(var(--margin) / 1.5) var(--margin);
+    }
+  `}
 `

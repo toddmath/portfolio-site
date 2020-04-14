@@ -26,6 +26,8 @@ export const Progress = styled.span`
   width: 100%;
   height: 100%;
   transform-origin: left;
-  transform: perspective(50rem) ${props => `scaleX(${props.scroll})`};
-  transition: transform 220ms ease;
+  /* transform: ${props => `scaleX(${props.scroll})`}; */
+  opacity: var(--opacity);
+  transform: scaleX(var(--scroll));
+  transition: transform 220ms ease, opacity 50ms ease;
 `

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useCallback } from 'react'
+import React, { createContext, useContext, useMemo } from 'react'
 import { ThemeProvider } from 'styled-components'
 import theme from 'styled-theming'
 
@@ -42,13 +42,17 @@ export const ThemeToggleProvider = ({ children }) => {
   //   setThemeMode(themeMode === 'light' ? 'dark' : 'light')
   // }
 
-  const toggleTheme = useCallback(
-    () => setThemeMode(themeMode === 'light' ? 'dark' : 'light'),
-    [setThemeMode]
-  )
+  // const toggleTheme = useCallback(
+  //   () => setThemeMode(themeMode === 'light' ? 'dark' : 'light'),
+  //   [setThemeMode]
+  // )
+
+  const toggleTheme = () => setThemeMode(theme => (theme === 'light' ? 'dark' : 'light'))
+
+  const value = useMemo(() => [themeMode, toggleTheme], [themeMode])
 
   return (
-    <ThemeToggleContext.Provider value={[themeMode, toggleTheme]}>
+    <ThemeToggleContext.Provider value={value}>
       <ThemeProvider theme={{ mode: themeMode }}>{children}</ThemeProvider>
     </ThemeToggleContext.Provider>
   )

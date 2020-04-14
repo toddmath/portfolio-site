@@ -43,7 +43,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-lodash',
       options: {
-        disabledFeatures: ['exotics'],
+        disabledFeatures: ['shorthands', 'cloning', 'chaining', 'exotics'],
       },
     },
     {
@@ -57,7 +57,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'content',
-        path: `${__dirname}/src/content/`,
+        path: path.join(__dirname, 'src', 'content'),
       },
     },
     {

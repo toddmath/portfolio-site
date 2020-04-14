@@ -52,6 +52,7 @@ const theme = {
       progressBg: 'rgba(74, 131, 255, 0.5)',
       imgBackground: 'rgba(255, 251, 237, 0.2)',
       cardBackground: 'rgba(43, 61, 80, 1)',
+      semiCardBackground: 'rgba(43, 61, 80, 0.75)',
       cardHeadline: 'rgba(247, 248, 255, 1)',
       cardParagraph: 'rgba(169, 189, 204, 1)',
       cardTagBackground: 'rgba(74, 131, 255, 1)',

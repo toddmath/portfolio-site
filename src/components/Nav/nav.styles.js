@@ -226,5 +226,5 @@ export const StyledLink = styled.div`
 export const StyledButtonContainer = styled.div`
   display: inline-flex;
   align-items: stretch;
-  transition-delay: ${props => `${props.delay}ms` || '100ms'};
+  transition-delay: ${props => `${props.$delay}ms` || '100ms'};
 `

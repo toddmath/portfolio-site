@@ -21,11 +21,43 @@
 // }
 import React from 'react'
 import ThemeToggleProvider from './src/context/theme.context'
+import ScrollProvider from './src/context/scroll.context'
+// import Wrapper from './Wrapper'
+import 'sal.js/dist/sal.css'
+// import ThemeHydrationScriptTag from './theme-hydration-script-tag'
 // import { ThemeProvider } from 'styled-components'
 
+// export const onRenderBody = ({ setPreBodyComponents }, pluginOptions) => {
+//   // eslint-disable-next-line no-param-reassign
+//   delete pluginOptions.plugins
+//   // const { classNameDark, classNameLight, storageKey, minify } = pluginOptions
+//   // const props = { classNameDark, classNameLight, storageKey, minify }
+
+//   setPreBodyComponents([<ThemeHydrationScriptTag key='dark-mode-noflash-hydration-script' />])
+// }
+
+// export const onClientEntry = async () => {
+//   if (typeof IntersectionObserver === 'undefined') {
+//     await import('intersection-observer')
+//   }
+// }
+
 export const wrapRootElement = ({ element }) => {
-  return <ThemeToggleProvider>{element}</ThemeToggleProvider>
+  return (
+    <ScrollProvider>
+      <ThemeToggleProvider>{element}</ThemeToggleProvider>
+    </ScrollProvider>
+  )
 }
+
+// export const wrapPageElement = ({ element, props }, { plugins, ...options }) => {
+//   return (
+//     <Wrapper options={options} path={props.path}>
+//       {element}
+//     </Wrapper>
+//   )
+// }
+
 // import useLocalStorage from './src/hooks/useLocalStorage'
 // import { wrapRootElement } from './gatsby-browser'
 // const defaultTheme = "light"

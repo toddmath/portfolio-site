@@ -22,6 +22,13 @@ export const sizes = {
   tiny: 330,
 }
 
+export const toBreakpoint = query => {
+  if (!sizes[query]) {
+    throw Error(`Query ${query} is not an available size.`)
+  }
+  return sizes[query] / 16
+}
+
 // eslint-disable-next-line prefer-template
 export const toEm = px => `${(Number(px) / 16).toFixed(2)}em`
 
@@ -44,19 +51,21 @@ export const toEm = px => `${(Number(px) / 16).toFixed(2)}em`
 export const mediaType = (type = 'screen', max = true) =>
   Object.keys(sizes).reduce((acc, key) => {
     acc[key] = (...args) => css`
-      @media ${type.length > 0 && `${type} and`} (${max ? 'max' : 'min'}-width: ${toEm(sizes[key])}) {
+      @media ${type.length > 0 && `${type} and`} (${max ? 'max' : 'min'}-width: ${toEm(
+      sizes[key]
+    )}) {
         ${css(...args)};
       }
     `
     return acc
   }, {})
 
-const screen = 'screen'
-const print = 'print'
+const SCREEN = 'screen'
+const PRINT = 'print'
 
-export const media = mediaType(screen, true)
-export const mediaPrint = mediaType(print, true)
-export const mediaMin = mediaType(screen, false)
+export const media = mediaType(SCREEN, true)
+export const mediaPrint = mediaType(PRINT, true)
+export const mediaMin = mediaType(SCREEN, false)
 
 // export const media = Object.keys(sizes).reduce((acc, key) => {
 //   if (key in sizes) {

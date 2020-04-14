@@ -50,6 +50,7 @@ const Heading = styled.h3`
   ${media.tablet`font-size: 24px;`};
   color: ${headingColor} !important;
   text-shadow: ${headingShadow};
+  line-height: 1.2;
   &:before {
     counter-increment: section;
     content: '0' counter(section) '.';
