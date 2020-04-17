@@ -5,10 +5,12 @@
   "version": "0.1.0",
   "author": "Todd Matheson <tmatheson11186@gmail.com>",
   "dependencies": {
+    "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.7",
     "classnames": "^2.2.6",
     "framer-motion": "^1.10.3",
     "gatsby": "^2.20.18",
+    "gatsby-cli": "^2.11.10",
     "gatsby-image": "^2.3.2",
     "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-lodash": "^3.2.1",
