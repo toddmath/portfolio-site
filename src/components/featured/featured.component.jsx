@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { getImage } from 'gatsby-plugin-image'
 
 // import { useReveals, useFeaturedQuery } from '@hooks'
 import { useFeaturedQuery } from '@hooks'
@@ -75,7 +76,7 @@ export default function Featured() {
                 target='_blank'
                 rel='nofollow noopener noreferrer'
               >
-                <StyledFeaturedImg fluid={fm.cover.childImageSharp.fluid} />
+                <StyledFeaturedImg image={getImage(fm.cover)} alt={fm.title} />
               </StyledImgContainer>
             </StyledProject>
           ))}

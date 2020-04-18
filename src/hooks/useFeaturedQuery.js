@@ -13,9 +13,13 @@ export function useFeaturedQuery() {
               title
               cover {
                 childImageSharp {
-                  fluid(maxWidth: 700, quality: 90, traceSVG: { color: "#4a83ff" }) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                  }
+                  gatsbyImageData(
+                    width: 700
+                    quality: 90
+                    tracedSVGOptions: { color: "#4a83ff" }
+                    placeholder: TRACED_SVG
+                    layout: CONSTRAINED
+                  )
                 }
               }
               tech

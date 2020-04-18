@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import styled from 'styled-components'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { theme, mixins, media, Article, styledTheme } from '@styles'
 
@@ -160,7 +160,7 @@ export const StyledPic = styled.div`
   ${media.phablet`width: 80%;`};
 `
 
-export const StyledAvatar = styled(Img)`
+export const StyledAvatar = styled(GatsbyImage)`
   position: relative;
   border-radius: ${theme.borderRadius};
   transition: ${theme.transition};

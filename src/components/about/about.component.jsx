@@ -18,7 +18,7 @@ import {
 const cleanKey = key => key.replace(/(\s+)/g, '')
 
 export default function About() {
-  const { title, skills, fluid, html } = useAboutQuery()
+  const { title, skills, image, html } = useAboutQuery()
   // const revealContainer = useRef(null)
   // useReveal(revealContainer)
 
@@ -30,35 +30,35 @@ export default function About() {
       desktopStyles={`max-width: 696px;`}
     >
       {/* <div data-sal='fade' data-sal-duration='1000'> */}
-        <Flex
-          width='100%'
-          flexDirection='column'
-          justifyContent='center'
-          alignItems='flex-start'
-        >
-          <Heading id='about'>{title}</Heading>
+      <Flex
+        width='100%'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='flex-start'
+      >
+        <Heading id='about'>{title}</Heading>
 
-          <StyledFlexContainer>
-            <StyledContent>
-              <div dangerouslySetInnerHTML={{ __html: html }} />
+        <StyledFlexContainer>
+          <StyledContent>
+            <div dangerouslySetInnerHTML={{ __html: html }} />
 
-              <SkillsGridList role='list'>
-                {skills &&
-                  skills.map(skill => (
-                    <SkillGridItem key={cleanKey(skill)} role='listitem'>
-                      {skill}
-                    </SkillGridItem>
-                  ))}
-              </SkillsGridList>
-            </StyledContent>
+            <SkillsGridList role='list'>
+              {skills &&
+                skills.map(skill => (
+                  <SkillGridItem key={cleanKey(skill)} role='listitem'>
+                    {skill}
+                  </SkillGridItem>
+                ))}
+            </SkillsGridList>
+          </StyledContent>
 
-            <StyledPic>
-              <StyledAvatarLink role='link' href={github}>
-                <StyledAvatar role='img' fluid={fluid} alt='Avatar' />
-              </StyledAvatarLink>
-            </StyledPic>
-          </StyledFlexContainer>
-        </Flex>
+          <StyledPic>
+            <StyledAvatarLink role='link' href={github}>
+              <StyledAvatar role='img' image={image} alt='Avatar' />
+            </StyledAvatarLink>
+          </StyledPic>
+        </StyledFlexContainer>
+      </Flex>
       {/* </div> */}
     </Article>
   )

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Img from 'gatsby-image'
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import { theme, mixins, media, Article, styledTheme } from '@styles'
 
@@ -147,7 +147,7 @@ export const StyledLinkWrapper = styled.div`
   `}
 `
 
-export const StyledFeaturedImg = styled(Img)`
+export const StyledFeaturedImg = styled(GatsbyImage)`
   vertical-align: middle;
   border-radius: ${borderRadius};
   ${img};

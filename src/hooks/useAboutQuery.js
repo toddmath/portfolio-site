@@ -1,4 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby'
+import { getImage } from 'gatsby-plugin-image'
 
 export function useAboutQuery() {
   const data = useStaticQuery(graphql`
@@ -10,9 +11,13 @@ export function useAboutQuery() {
               title
               avatar {
                 childImageSharp {
-                  fluid(maxWidth: 600, quality: 90, traceSVG: { color: "#4a83ff" }) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                  }
+                  gatsbyImageData(
+                    width: 600
+                    quality: 90
+                    tracedSVGOptions: { color: "#4a83ff" }
+                    placeholder: TRACED_SVG
+                    layout: CONSTRAINED
+                  )
                 }
               }
               skills
@@ -24,13 +29,15 @@ export function useAboutQuery() {
     }
   `)
 
+  const image = getImage(data.allMarkdownRemark.edges[0].node.frontmatter.avatar)
+
   const {
     frontmatter: {
       title,
       skills,
-      avatar: {
-        childImageSharp: { fluid },
-      },
+      // avatar: {
+      //   childImageSharp: { fluid },
+      // },
     },
     html,
   } = data.allMarkdownRemark.edges[0].node
@@ -38,7 +45,7 @@ export function useAboutQuery() {
   return {
     title,
     skills,
-    fluid,
+    image,
     html,
   }
 }
