@@ -1,16 +1,15 @@
 import React, { useRef } from 'react'
 
-import { email } from '@config'
-// import { useContactQuery, useReveal } from '@hooks'
+// import { email } from '@config'
 import { useContactQuery } from '@hooks'
-import { Article, Button } from '@components'
+import { Article } from '@styles'
+import { CTA } from '@components'
 
 import { StyledHeading, StyledButtonContainer } from './contact.styles'
 
 export default function Contact() {
   const { title, html } = useContactQuery()
   const revealContainer = useRef(null)
-  // useReveal(revealContainer)
 
   return (
     <Article
@@ -26,18 +25,25 @@ export default function Contact() {
       </StyledHeading>
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <StyledButtonContainer>
-        <Button
-          as='a'
-          href={`mailto:${email}`}
-          target='_blank'
-          rel='nofollow noopener noreferrer'
-          size='large'
-          outline
-          responsive
-        >
-          Say Hi
-        </Button>
+        <CTA />
       </StyledButtonContainer>
     </Article>
   )
 }
+
+/*
+<Button
+  as='a'
+  href={`mailto:${email}`}
+  target='_blank'
+  rel='nofollow noopener noreferrer'
+  size='large'
+  responsive
+  mono={false}
+>
+  Say&nbsp;
+  <span role='img' aria-label='hi'>
+    👋
+  </span>
+</Button>
+*/

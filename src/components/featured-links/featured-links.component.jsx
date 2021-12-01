@@ -1,35 +1,38 @@
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import React, { memo } from 'react'
 
 import { useReducedMotion } from '@hooks'
-import { FeaturedLink } from '@components'
-import { IconGitHub, IconExternal } from '@components/icons'
+import FeaturedLink from '../featured-link/featured-link.component'
+import { Icon } from '@components/icons'
 import { StyledLinkWrapper } from './featured-links.styles'
 
-const FeaturedLinks = ({ isOdd, github, external }) => {
+const FeaturedLinks = memo(function FeaturedLinks({ isOdd, github, external }) {
   const reducedMotion = useReducedMotion()
 
-  return (
-    <StyledLinkWrapper isOdd={isOdd}>
-      {github && (
-        <FeaturedLink isReduced={reducedMotion} to={github} label='Github'>
-          <IconGitHub />
-        </FeaturedLink>
-      )}
+  const Github = (
+    <FeaturedLink isReduced={reducedMotion} to={github} label='github'>
+      <Icon name='github' size='26' strokeWidth='1.5' title='github' />
+    </FeaturedLink>
+  )
+  const External = (
+    <FeaturedLink isReduced={reducedMotion} to={external} label='external'>
+      <Icon name='linkexternal' size='26' strokeWidth='1.5' title='external' />
+    </FeaturedLink>
+  )
 
-      {external && (
-        <FeaturedLink isReduced={reducedMotion} to={external} label='External'>
-          <IconExternal />
-        </FeaturedLink>
-      )}
+  return (
+    <StyledLinkWrapper $isOdd={isOdd}>
+      {github ? <Github /> : null}
+      {external ? <External /> : null}
     </StyledLinkWrapper>
   )
-}
+})
 
 FeaturedLinks.propTypes = {
-  external: PropTypes.string,
-  github: PropTypes.string,
-  isOdd: PropTypes.bool.isRequired,
+  external: T.string,
+  github: T.string,
+  isOdd: T.bool.isRequired,
 }
 
-export default memo(FeaturedLinks)
+export default FeaturedLinks
+// export default memo(FeaturedLinks)

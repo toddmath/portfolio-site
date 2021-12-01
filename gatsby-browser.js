@@ -21,10 +21,10 @@
 // }
 import React from 'react'
 import ThemeToggleProvider from './src/context/theme.context'
-import ScrollProvider from './src/context/scroll.context'
+// import ScrollProvider from './src/context/scroll.context'
 // import Wrapper from './Wrapper'
 import 'sal.js/dist/sal.css'
-// import ThemeHydrationScriptTag from './theme-hydration-script-tag'
+import ThemeHydrationScriptTag from './theme-hydration-script-tag'
 // import { ThemeProvider } from 'styled-components'
 
 // export const onRenderBody = ({ setPreBodyComponents }, pluginOptions) => {
@@ -42,13 +42,26 @@ import 'sal.js/dist/sal.css'
 //   }
 // }
 
-export const wrapRootElement = ({ element }) => {
+export function onInitialClientRender() {
   return (
-    <ScrollProvider>
-      <ThemeToggleProvider>{element}</ThemeToggleProvider>
-    </ScrollProvider>
+    <ThemeHydrationScriptTag
+      key='dark-mode-noflash-hydration-script'
+      shouldMinify={true}
+    />
   )
 }
+
+export function wrapRootElement({ element }) {
+  return <ThemeToggleProvider>{element}</ThemeToggleProvider>
+}
+
+// export const wrapRootElement = ({ element }) => {
+//   return (
+//     <ScrollProvider>
+//       <ThemeToggleProvider>{element}</ThemeToggleProvider>
+//     </ScrollProvider>
+//   )
+// }
 
 // export const wrapPageElement = ({ element, props }, { plugins, ...options }) => {
 //   return (

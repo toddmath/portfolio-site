@@ -1,8 +1,8 @@
 ---
 title: 'Hi, my name is'
 name: 'Todd Matheson'
-subtitle: I build websites and web-apps.
+subtitle: I build modern web apps.
 contactText: 'Get In Touch'
 ---
 
-I'm a front end web developer based in San Mateo, CA specializing in building exceptional, high-quality websites & web apps.
+Feel free to check out some of my projects, or say hi. I'm Currently based in the Bay Area, California.

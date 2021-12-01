@@ -2,21 +2,20 @@ import React from 'react'
 import Helmet from 'react-helmet'
 // import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-import { navLinks } from '@config'
+// import { navLinks } from '@config'
 import { useNav } from '@hooks'
-import { Menu, NavLinks, Button, ThemeToggle, Fade } from '@components'
+import { TurnC } from '../hamburger/turn.component'
+import { Menu, NavLinks, ThemeToggle, Fade } from '@components'
 
 import {
   StyledContainer,
   StyledNav,
-  StyledHamburger,
-  StyledHamburgerBox,
-  StyledHamburgerInner,
   StyledLink,
   StyledButtonContainer,
+  ResumeButton,
 } from './nav.styles'
 
-const Nav = () => {
+function Nav() {
   const { menuOpen, isMounted, scrollDirection, toggleMenu } = useNav()
 
   return (
@@ -27,11 +26,7 @@ const Nav = () => {
 
       <StyledNav role='navigation' id='header-nav' aria-label='Section links'>
         <Fade>
-          <StyledHamburger onClick={toggleMenu} aria-expanded={menuOpen} aria-haspopup='menu'>
-            <StyledHamburgerBox>
-              <StyledHamburgerInner menuOpen={menuOpen} aria-expanded={menuOpen} />
-            </StyledHamburgerBox>
-          </StyledHamburger>
+          <TurnC toggle={toggleMenu} toggled={menuOpen} color='currentColor' />
         </Fade>
 
         <StyledLink>
@@ -40,9 +35,7 @@ const Nav = () => {
 
           <Fade wait={0}>
             <StyledButtonContainer>
-              <Button outline size='medium' href='/resume.pdf'>
-                Resume
-              </Button>
+              <ResumeButton>Resume</ResumeButton>
             </StyledButtonContainer>
           </Fade>
         </StyledLink>
@@ -57,6 +50,18 @@ const Nav = () => {
     </StyledContainer>
   )
 }
+
+/*
+<StyledHamburger
+  onClick={toggleMenu}
+  aria-expanded={menuOpen}
+  aria-haspopup='menu'
+>
+  <StyledHamburgerBox>
+    <StyledHamburgerInner menuOpen={menuOpen} aria-expanded={menuOpen} />
+  </StyledHamburgerBox>
+</StyledHamburger>
+*/
 
 export default Nav
 

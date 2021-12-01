@@ -12,6 +12,8 @@ const titleGradient = styledTheme([
 export const StyledHeroTitleContainer = styled.div`
   --maskX: 0;
   --maskY: 0;
+  align-self: center;
+  padding-bottom: 1rem;
 `
 
 export const StyledTextContainer = styled.div`
@@ -29,7 +31,7 @@ const titleStyles = css`
   word-wrap: break-word;
   line-break: strict;
   hyphens: auto;
-  perpsective: 40rem;
+  perspective: 40rem;
 `
 
 const textTitleStyles = css`
@@ -54,11 +56,12 @@ const textSubtitleStyles = css`
 `
 
 const titleGradientStyles = css`
-  height: 100%;
-  width: 100%;
+  ${'' /* height: 100%; */}
+  ${'' /* width: 100%; */}
   color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 `
 
 export const StyledTextTitleContent = styled.h2`

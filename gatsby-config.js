@@ -1,10 +1,11 @@
-const config = require('./src/config')
 const path = require('path')
+const config = require('./src/config')
 
 module.exports = {
   siteMetadata: {
     title: config.siteTitle,
     description: config.siteDescription,
+    siteUrl: config.siteUrl,
     url: config.siteUrl,
     startUrl: config.startUrl,
     keyWords: config.siteKeywords,
@@ -40,19 +41,8 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: 'gatsby-plugin-lodash',
-      options: {
-        disabledFeatures: ['shorthands', 'cloning', 'chaining', 'exotics'],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-styled-components',
-      options: {
-        displayName: true,
-        fileName: false,
-      },
-    },
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-robots-txt`,
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -67,8 +57,37 @@ module.exports = {
         path: path.join(__dirname, 'src', 'images'),
       },
     },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/, // See below to configure properly
+          omitKeys: [
+            'xmlnsDc',
+            'xmlnsCc',
+            'xmlnsRdf',
+            'xmlnsSvg',
+            'xmlnsSodipodi',
+            'xmlnsInkscape',
+          ],
+        },
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: 'gatsby-plugin-lodash',
+      options: {
+        disabledFeatures: ['shorthands', 'cloning', 'chaining', 'exotics'],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-styled-components',
+      options: {
+        displayName: true,
+        fileName: false,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -104,6 +123,24 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    'gatsby-plugin-netlify',
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // Setting a color is optional.
+        color: config.main,
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Montserrat', 'PT Mono'],
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

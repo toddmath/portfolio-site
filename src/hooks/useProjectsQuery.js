@@ -28,7 +28,9 @@ export default function useProjectsQuery(gridLimit = 6) {
     }
   `)
 
-  const projects = data.allMarkdownRemark.edges.filter(({ node }) => node.frontmatter.show === 'true')
+  const projects = data.allMarkdownRemark.edges.filter(
+    ({ node }) => node.frontmatter.show === 'true'
+  )
 
   const firstProjects = projects.slice(0, gridLimit)
 

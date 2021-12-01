@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { useToggle } from '@hooks'
 import { StyledButton, StyledResponsiveButton } from './button.styles'
 
-const Button = ({
+function Button({
   className = '',
   outline = false,
   mono = true,
@@ -14,7 +14,7 @@ const Button = ({
   href,
   otherStyles,
   children,
-}) => {
+}) {
   const [activated, toggleActivated] = useToggle(false)
 
   let linkProps = {}
@@ -49,12 +49,7 @@ const Button = ({
 
 Button.propTypes = {
   as: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
+  children: PropTypes.node,
   className: PropTypes.string,
   href: PropTypes.string,
   mono: PropTypes.bool,

@@ -53,13 +53,12 @@ typings/
 
 # dotenv environment variable files
 .env*
+config.js
+./config.js
 
 # gatsby files
 .cache/
 public
-
-# Mac files
-.DS_Store
 
 # Yarn
 yarn-error.log
@@ -67,3 +66,49 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# Local Netlify folder
+.netlify
+
+################################################################################
+#### Vscode
+################################################################################
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+################################################################################
+#### MACOS
+################################################################################
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk

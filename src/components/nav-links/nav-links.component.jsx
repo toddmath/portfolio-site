@@ -4,51 +4,64 @@ import { AnimatePresence } from 'framer-motion'
 
 // import { Fade } from '@components'
 import { navLinks } from '@config'
-import { MotionNavList, MotionNavListItem, NavLink } from './nav-links.styles'
+// import { theme } from '@styles'
+import { MotionNavList, MotionNavListItem, NavWrapper, NavLink } from './nav-links.styles'
 
-const NavLinks = ({ isMounted }) => {
-  // const spring = { type: 'spring', damping: 8, stiffness: 65 }
-  // const list = {
-  //   visible: {
-  //     opacity: 1,
-  //     transition: {
-  //       when: 'beforeChildren',
-  //       staggerChildren: 0.3,
-  //     },
-  //   },
-  // }
-  const variants = {
-    visible: custom => ({
-      opacity: 1,
-      transition: { delay: custom * 0.2 },
-    }),
-  }
+// const { flat } = theme
 
-  return (
-    <MotionNavList role='list'>
-      <AnimatePresence>
-        {isMounted &&
-          navLinks &&
-          navLinks.map(({ url, name }, i) => (
-            <MotionNavListItem
-              key={`NavLink-${name}`}
-              initial={{ opacity: 0 }}
-              custom={i}
-              animate='visible'
-              variants={variants}
-              // layoutTransition={spring}
-              // transition={spring}
-              role='listitem'
-              aria-posinset={i + 1}
-            >
-              <NavLink role='link' to={url}>
-                {name}
-              </NavLink>
-            </MotionNavListItem>
-          ))}
-      </AnimatePresence>
-    </MotionNavList>
-  )
+// const spring = {
+//   type: 'spring',
+//   damping: 10,
+//   stiffness: 40,
+// }
+
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
 }
 
-export default memo(NavLinks)
+const parent = {
+  initial: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+}
+
+const NavLinks = memo(function NavLinks({ isMounted }) {
+  // const isMountedHasLinks = isMounted && !!navLinks
+
+  return (
+    <AnimatePresence>
+      {isMounted ? (
+        <MotionNavList variants={parent} initial='initial' animate='visible'>
+          {navLinks.map(({ url, name }, i) => (
+            <MotionNavListItem
+              key={`NavLink-${name}`}
+              initial='initial'
+              variants={variants}
+              layout={true}
+              aria-posinset={i + 1}
+            >
+              <NavWrapper
+                style={{ originX: 0.1 }}
+                whileHover={{ x: 4, scale: 1.1 }}
+                layout={true}
+              >
+                <NavLink to={url}>{name}</NavLink>
+              </NavWrapper>
+            </MotionNavListItem>
+          ))}
+        </MotionNavList>
+      ) : null}
+    </AnimatePresence>
+  )
+})
+
+export default NavLinks

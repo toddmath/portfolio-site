@@ -1,8 +1,14 @@
 export { default as GlobalStyle } from './GlobalStyle'
 export { default as mixins } from './mixins'
 export { default as theme } from './theme'
-export { default as media, mediaMin } from './media'
-export { default as Main } from './Main'
+export {
+  default as media,
+  mediaMin,
+  mediaQuery,
+  mediaReducedMotion,
+  mediaRetina,
+} from './media'
+export { default as Main, MainGrid } from './Main'
 export { default as Footer } from './Footer'
 export { default as Heading } from './Heading'
 export { default as Button } from './Button'

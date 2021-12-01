@@ -12,9 +12,11 @@ export default function useTimeout(callback, delay = 200) {
   const savedCallback = useSavedRef(callback)
 
   useEffect(() => {
-    const tick = () => savedCallback.current()
+    function tick() {
+      savedCallback.current()
+    }
     const id = setTimeout(tick, delay)
 
     return () => clearTimeout(id)
-  }, [savedCallback])
+  }, [savedCallback, delay])
 }

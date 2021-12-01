@@ -40,16 +40,13 @@ Heading.propTypes = {
   align: T.string,
   width: T.string,
   color: T.string,
-  children: T.oneOfType([T.element, T.arrayOf(T.element), T.arrayOf(T.string), T.string]),
+  children: T.oneOfType([
+    T.element,
+    T.arrayOf(T.element),
+    T.arrayOf(T.string),
+    T.string,
+    T.node,
+  ]),
 }
-
-// Heading.defaultProps = {
-//   level: 'h2',
-//   fontSize: 'xl',
-//   display: 'flex',
-//   margin: '10px 0 40px',
-//   align: 'center',
-//   width: '100%',
-// }
 
 export default Heading

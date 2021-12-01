@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 
+import { useBoolean } from './useBoolean'
 import useTimeout from './useTimeout'
 // import useScrollPosition from './useScrollPosition'
 import useScrollPos from './useScrollPos'
@@ -10,49 +11,26 @@ import { throttle } from '@utils'
 const ELEMENT = typeof window === 'undefined' ? null : window
 
 export default function useNav(element = ELEMENT) {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
+  const { isToggled: menuOpen, setToggle: toggleMenu } = useBoolean(false)
+  const { isToggled: isMounted, setTrue: setMounted } = useBoolean(false)
   const [scrollDirection, setScrollDirection] = useState('none')
-  // const [lastScrollTop, setLastScrollTop] = useState(0)
-  // const DELTA = 2
-
-  const toggleMenu = useCallback(() => setMenuOpen(state => !state), [setMenuOpen])
-
-  // const handleSetScrollDirection = useCallback(
-  //   dir => {
-  //     if (scrollDirection !== dir) setScrollDirection(dir)
-  //   },
-  //   [scrollDirection, setScrollDirection]
-  // )
-  // const handleScroll = () => {
-  //   const fromTop = Math.abs(element.scrollY)
-  //   if (!isMounted || Math.abs(lastScrollTop - fromTop) < DELTA || menuOpen) {
-  //     return
-  //   }
-
-  //   if (fromTop <= DELTA) {
-  //     handleSetScrollDirection('none')
-  //   } else if (fromTop > lastScrollTop && fromTop > navHeight) {
-  //     handleSetScrollDirection('down')
-  //   } else if (fromTop + window.innerHeight < document.body.scrollHeight) {
-  //     handleSetScrollDirection('up')
-  //   }
-
-  //   if (lastScrollTop !== fromTop) {
-  //     setLastScrollTop(fromTop)
-  //   }
-  // }
 
   const handleResize = () => {
-    if (typeof window !== 'undefined' && window.innerHeight > 768 && menuOpen) {
-      toggleMenu()
+    if (typeof window !== 'undefined') {
+      if (window?.innerHeight > 768 && menuOpen) toggleMenu()
     }
+    // if (typeof window !== 'undefined' && window.innerHeight > 768 && menuOpen) {
+    //   toggleMenu()
+    // }
   }
 
-  const onKeyPress = () => {
-    if (!menuOpen) return
-    if (isKeyPress) toggleMenu()
-  }
+  // const onKeyPress = useCallback(
+  //   e => {
+  //     if (!menuOpen) return
+  //     if (e.which === 27 || e.key === 'Escape') toggleMenu()
+  //   },
+  //   [menuOpen, toggleMenu]
+  // )
 
   // const onKeyDown = e => {
   //   if (!menuOpen) return
@@ -61,12 +39,9 @@ export default function useNav(element = ELEMENT) {
   //   }
   // }
 
-  const handleMount = () => setIsMounted(true)
-  useTimeout(handleMount, 10)
+  useTimeout(setMounted, 10)
 
-  // const throttledScroll = () => throttle(handleScroll(), 50)
   const throttledResize = () => throttle(handleResize(), 50)
-  // const wait = 10
 
   useScrollPos(
     ({ prevPos, currPos }) => {
@@ -74,14 +49,21 @@ export default function useNav(element = ELEMENT) {
       const isTop = () => Math.abs(currPos.y) <= 20
       const isShow = currPos.y > prevPos.y
       const notShow = prevPos.y > currPos.y
-      if (!isTop() && isShow && scrollDirection !== 'up') setScrollDirection('up')
-      if (!isTop() && notShow && scrollDirection !== 'down') setScrollDirection('down')
-      if (isTop() && scrollDirection !== 'none') setScrollDirection('none')
+
+      if (!isTop()) {
+        if (isShow && scrollDirection !== 'up') {
+          setScrollDirection('up')
+        }
+        if (notShow && scrollDirection !== 'down') {
+          setScrollDirection('down')
+        }
+      }
+      if (isTop() && scrollDirection !== 'none') {
+        setScrollDirection('none')
+      }
     },
-    [scrollDirection]
+    [scrollDirection, menuOpen]
   )
-  // useScrollPosition(throttledScroll, null, 50)
-  // useScrollPosition(handleScroll, null, 100)
 
   const isEscape = e => e.which === 27 || e.key === 'Escape'
 
@@ -95,12 +77,13 @@ export default function useNav(element = ELEMENT) {
     element
   )
 
-  useEffect(() => onKeyPress(), [isMounted])
-
-  return {
-    menuOpen,
-    isMounted,
-    scrollDirection,
-    toggleMenu,
-  }
+  return useMemo(
+    () => ({
+      menuOpen,
+      isMounted,
+      scrollDirection,
+      toggleMenu,
+    }),
+    [isMounted, menuOpen, scrollDirection, toggleMenu]
+  )
 }

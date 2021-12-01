@@ -1,4 +1,6 @@
-const theme = {
+import { createEnum } from '@utils'
+
+const theme = createEnum({
   colors: {
     dark: '#000007',
     darkestNavy: '#01050b',
@@ -28,21 +30,69 @@ const theme = {
 
   mode: {
     light: {
+      background: 'rgba(247, 248, 255, 1)',
+      cardBG: 'hsl(73, 49.7%, 98%)',
+      semiBG: 'rgba(96, 96, 89, 0.5)',
+      semiCardBG: 'rgba(43, 61, 80, 0.75)',
       text: 'rgba(96, 96, 89, 1)',
       header: 'rgba(96, 102, 140, 1)',
+      particles: {
+        polygon: 'rgb(43, 61, 80)',
+        stroke: 'rgb(43, 61, 80)',
+        linkedLine: 'rgb(76, 87, 114)',
+      },
     },
     dark: {
+      background: 'rgba(43, 61, 80, 1)',
+      cardBG: 'hsl(211, 14.9%, 18.3%)',
+      semiBG: 'rgba(255, 251, 237, 0.2)',
+      semiCardBG: 'rgba(43, 61, 80, 0.75)',
       text: 'rgba(169, 189, 204, 1)',
       header: 'rgba(131, 146, 158, 1)',
+      particles: {
+        polygon: 'rgba(247, 248, 255, 0.5)',
+        stroke: 'rgba(247, 248, 255, 0.2)',
+      },
+      headerPrimary: '#fff',
+      headerSecondary: '#b9bbbe',
+      textNormal: '#dcddde',
+      textMuted: '#72767d',
+      textLink: '#00b0f4',
+      navDefault: '#8e9297',
+      interactive: {
+        noraml: '#b9bbbe',
+        hover: '#dcddde',
+        active: '#fff',
+        muted: '#4f545c',
+      },
+      bg: {
+        primary: '#36393f',
+        secondary: '#2f3136',
+        alt: '#292b2f',
+        tertiary: '#202225',
+        accent: '#4f545c',
+        floating: '#18191c',
+        mobilePrimary: '#36393f',
+        mobileSecondary: '#2f3136',
+        modifierHover: 'rgba(79,84,92,0.16)',
+        modifierActive: 'rgba(79,84,92,0.24)',
+        modifierSelected: 'rgba(79,84,92,0.32)',
+        modifierAccent: 'hsla(0,0%,100%,0.06)',
+        mentioned: 'rgba(250,166,26,0.05)',
+        mentionedHover: 'rgba(250,166,26,0.08)',
+        messageHover: 'rgba(4,4,5,0.07)',
+      },
     },
   },
 
   flat: {
     dark: {
+      graphite: 'hsl(211, 14.9%, 18.3%)',
       background: 'rgba(247, 248, 255, 1)',
       semiBackground: 'rgba(247, 248, 255, 0.7)',
       headline: 'rgba(96, 102, 140, 1)',
       paragraph: 'rgba(96, 96, 89, 1)',
+      strong: 'rgba(56, 56, 52, 1)',
       shadow: 'rgba(96, 96, 89, 0.8)',
       headerShadow: 'rgba(96, 96, 89, 0.5)',
       headerBorder: 'rgba(194, 199, 204, 1)',
@@ -90,7 +140,8 @@ const theme = {
   fonts: {
     Calibre:
       'Calibre, San Francisco, SF Pro Text, -apple-system, system-ui, BlinkMacSystemFont, Roboto, Helvetica Neue, Segoe UI, Arial, sans-serif',
-    SFMono: 'SF Mono, Fira Code, Fira Mono, Roboto Mono, Lucida Console, Monaco, monospace',
+    SFMono:
+      'SF Mono, Fira Code, Fira Mono, Roboto Mono, Lucida Console, Monaco, monospace',
     Montserrat:
       'Montserrat, San Francisco, SF Pro Text, -apple-system, system-ui, BlinkMacSystemFont, Roboto, Helvetica Neue, Segoe UI, Arial, sans-serif',
   },
@@ -136,6 +187,11 @@ const theme = {
     rads: `radial-gradient(circle 248px at center, rgba(74, 131, 255, 1) 0%, #30c7ec 47%, rgba(74, 131, 255, 1) 100%)`,
   },
 
+  mainGradient: (
+    dir = 'to bottom',
+    colors = ['#B721FF', '#2AF598', '#fec051', '#FEE140', '#FA709A']
+  ) => `linear-gradient(${dir}, ${colors.join()})`,
+
   gradients: {
     blueTeal: `background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);`,
     blueGreen: `background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);`,
@@ -163,6 +219,6 @@ const theme = {
   hamAfterActive2: `bottom 0.1s cubic-bezier(.22,.61,.36,1) 0.25s, transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s`,
   easeInCirc: `cubic-bezier(.64,.15,.55,.52)`,
   easeOutCirc: `cubic-bezier(.22,.25,.34,.84)`,
-}
+})
 
 export default theme

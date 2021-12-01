@@ -1,0 +1,21 @@
+{
+  "gitlens.codeLens.enabled": false,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#66c7bb",
+    "activityBar.activeBorder": "#ac44bb",
+    "activityBar.background": "#66c7bb",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#ac44bb",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#43b7a9",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#359286",
+    "titleBar.activeBackground": "#43b7a9",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#43b7a999",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#43b7a9",
+  "cmake.configureOnOpen": false
+}

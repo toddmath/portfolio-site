@@ -14,5 +14,10 @@ export const onRenderBody = ({ setPreBodyComponents }, pluginOptions) => {
   // const { classNameDark, classNameLight, storageKey, minify } = pluginOptions
   // const props = { classNameDark, classNameLight, storageKey, minify }
 
-  setPreBodyComponents([<ThemeHydrationScriptTag key='dark-mode-noflash-hydration-script' />])
+  setPreBodyComponents([
+    <ThemeHydrationScriptTag
+      key='dark-mode-noflash-hydration-script'
+      shouldMinify={true}
+    />,
+  ])
 }

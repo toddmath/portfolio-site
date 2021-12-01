@@ -6,10 +6,10 @@ export const Moon = () => (
     xmlns='http://www.w3.org/2000/svg'
     viewBox='0 0 1000 1000'
     role='img'
-    aria-labelledby='title'
+    aria-label='Switch theme'
     id='icon_moon'
   >
-    <title>Moon</title>
+    <title>Switch theme</title>
     <path
       className='sunshine'
       d='M728.48 616.81a254.35 254.35 0 0 1-227.6 140.42c-140.43 0-254.28-113.59-254.28-253.7 0-109.26 69.22-202.39 166.31-238.11'

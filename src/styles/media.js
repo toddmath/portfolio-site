@@ -1,17 +1,20 @@
+// @ts-nocheck
 import { css } from 'styled-components'
 
 /**
- * @type {object} sizes
- * @property {number} sizes.giant 1440px or 90em.
- * @property {number} sizes.bigDesktop 1200px or 75em.
- * @property {number} sizes.desktop 1000px or 62.5em.
- * @property {number} sizes.tablet 768px or 48em.
- * @property {number} sizes.thone 600px or 37.5em.
- * @property {number} sizes.phablet 480px or 30em.
- * @property {number} sizes.phone 376px or 23.5em.
- * @property {number} sizes.tiny 330px 20.62em.
+ * @readonly
+ * @enum {{ giant: number, bigDesktop: number, desktop: number, tablet: number, thone: number, phablet: number, phone: number, tiny: number }} sizes
+ * @description
+ * |//| giant        1440px    90em
+ * |//| bigDesktop   1200px    75em
+ * |//| desktop      1000px    62.5em
+ * |//| tablet       768px     48em
+ * |//| thone        600px     37.5em
+ * |//| phablet      480px     30em
+ * |//| phone        376px     23.5em
+ * |//| tiny         330px     20.62em |//|
  */
-export const sizes = {
+export const sizes = Object.freeze({
   giant: 1440,
   bigDesktop: 1200,
   desktop: 1000,
@@ -20,17 +23,25 @@ export const sizes = {
   phablet: 480,
   phone: 376,
   tiny: 330,
-}
+})
 
+/**
+ * Helper function to query and convert breakpoint to em.
+ * @param {'giant'|'bigDesktop'|'desktop'|'tablet'|'thone'|'phablet'|'phone'|'tiny'} query Breakpoint value.
+ * @returns {number?} Coverted pixel to em value
+ */
 export const toBreakpoint = query => {
   if (!sizes[query]) {
-    throw Error(`Query ${query} is not an available size.`)
+    throw new Error(`Query ${query} is not an available size.`)
   }
   return sizes[query] / 16
 }
 
-// eslint-disable-next-line prefer-template
-export const toEm = px => `${(Number(px) / 16).toFixed(2)}em`
+/**
+ * @param {number|string} px Pixels value to covert / parse.
+ * @returns {string} Coverted em string.
+ */
+export const toEm = px => `${(+px / 16).toFixed(2)}em`
 
 /**
  * Advnaced media query builder. Allows different media types and max / min-width queries.
@@ -49,10 +60,10 @@ export const toEm = px => `${(Number(px) / 16).toFixed(2)}em`
  * `;
  */
 export const mediaType = (type = 'screen', max = true) =>
-  Object.keys(sizes).reduce((acc, key) => {
+  Object.entries(sizes).reduce((acc, [key, px]) => {
     acc[key] = (...args) => css`
       @media ${type.length > 0 && `${type} and`} (${max ? 'max' : 'min'}-width: ${toEm(
-      sizes[key]
+      px
     )}) {
         ${css(...args)};
       }
@@ -60,12 +71,17 @@ export const mediaType = (type = 'screen', max = true) =>
     return acc
   }, {})
 
-const SCREEN = 'screen'
-const PRINT = 'print'
+const [SCREEN, PRINT] = ['screen', 'print']
 
 export const media = mediaType(SCREEN, true)
 export const mediaPrint = mediaType(PRINT, true)
 export const mediaMin = mediaType(SCREEN, false)
+
+export const mediaQuery = (query = '') => (...args) =>
+  css`@media screen and(${query}) {${css(...args)}}`
+
+export const mediaReducedMotion = mediaQuery('prefers-reduced-motion: reduce')
+export const mediaRetina = mediaQuery('min-resolution: 2ppx')
 
 // export const media = Object.keys(sizes).reduce((acc, key) => {
 //   if (key in sizes) {

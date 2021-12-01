@@ -1,17 +1,13 @@
 import styled from 'styled-components'
-import { animated } from 'react-spring'
+import { motion } from 'framer-motion'
 
-import { theme } from '@styles'
-
-const { flat } = theme
-
-export const StyledLink = styled(animated.a)`
+export const MotionLink = styled(motion.a)`
   padding: 10px;
-  color: ${flat.dark.link};
   transform: unset;
   transition: unset;
-  svg {
-    width: 18px;
-    height: 18px;
+  color: var(--interactive-normal);
+
+  &:hover {
+    color: var(--interactive-hover);
   }
 `

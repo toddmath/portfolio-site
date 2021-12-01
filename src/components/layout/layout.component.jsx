@@ -1,20 +1,31 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import PT from 'prop-types'
 
-// import { Head, Nav, Social, Email, Footer } from '@components'
-import { Head, Main } from '@components'
-import { GlobalStyle } from '@styles'
+import { Nav, Social, Email, Footer, ProgressBar, Head } from '@components'
+import { Main as StyledMain, MainGrid, GlobalStyle } from '@styles'
+// import { useResizeObserver } from '@hooks'
 
-const Layout = ({ children }) => (
-  <Main>
-    <Head />
-    <GlobalStyle />
-    <>{children}</>
-  </Main>
-)
+function Layout({ children }) {
+  // const { ref, width, height } = useResizeObserver({})
+
+  return (
+    <StyledMain>
+      <Head />
+      <GlobalStyle />
+      <MainGrid id='root' counter='section' title='Home'>
+        <ProgressBar />
+        <Nav />
+        <Social />
+        <Email />
+        {children}
+        <Footer />
+      </MainGrid>
+    </StyledMain>
+  )
+}
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PT.node,
 }
 
 export default Layout

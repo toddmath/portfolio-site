@@ -46,6 +46,7 @@ export const StyledTitle = styled.h3`
   font-size: ${h3};
   color: ${headingColor};
   text-shadow: ${headingShadow};
+  transition: color 200ms ${easing};
   line-height: 1.2;
   ${media.tablet`font-size: 24px;`};
   a {
@@ -53,20 +54,32 @@ export const StyledTitle = styled.h3`
   }
 `
 
-export const StyledGrid = styled(motion.div)`
+export const MotionGrid = styled(motion.div)`
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  /* grid-gap: 15px; */
-  grid-gap: 3em;
+  /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 325px));
+  grid-auto-columns: 100%;
+  grid-auto-rows: minmax(300px, 1fr);
+  gap: 2em 0;
   position: relative;
-  ${media.desktop`
-    /* grid-gap: 3vw; */
+  /* place-items: stretch stretch; */
+  justify-items: center;
+  justify-content: space-around;
+  width: 100%;
+  > section {
+    grid-column: span 1;
+  }
+  /* ${media.desktop`
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  `};
+  `}; */
+  ${media.phablet`
+    grid-template-columns: repeat(auto-fit, 100%);
+    justify-content: stretch;
+  `}
   ${media.thone`
-    grid-template-columns: auto;
-    grid-gap: 2em;
+    /* grid-template-columns: auto; */
+    gap: 2em;
   `}
 `
 
@@ -99,7 +112,7 @@ export const StyledProjectInner = styled.div`
   ${boxShadow};
   ${flexBetween};
   flex-direction: column;
-  align-items: flex-start;
+  align-items: start;
   position: relative;
   /* padding: 2rem 1.75rem; */
   /* padding: 1.5em 1.7em; */
@@ -111,18 +124,8 @@ export const StyledProjectInner = styled.div`
   border: ${projectBorderColor};
 `
 
-export const StyledProject = styled(motion.section)`
-  --projBenz: ${easing};
-  transition: transform 0.25s var(--projBenz), background 0s var(--projBenz);
-  /* transition: unset; */
+export const MotionProject = styled(motion.section)`
   cursor: default;
-  &:hover,
-  &:focus {
-    outline: 0;
-    ${StyledProjectInner} {
-      transform: translateY(-5px);
-    }
-  }
 `
 
 export const StyledProjectHeader = styled.div`
@@ -130,12 +133,14 @@ export const StyledProjectHeader = styled.div`
   margin-bottom: 30px;
 `
 
+const folderColors = styledTheme([flat.dark.paragraph, flat.dark.cardParagraph])
+
 export const StyledFolder = styled.div`
-  color: ${flat.dark.cardTagBackground};
-  svg {
+  color: ${folderColors};
+  /* svg {
     width: 40px;
     height: 40px;
-  }
+  } */
 `
 
 export const StyledProjectLinks = styled.div`

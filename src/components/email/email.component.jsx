@@ -1,55 +1,40 @@
-import React, { useState } from 'react'
-// import { CSSTransition, TransitionGroup } from 'react-transition-group'
-// import { AnimatePresence, motion } from 'framer-motion'
-import { useSpring } from 'react-spring'
+import React from 'react'
 
-import { useReducedMotion } from '@hooks'
 import { email } from '@config'
 import { Fade } from '@components'
-import { StyledContainer, StyledEmailLink, StyledLinkWrapper } from './email.styles'
+import {
+  StyledContainer,
+  StyledEmailLink,
+  StyledLinkWrapper,
+  StyledEmailLinkContainer,
+  StyledEmailIcon,
+} from './email.styles'
 
 export default function Email() {
-  const [isHovered, setIsHovered] = useState(false)
-  // const [isMounted, setIsMounted] = useState(false)
-  const reducedMotion = useReducedMotion()
-
-  // const mountIt = () => setIsMounted(true)
-  // useTimeout(mountIt, 2000)
-
-  const isReducedOrNotHovered = reducedMotion || !isHovered
-  // const isReducedOrIsHovered = reducedMotion || isHovered
-
-  const props = useSpring({
-    transform: `translate3d(0px, ${isReducedOrNotHovered ? '0px' : '-4px'}, 0px) scale(${
-      isReducedOrNotHovered ? 1 : 1.2
-    })`,
-  })
-
-  const handleOnHover = () => {
-    if (!reducedMotion) {
-      setIsHovered(true)
-    }
-  }
-  const handleOnLeave = () => setIsHovered(false)
-
   return (
-    <StyledContainer>
-      <Fade>
+    <Fade>
+      <StyledContainer>
         <StyledLinkWrapper>
           <StyledEmailLink
-            style={props}
             role='link'
-            onMouseOver={handleOnHover}
-            onFocus={handleOnHover}
-            onMouseLeave={handleOnLeave}
-            onBlur={handleOnLeave}
+            initial={{
+              '--text-wght': 400,
+            }}
+            whileHover={{
+              '--text-wght': 800,
+            }}
+            transition={{ duration: 0.2 }}
             href={`mailto:${email}`}
           >
             {email}
           </StyledEmailLink>
+
+          <StyledEmailLinkContainer>
+            <StyledEmailIcon size='24' title='email me' strokeWidth='1.5' />
+          </StyledEmailLinkContainer>
         </StyledLinkWrapper>
-      </Fade>
-    </StyledContainer>
+      </StyledContainer>
+    </Fade>
   )
 }
 

@@ -2,6 +2,8 @@
   "parser": "babel-eslint",
   "extends": [
     "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "plugin:react/recommended",
     "airbnb",
     "prettier",
@@ -10,25 +12,45 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "alias": [
+        ["@components", "./src/components"],
+        ["@config", "./src/config"],
+        ["@content", "./src/content"],
+        ["@fonts", "./src/fonts"],
+        ["@images", "./src/images"],
+        ["@pages", "./src/pages"],
+        ["@styles", "./src/styles"],
+        ["@utils", "./src/utils"],
+        ["@hooks", "./src/hooks"],
+        ["@context", "./src/context"]
+      ],
+      "babel-module": {}
     }
   },
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "globals": {
     "__PATH_PREFIX": true
   },
-  "plugins": ["prettier", "lodash", "react"],
+  "plugins": ["html", "prettier", "lodash", "react", "react-hooks"],
   "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
     "ecmaFeatures": {
+      "impliedStrict": true,
+      "classes": true,
       "jsx": true
-    },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
+    }
   },
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "strict": 0,
     "curly": "off",
     "quotes": "off",

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from 'react'
+import React, { createContext, useContext, useMemo, useCallback } from 'react'
 import { ThemeProvider } from 'styled-components'
 import theme from 'styled-theming'
 
@@ -23,7 +23,15 @@ export const textColor = theme('mode', {
 
 export const ThemeToggleContext = createContext([])
 
-export const useTheme = () => useContext(ThemeToggleContext)
+// export const useTheme = () => useContext(ThemeToggleContext)
+
+export function useTheme() {
+  const context = useContext(ThemeToggleContext)
+  if (!context) {
+    throw new Error(`Must be called inside of ThemeToggleProvider`)
+  }
+  return context
+}
 
 export const ThemeToggleProvider = ({ children }) => {
   const [themeMode, setThemeMode] = useLocalStorage('theme-mode', 'light')
@@ -47,9 +55,12 @@ export const ThemeToggleProvider = ({ children }) => {
   //   [setThemeMode]
   // )
 
-  const toggleTheme = () => setThemeMode(theme => (theme === 'light' ? 'dark' : 'light'))
+  const toggleTheme = useCallback(
+    () => setThemeMode(theme => (theme === 'light' ? 'dark' : 'light')),
+    [setThemeMode]
+  )
 
-  const value = useMemo(() => [themeMode, toggleTheme], [themeMode])
+  const value = useMemo(() => [themeMode, toggleTheme], [themeMode, toggleTheme])
 
   return (
     <ThemeToggleContext.Provider value={value}>

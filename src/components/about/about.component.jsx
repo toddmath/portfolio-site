@@ -1,15 +1,17 @@
 import React from 'react'
-
-// import { useAboutQuery, useReveal } from '@hooks'
 import { useAboutQuery } from '@hooks'
 import { github } from '@config'
 
-import { Article, Heading, Flex } from '@components'
+import { Heading } from '@styles'
+import { Flex } from '@components'
+
 import {
-  StyledFlexContainer,
+  StyledContainer,
   StyledContent,
+  StyledGrid,
   SkillsGridList,
   SkillGridItem,
+  SkillIcon,
   StyledPic,
   StyledAvatar,
   StyledAvatarLink,
@@ -19,47 +21,59 @@ const cleanKey = key => key.replace(/(\s+)/g, '')
 
 export default function About() {
   const { title, skills, fluid, html } = useAboutQuery()
-  // const revealContainer = useRef(null)
-  // useReveal(revealContainer)
 
   return (
-    <Article
+    <StyledContainer
       ariaLabel='About me section'
       maxWidth='1045px'
       bigDesktopStyles={`max-width: 820px;`}
       desktopStyles={`max-width: 696px;`}
     >
-      {/* <div data-sal='fade' data-sal-duration='1000'> */}
-        <Flex
-          width='100%'
-          flexDirection='column'
-          justifyContent='center'
-          alignItems='flex-start'
-        >
-          <Heading id='about'>{title}</Heading>
+      <Flex
+        width='100%'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='flex-start'
+      >
+        <Heading id='about'>{title}</Heading>
 
-          <StyledFlexContainer>
-            <StyledContent>
-              <div dangerouslySetInnerHTML={{ __html: html }} />
+        <StyledGrid>
+          <StyledContent>
+            <div dangerouslySetInnerHTML={{ __html: html }} />
 
-              <SkillsGridList role='list'>
-                {skills &&
-                  skills.map(skill => (
-                    <SkillGridItem key={cleanKey(skill)} role='listitem'>
-                      {skill}
-                    </SkillGridItem>
-                  ))}
-              </SkillsGridList>
-            </StyledContent>
+            <SkillsGridList role='list'>
+              {skills?.map(skill => (
+                <SkillGridItem key={cleanKey(skill)} role='listitem'>
+                  <SkillIcon />
+                  {skill}
+                </SkillGridItem>
+              ))}
+            </SkillsGridList>
+          </StyledContent>
 
-            <StyledPic>
-              <StyledAvatarLink role='link' href={github}>
-                <StyledAvatar role='img' fluid={fluid} alt='Avatar' />
-              </StyledAvatarLink>
-            </StyledPic>
-          </StyledFlexContainer>
-        </Flex>
-      {/* </div> */}
-    </Article>
+          <StyledPic>
+            <StyledAvatarLink role='link' href={github}>
+              <StyledAvatar role='img' fluid={fluid} alt='Avatar' />
+            </StyledAvatarLink>
+          </StyledPic>
+        </StyledGrid>
+      </Flex>
+    </StyledContainer>
   )
 }
+
+/*
+<Tilt
+  options={{
+    reverse: false,
+    max: 12,
+    perspective: 1000,
+    scale: 1,
+    speed: 300,
+    transition: true,
+    axis: null,
+    reset: true,
+    easing: 'cubic-bezier(.03,.98,.52,.99)',
+  }}
+>
+*/

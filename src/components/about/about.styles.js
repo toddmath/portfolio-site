@@ -2,30 +2,36 @@
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { theme, mixins, media, Article, styledTheme } from '@styles'
+import Icon from '../icons/icon.component'
+import Article from '../article/article.component'
+import { theme, mixins, media } from '@styles'
 
-const {
-  willow,
-  nashville,
-  inkwell,
-  img,
-  flexBetween,
-  flexCenter,
-  flexColumn,
-  inlineLink,
-  linkCenterUL,
-  gridImplicit,
-} = mixins
-const { colors, flat, fontSizes, fonts, transition, borderRadius } = theme
+const { willow, img, flexBetween, linkCenterUL } = mixins
+const { fontSizes, borderRadius } = theme
 
-const gridItemColor = styledTheme([flat.dark.paragraph, flat.dark.background])
+export const StyledContainer = styled(Article).attrs(() => ({
+  ariaLabel: 'About me section',
+  maxWidth: '1045px',
+  bigDesktopStyles: 'max-width: 820px;',
+  desktopStyles: 'max-width: 696px;',
+}))`
+  z-index: 2;
 
-export const StyledContainer = styled(Article)`
-  position: relative;
-  transition: ${transition};
-  ${flexCenter};
-  ${flexColumn};
-  align-items: flex-start;
+  @media print {
+    @page {
+      size: 5.5in 8.5in portrait !important;
+      page-break-after: always !important;
+      page-break-before: always !important;
+      height: 8.5in;
+    }
+    display: flex;
+    height: 8.5in;
+    align-items: center;
+    justify-content: center;
+    page-break-after: always !important;
+    page-break-before: always !important;
+    size: A4 portrait !important;
+  }
 `
 
 export const StyledFlexContainer = styled.div`
@@ -43,87 +49,59 @@ export const StyledGrid = styled.div`
   display: grid;
   gap: 8px;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  ${media.tablet`
-    grid-template-rows: repeat(2, minMax(300px, 1fr));
-  `}
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 `
 
-export const StyledGridContent = styled.div`
+export const StyledContent = styled.div`
+  z-index: 2;
   width: 100%;
   grid-column: span 5;
+
   a {
     ${linkCenterUL};
   }
+
   ${media.desktop`
     grid-column: 1 / -1;
     grid-row: span 1;
   `}
 `
 
-export const StyledContent = styled.div`
-  width: 100%;
-  flex-basis: 800px;
-  a {
-    ${linkCenterUL};
-  }
-`
-
-// export const SkillsContainer = styled.ul`
-//   display: grid;
-//   grid-template-columns: repeat(2, minmax(140px, 200px));
-//   overflow: hidden;
-//   margin-top: 20px;
-// `
-
 export const SkillsGridList = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
-  row-gap: 0.25rem;
-  column-gap: 0.5rem;
+  grid-row-gap: 0.25rem;
+  grid-column-gap: 0.5rem;
   overflow: hidden;
+`
+
+export const SkillIcon = styled(Icon).attrs(() => ({
+  name: 'source',
+  size: '18',
+}))`
+  --length: 18;
+  color: var(--text-link);
+  height: var(--length);
+  width: var(--length);
+  margin: auto 0;
+  stroke-width: 1.5;
+  line-height: inherit;
+  padding-right: 8px;
 `
 
 export const SkillGridItem = styled.li`
   position: relative;
   margin: 0;
-  padding-left: 1rem;
-  font-family: ${fonts.SFMono};
+  font-family: var(--font-sys);
   font-size: ${fontSizes.smish};
-  color: ${gridItemColor};
+  color: var(--text-normal);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  &:before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: ${flat.dark.tertiary};
-    font-family: ${fonts.SFMono};
-    font-size: ${fontSizes.md};
-    font-weight: bold;
-    line-height: inherit;
-  }
+  display: flex;
 `
 
-// export const Skill = styled.li`
-//   position: relative;
-//   margin-bottom: 10px;
-//   padding-left: 20px;
-//   font-family: ${fonts.SFMono};
-//   font-size: ${fontSizes.smish};
-//   color: ${colors.grey};
-//   &:before {
-//     content: '▹';
-//     position: absolute;
-//     left: 0;
-//     color: ${flat.dark.tertiary};
-//     font-size: ${fontSizes.md};
-//     line-height: 15px;
-//   }
-// `
-
-export const StyledGridPic = styled.div`
+export const StyledPic = styled.div`
   grid-column: -1 / -4;
   align-self: start;
   position: relative;
@@ -141,30 +119,11 @@ export const StyledGridPic = styled.div`
   ${media.phablet`width: 80%;`};
 `
 
-export const StyledPic = styled.div`
-  position: relative;
-  align-self: start;
-  max-width: 300px;
-  width: 100%;
-  margin-left: 2rem;
-  flex-basis: 300px;
-  flex-shrink: 0.5;
-  ${media.tablet`
-      margin: 60px auto 0 auto;
-      align-self: center;
-      justify-self: center;
-      justify-items: center;
-      justify-content: center;
-  `};
-  ${media.desktop`width: 100%;`};
-  ${media.phablet`width: 80%;`};
-`
-
 export const StyledAvatar = styled(Img)`
   position: relative;
-  border-radius: ${theme.borderRadius};
-  transition: ${theme.transition};
-  ${img};
+  border-radius: ${borderRadius};
+  ${img}
+
   img {
     border-radius: ${borderRadius};
   }
@@ -176,9 +135,4 @@ export const StyledAvatarLink = styled.a`
   ${willow};
   position: relative;
   border-radius: ${borderRadius};
-  transition: ${theme.transition};
-  &:before,
-  &:after {
-    transition: ${theme.transition};
-  }
 `

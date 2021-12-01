@@ -2,17 +2,17 @@
 import React, { useEffect } from 'react'
 import sal from 'sal.js'
 
-const salOptions = {
-  threshold: 1,
-  once: true,
-  disable: false,
-  selector: '[data-sal]',
-  animateClassName: 'sal-animate',
-  disabledClassName: 'sal-disabled',
-  rootMargin: '0% 50%',
-  enterEventName: 'sal:in',
-  exitEventName: 'sal:out',
-}
+// const salOptions = {
+//   threshold: 1,
+//   once: true,
+//   disable: false,
+//   selector: '[data-sal]',
+//   animateClassName: 'sal-animate',
+//   disabledClassName: 'sal-disabled',
+//   rootMargin: '0% 50%',
+//   enterEventName: 'sal:in',
+//   exitEventName: 'sal:out',
+// }
 
 export default function Wrapper({
   children,
@@ -31,7 +31,7 @@ export default function Wrapper({
 }) {
   useEffect(() => {
     sal(options)
-  }, [path])
+  }, [path, options])
 
   return children
 }

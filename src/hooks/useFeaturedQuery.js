@@ -22,6 +22,7 @@ export function useFeaturedQuery() {
               github
               external
               show
+              date
             }
             html
           }

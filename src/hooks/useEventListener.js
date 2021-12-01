@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import useSavedRef from './useSavedRef'
 
 const isFunction = p => p.constructor === Function || typeof p === 'function'
-const isPassive = name => ['scroll', 'touchstart', 'touchmove', 'wheel'].some(e => e === name)
+const isPassive = name =>
+  ['scroll', 'touchstart', 'touchmove', 'wheel'].some(e => e === name)
 
 const handleConfig = n => (isPassive(n) ? { passive: true } : false)
 

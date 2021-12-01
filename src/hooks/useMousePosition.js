@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 
-import { useEventListener } from '@hooks'
+import useEventListener from './useEventListener'
 import { throttle } from '@utils'
 
 /**

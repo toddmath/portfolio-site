@@ -19,7 +19,8 @@ export const StyledContainer = styled(Article)`
 `
 
 export const StyledHeading = styled(Heading)`
-  color: ${flat.dark.headline};
+  /* color: ${flat.dark.headline}; */
+  color: var(--header-secondary);
   font-size: 50px;
   ${media.desktop`font-size: 50px;`};
   ${media.tablet`font-size: 40px;`};
@@ -35,28 +36,19 @@ export const StyledHeading = styled(Heading)`
   }
 `
 
-export const StyledTitle = styled.h4`
-  margin: 0 0 20px;
-  font-size: 60px;
-  color: ${flat.dark.headline};
-  ${media.desktop`font-size: 50px;`};
-  ${media.tablet`font-size: 40px;`};
-`
-
 export const StyledEmailLink = styled.a`
   ${mixins.bigButton};
   margin-top: 50px;
   ${media.tablet`margin-top: 30px;`}
   ${media.phablet`margin-top: 20px;`}
-  &:hover,
-  &:focus,
-  &:active {
-    color: ${flat.dark.background};
-  }
 `
 
 export const StyledButtonContainer = styled.div`
   margin-top: 50px;
   ${media.tablet`margin-top: 30px;`}
   ${media.phablet`margin-top: 20px;`}
+
+  & span[role='img'] {
+    font-size: 1.3em;
+  }
 `

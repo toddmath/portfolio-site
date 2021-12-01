@@ -1,46 +1,94 @@
-import React, { useState, memo } from 'react'
-import PropTypes from 'prop-types'
-import { useSpring } from 'react-spring'
+import React, { memo } from 'react'
+import T from 'prop-types'
 
-import { FormattedIcon } from '@components/icons'
-import { StyledLink } from './social-link.styles'
+import { Icon } from '@components/icons'
+import { MotionLink } from './social-link.styles'
 
-function SocialLink({ url, name, isHovered }) {
-  const [linkHovered, setLinkHovered] = useState(false)
-  const handleOnOver = () => setLinkHovered(true)
-  const handleOnOut = () => setLinkHovered(false)
-
-  const props = useSpring({
-    scale: isHovered ? (linkHovered ? '1.1' : '1.5') : '1',
-    opacity: isHovered ? 1 : 0.9,
-    config: {
-      tension: linkHovered ? 550 : 450,
-      friction: linkHovered ? 45 : 30,
-      mass: linkHovered ? 5 : 3,
+const variants = {
+  initial: {
+    scale: 1,
+  },
+  linkHover: {
+    scale: 1.1,
+    transition: {
+      type: 'spring',
     },
-  })
+  },
+  hover: {
+    scale: 1.5,
+    transition: {
+      type: 'spring',
+    },
+  },
+}
 
+const SocialLink = memo(function SocialLink({ url, name, listHovered }) {
   return (
-    <StyledLink
+    <MotionLink
       href={url}
       aria-label={name}
       target='_blank'
       rel='nofollow noopener noreferrer'
-      onMouseOver={handleOnOver}
-      onFocus={handleOnOver}
-      onMouseLeave={handleOnOut}
-      onBlur={handleOnOut}
-      style={props}
+      variants={variants}
+      initial='initial'
+      whileHover='linkHover'
+      layout
+      animate={listHovered ? 'hover' : 'initial'}
+      // custom={listHovered}
     >
-      <FormattedIcon name={name} />
-    </StyledLink>
+      <Icon name={name} size='24' />
+    </MotionLink>
   )
-}
+})
+
+// const SocialLink = memo(function ({ url, name, isHovered }) {
+//   const [linkHovered, setLinkHovered] = useState(false)
+//   const handleOnOver = useCallback(() => setLinkHovered(true), [])
+//   const handleOnOut = useCallback(() => setLinkHovered(false), [])
+
+//   const props = useSpring({
+//     scale: isHovered ? (linkHovered ? '1.1' : '1.5') : '1',
+//     // opacity: isHovered ? 1 : 0.9,
+//     strokeWidth: isHovered ? (linkHovered ? '1.5' : '1.0') : '1.5',
+//     config: mixins.getSpringConfig(linkHovered),
+//   })
+
+//   return (
+//     <StyledLink
+//       href={url}
+//       aria-label={name}
+//       target='_blank'
+//       rel='nofollow noopener noreferrer'
+//       onMouseOver={handleOnOver}
+//       onFocus={handleOnOver}
+//       onMouseLeave={handleOnOut}
+//       onBlur={handleOnOut}
+//       style={props}
+//     >
+//       <Icon name={name} size='24' />
+//     </StyledLink>
+//   )
+// })
 
 SocialLink.propTypes = {
-  isHovered: PropTypes.bool.isRequired,
-  name: PropTypes.string,
-  url: PropTypes.string.isRequired,
+  name: T.string,
+  url: T.string.isRequired,
 }
 
-export default memo(SocialLink)
+export default SocialLink
+
+/*
+<StyledLink
+  href={url}
+  aria-label={name}
+  target='_blank'
+  rel='nofollow noopener noreferrer'
+  onMouseOver={handleOnOver}
+  onFocus={handleOnOver}
+  onMouseLeave={handleOnOut}
+  onBlur={handleOnOut}
+  style={props}
+>
+  <Icon name={name} size='24' />
+</StyledLink>
+*/

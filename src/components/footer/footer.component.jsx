@@ -1,13 +1,14 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 import { useGithubInfo } from '@hooks'
 import { socialMedia } from '@config'
-import { FormattedIcon, IconStar, IconFork } from '@components/icons'
+import { Icon } from '@components/icons'
 
 import {
   StyledContainer,
   StyledSocial,
-  StyledSocialList,
+  MotionSocialList,
   StyledSocialLink,
   StyledMetadata,
   StyledGitHubLink,
@@ -21,9 +22,13 @@ const Footer = () => {
   return (
     <StyledContainer>
       <StyledSocial>
-        <StyledSocialList>
+        <MotionSocialList>
           {socialMedia?.map(({ name, url }, i) => (
-            <li key={i}>
+            <motion.li
+              key={i}
+              whileHover={{ scale: 0.75, color: 'var(--interactive-hover)' }}
+              transition={{ type: 'spring', damping: 7, stiffness: 100 }}
+            >
               <StyledSocialLink
                 href={url}
                 target='_blank'
@@ -31,11 +36,11 @@ const Footer = () => {
                 aria-label={name}
                 role='link'
               >
-                <FormattedIcon name={name} />
+                <Icon name={name} size='24' />
               </StyledSocialLink>
-            </li>
+            </motion.li>
           ))}
-        </StyledSocialList>
+        </MotionSocialList>
       </StyledSocial>
 
       <StyledMetadata>
@@ -44,18 +49,23 @@ const Footer = () => {
           target='_blank'
           rel='nofolow noopener noreferrer'
         >
-          <div>Designed by Todd Matheson</div>
-
+          Designed by Todd Matheson
           <StyledGitHubInfo>
             {stars > 0 && (
               <StyledGitHubInfoInner>
-                <IconStar />
+                <motion.div
+                  whileHover={{ scale: 1.2, color: 'var(--interactive-hover)' }}
+                >
+                  <Icon name='star' strokeWidth='1.5' size='20' />
+                </motion.div>
                 <span>{stars}</span>
               </StyledGitHubInfoInner>
             )}
             {forks > 0 && (
               <StyledGitHubInfoInner>
-                <IconFork />
+                <motion.div>
+                  <Icon name='fork' strokeWidth='1.5' size='22' />
+                </motion.div>
                 <span>{forks}</span>
               </StyledGitHubInfoInner>
             )}

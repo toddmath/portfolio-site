@@ -28,7 +28,8 @@ const useObserver = (
       observer.disconnect()
       observer = null
     }
-  }, [node, options.root, options.rootMargin, options.threshold])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [node, options.root, options.rootMargin, options.threshold, handleObserver])
 
   return entry
 }

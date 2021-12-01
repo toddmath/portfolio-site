@@ -8,6 +8,7 @@ const {
   flat,
   fontSizes: { h3, xl, lg },
   fonts: { SFMono },
+  easing,
 } = theme
 
 const textShadow = `0 0 0 var(--textFG), 0 0 0 var(--highlite),
@@ -38,8 +39,10 @@ const headingCounterColor = styledTheme([flat.dark.tertiary, flat.dark.backgroun
 
 const Heading = styled.h3`
   --margin: 10px;
-  --highlite: ${flat.dark.highlight};
-  --textFG: ${flat.dark.paragraph};
+  --highlite: var(--text-link);
+  --textFG: var(--text-muted);
+  /* --highlite: ${flat.dark.highlight}; */
+  /* --textFG: ${flat.dark.paragraph}; */
   position: relative;
   display: flex;
   align-items: center;
@@ -48,28 +51,34 @@ const Heading = styled.h3`
   white-space: nowrap;
   font-size: ${h3};
   ${media.tablet`font-size: 24px;`};
-  color: ${headingColor} !important;
-  text-shadow: ${headingShadow};
+  color: var(--header-secondary);
+  /* color: ${headingColor} !important; */
+  /* text-shadow: ${headingShadow}; */
   line-height: 1.2;
+  transition: color 200ms ${easing};
+
   &:before {
     counter-increment: section;
     content: '0' counter(section) '.';
     margin-right: var(--margin);
     font-family: ${SFMono};
     font-weight: normal;
-    color: ${headingCounterColor};
+    color: var(--text-link);
+    /* color: ${headingCounterColor}; */
     text-shadow: none;
     font-size: ${xl};
     position: relative;
     bottom: 4px;
     ${media.tablet`font-size: ${lg};`};
   }
+
   &:after {
     content: '';
     display: block;
     height: 1px;
     width: 300px;
-    background-color: ${flat.dark.tertiary};
+    background-color: var(--background-accent);
+    /* background-color: ${flat.dark.tertiary}; */
     position: relative;
     top: -5px;
     margin-left: calc(var(--margin) * 2);

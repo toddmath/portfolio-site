@@ -6,6 +6,7 @@ import { LogoWrapper, StyledMoon } from './theme-toggle.styles'
 
 export default function ThemeToggle() {
   const [themeMode, toggleTheme] = useTheme()
+
   return (
     <LogoWrapper>
       <StyledMoon onClick={toggleTheme} themeMode={themeMode}>

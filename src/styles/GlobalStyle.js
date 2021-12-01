@@ -1,20 +1,24 @@
+/* eslint-disable prettier/prettier */
 import { createGlobalStyle } from 'styled-components'
 
 import theme from './theme'
-import media, { toBreakpoint, mediaMin } from './media'
+import media, { toBreakpoint } from './media'
 import * as fontFamilies from './fonts'
 import mixins from './mixins'
+// import printStyles from './Print'
+import { lightVariables, darkVariables } from './variables'
 import styledTheme from './StyledTheme'
 // import sal from './sal'
 
-const { fontSizes, fonts, flat, lineHeights, transition, easing } = theme
-
+const { fontSizes, flat, lineHeights, easing } = theme
 const { textSelectShadow } = mixins
-
 const thumbBackground = styledTheme([flat.dark.background, flat.dark.cardBackground])
+const themeVariables = styledTheme([lightVariables, darkVariables])
 
 const GlobalStyle = createGlobalStyle`
-  /* FF Meta Variable Demo Font */
+  /* ----------------------------------------------------------------------
+  ---- FF Meta Variable Font
+  ---------------------------------------------------------------------- */
   @font-face {
     font-family: 'FF Meta VF';
     src: url(${fontFamilies.MetaVariableWOFF2}) format('woff2');
@@ -22,155 +26,68 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal italic;
     font-weight: 100 900;
   }
+  /* ----------------------------------------------------------------------
+  ---- Operator Mono
+  ---------------------------------------------------------------------- */
   @font-face {
-    font-family: 'SF Mono';
-    src: url(${fontFamilies.SFMonoRegularWOFF2}) format('woff2'),
-    url(${fontFamilies.SFMonoRegularWOFF}) format('woff'),
-    url(${fontFamilies.SFMonoRegularTTF}) format('truetype');
-    font-weight: normal;
+    font-family: 'Operator Mono';
+    src: url(${fontFamilies.OperatorMonoBookWOFF2}) format('woff2'),
+      url(${fontFamilies.OperatorMonoBookWOFF}) format('woff'),
+      url(${fontFamilies.OperatorMonoBookOTF}) format('opentype');
+    font-weight: 400;
     font-style: normal;
     font-display: auto;
   }
   @font-face {
-    font-family: 'SF Mono';
-    src: url(${fontFamilies.SFMonoRegularItalicWOFF2}) format('woff2'),
-    url(${fontFamilies.SFMonoRegularItalicWOFF}) format('woff'),
-    url(${fontFamilies.SFMonoRegularItalicTTF}) format('truetype');
-    font-weight: normal;
+    font-family: 'Operator Mono';
+    src: url(${fontFamilies.OperatorMonoBookItalicWOFF2}) format('woff2'),
+      url(${fontFamilies.OperatorMonoBookItalicWOFF}) format('woff'),
+      url(${fontFamilies.OperatorMonoBookItalicOTF}) format('opentype');
+    font-weight: 400;
     font-style: italic;
     font-display: auto;
   }
   @font-face {
-    font-family: 'SF Mono';
-    src: url(${fontFamilies.SFMonoMediumWOFF2}) format('woff2'),
-    url(${fontFamilies.SFMonoMediumWOFF}) format('woff'),
-    url(${fontFamilies.SFMonoMediumTTF}) format('truetype');
+    font-family: 'Operator Mono';
+    src: url(${fontFamilies.OperatorMonoMediumWOFF2}) format('woff2'),
+      url(${fontFamilies.OperatorMonoMediumWOFF}) format('woff'),
+      url(${fontFamilies.OperatorMonoMediumOTF}) format('opentype');
     font-weight: 500;
     font-style: normal;
     font-display: auto;
   }
   @font-face {
-    font-family: 'SF Mono';
-    src: url(${fontFamilies.SFMonoMediumItalicWOFF2}) format('woff2'),
-    url(${fontFamilies.SFMonoMediumItalicWOFF}) format('woff'),
-    url(${fontFamilies.SFMonoMediumItalicTTF}) format('truetype');
+    font-family: 'Operator Mono';
+    src: url(${fontFamilies.OperatorMonoMediumItalicWOFF2}) format('woff2'),
+      url(${fontFamilies.OperatorMonoMediumItalicWOFF}) format('woff'),
+      url(${fontFamilies.OperatorMonoMediumItalicOTF}) format('opentype');
     font-weight: 500;
     font-style: italic;
     font-display: auto;
   }
   @font-face {
-    font-family: 'SF Mono';
-    src: url(${fontFamilies.SFMonoSemiboldWOFF2}) format('woff2'),
-    url(${fontFamilies.SFMonoSemiboldWOFF}) format('woff'),
-    url(${fontFamilies.SFMonoSemiboldTTF}) format('truetype');
-    font-weight: 600;
+    font-family: 'Operator Mono';
+    src: url(${fontFamilies.OperatorMonoBoldWOFF2}) format('woff2'),
+      url(${fontFamilies.OperatorMonoBoldWOFF}) format('woff'),
+      url(${fontFamilies.OperatorMonoBoldOTF}) format('opentype');
+    font-weight: 700;
     font-style: normal;
     font-display: auto;
   }
   @font-face {
-    font-family: 'SF Mono';
-    src: url(${fontFamilies.SFMonoSemiboldItalicWOFF2}) format('woff2'),
-    url(${fontFamilies.SFMonoSemiboldItalicWOFF}) format('woff'),
-    url(${fontFamilies.SFMonoSemiboldItalicTTF}) format('truetype');
-    font-weight: 600;
+    font-family: 'Operator Mono';
+    src: url(${fontFamilies.OperatorMonoBoldItalicWOFF2}) format('woff2'),
+      url(${fontFamilies.OperatorMonoBoldItalicWOFF}) format('woff'),
+      url(${fontFamilies.OperatorMonoBoldItalicOTF}) format('opentype');
+    font-weight: 700;
     font-style: italic;
     font-display: auto;
   }
-  @font-face {
-    font-family: "Montserrat";
-    font-weight: 100;
-    font-style: normal;
-    src: url(${fontFamilies.MontserratThinWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratThinWOFF}) format("woff"),
-        url(${fontFamilies.MontserratThinEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 300;
-      font-style: normal;
-      src: url(${fontFamilies.MontserratLightWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratLightWOFF}) format("woff"),
-        url(${fontFamilies.MontserratLightEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 400;
-      font-style: normal;
-      src: url(${fontFamilies.MontserratRegularWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratRegularWOFF}) format("woff"),
-        url(${fontFamilies.MontserratRegularEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 400;
-      font-style: italic;
-      src: url(${fontFamilies.MontserratRegularItalicWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratRegularItalicWOFF}) format("woff"),
-        url(${fontFamilies.MontserratRegularItalicEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 500;
-      font-style: normal;
-      src: url(${fontFamilies.MontserratMediumWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratMediumWOFF}) format("woff"),
-        url(${fontFamilies.MontserratMediumEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 500;
-      font-style: italic;
-      src: url(${fontFamilies.MontserratMediumItalicWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratMediumItalicWOFF}) format("woff"),
-        url(${fontFamilies.MontserratMediumItalicEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 600;
-      font-style: normal;
-      src: url(${fontFamilies.MontserratSemiBoldWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratSemiBoldWOFF}) format("woff"),
-        url(${fontFamilies.MontserratSemiBoldEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 600;
-      font-style: italic;
-      src: url(${fontFamilies.MontserratSemiBoldItalicWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratSemiBoldItalicWOFF}) format("woff"),
-        url(${fontFamilies.MontserratSemiBoldItalicEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 700;
-      font-style: normal;
-      src: url(${fontFamilies.MontserratBoldWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratBoldWOFF}) format("woff"),
-        url(${fontFamilies.MontserratBoldEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 700;
-      font-style: italic;
-      src: url(${fontFamilies.MontserratBoldItalicWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratBoldItalicWOFF}) format("woff"),
-        url(${fontFamilies.MontserratBoldItalicEOT}) format('embedded-opentype');
-  }
-  @font-face {
-      font-family: "Montserrat";
-      font-weight: 900;
-      font-style: normal;
-      src: url(${fontFamilies.MontserratBlackWOFF2}) format("woff2"),
-        url(${fontFamilies.MontserratBlackWOFF}) format("woff"),
-        url(${fontFamilies.MontserratBlackEOT}) format('embedded-opentype');
-  }
-  ${'' /* ${sal}; */}
+  /* ----------------------------------------------------------------------
+  ---- Global CSS Variables
+  ---------------------------------------------------------------------- */
   :root {
     /* Breakpoint variables */
-    ${'' /* --bp-small: 24.15; */}
-    ${'' /* --bp-medium: 43.75; */}
-    ${'' /* --bp-large: 60.25; */}
-    ${'' /* --bp-xlarge: 75; */}
     --bp-small: ${toBreakpoint('phone')};
     --bp-medium: ${toBreakpoint('tablet')};
     --bp-large: ${toBreakpoint('desktop')};
@@ -179,6 +96,10 @@ const GlobalStyle = createGlobalStyle`
     /* initial values ital */
     --text-wght: 350;
     --text-ital: 0;
+    --txt-wght: 'wght' 350;
+    --txt-opsz: 'opsz' 19;
+    --txt-grad: 'GRAD' 400;
+    --txt-yaxs: 'YAXS' 400;
 
     /* Paragraph variables */
     --p-line-height-min: 1;
@@ -192,9 +113,6 @@ const GlobalStyle = createGlobalStyle`
     --h1-line-height-max: 1.1;
     --h1-font-size-min: 3;
     --h1-font-size-max: 6;
-    ${'' /* --h1-vf-wght-multiplier-s: .33; */}
-    ${'' /* --h1-vf-wght-multiplier-m: .33; */}
-    ${'' /* --h1-vf-wght-multiplier-l: .33; */}
     --h1-vf-wght-multiplier-s: 1.15;
     --h1-vf-wght-multiplier-m: 1.2;
     --h1-vf-wght-multiplier-l: 1.3;
@@ -213,9 +131,6 @@ const GlobalStyle = createGlobalStyle`
     --h3-line-height-max: 1.25;
     --h3-font-size-min: 1.75;
     --h3-font-size-max: 2.5;
-    ${'' /* --h3-vf-wght-multiplier-s: .5; */}
-    ${'' /* --h3-vf-wght-multiplier-m: .5; */}
-    ${'' /* --h3-vf-wght-multiplier-l: .5; */}
     --h3-vf-wght-multiplier-s: 1.15;
     --h3-vf-wght-multiplier-m: 1.2;
     --h3-vf-wght-multiplier-l: 1.3;
@@ -231,292 +146,330 @@ const GlobalStyle = createGlobalStyle`
     --bq-line-height-max: 1.1;
     --bq-font-size-min: 2.7;
     --bq-font-size-max: 5;
+
+    /* Font Families, variable font settings */
+    --font-meta: "FF Meta VF";
+    --font-sys: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-code: "Operator Mono";
+    --wght: var(--txt-wght);
+    --opsz: var(--txt-opsz);
+    --grad: var(--txt-grad);
+    --yaxs: var(--txt-yaxs);
+    --x-height: 0.5;
+
+    ${themeVariables}
   }
-  .italic,
-  i,
-  em {
-    --text-ital: 1;
+
+  /* .dark-theme {
+    ${darkVariables}
   }
+
+  .light-theme {
+    ${lightVariables}
+  } */
+
   b,
   strong {
     --text-wght: 475;
+    --wght: 'wght' 520;
   }
+
   html {
     box-sizing: border-box;
     width: 100%;
-    text-rendering: optimizeLegibility;
+    height: 100%;
     scroll-behavior: smooth;
     scroll-padding: 8rem;
-    visibility: hidden;
-    &.sr {
-      visibility: visible;
-    }
+    ${mixins.reducedMotion};
+
+    font-family: var(--font-sys);
+    font-variation-settings: var(--wght), var(--opsz), var(--grad), var(--yaxs);
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thin-track);
+    /* scrollbar-color: auto; */
   }
-  @media screen and (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-      scroll-padding: 8rem;
+
+  /* ----------------------------------------------------------------------
+    ---- Scrollbar Styles
+    ---------------------------------------------------------------------- */
+  /* the entire scrollbar */
+  /* ::-webkit-scrollbar  {
+    width: 0.35rem;
+  } */
+
+  /* the buttons on the scrollbar (arrows pointing upwards and downwards) */
+  /* ::-webkit-scrollbar-button {
+    background: var(--scrollbar-thin-thumb);
+  } */
+
+  /* the draggable scrolling handle */
+  /* ::-webkit-scrollbar-thumb {
+    width: 0.35rem;
+    height: 3rem;
+    background:var(--scrollbar-thin-thumb);
+  } */
+
+  /* ::-webkit-scrollbar-thumb:hover {
+    border-radius: 0.4em;
+    background:var(--interactive-hover);
+  } */
+
+  /* ::-webkit-scrollbar-thumb:active {
+    border-radius: 0.4em;
+    background:var(--interactive-active);
+  } */
+
+  /* the track (progress bar) of the scrollbar */
+  /* ::-webkit-scrollbar-track {
+    background: var(--scrollbar-auto-scrollbar-color-track);
+
+    &:hover ::-webkit-scrollbar-thumb {
+      background: var(--interactive-normal);
     }
-  }
+  } */
+
+  /* ?? the part of the track (progress bar) not covered by the handle */
+  /* ::-webkit-scrollbar-track-piece {
+    background: var(--scrollbar-thin-track);
+  } */
+
+  /* the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet */
+  /* ::-webkit-scrollbar-corner {
+    background:var(--scrollbar-thin-thumb);
+  } */
+
+  /* the draggable resizing handle that appears at the bottom corner of some elements */
+  /* ::-webkit-resizer {
+    background:var(--scrollbar-thin-thumb);
+  } */
+
   *,
   *:before,
   *:after {
     box-sizing: inherit;
   }
+
   ul[class],
   ol[class] {
-    padding: 0;
     list-style: none;
   }
+
   p,
-  ul[class],
-  ol[class],
+  ul,
+  ol,
   figure,
   blockquote,
   dl,
   dd {
     margin: 0;
   }
+
   body {
     margin: 0;
-    width: 100%;
+    /* width: 100%; */
+    width: 100vw;
     min-height: 100%;
-    overflow-x: hidden;
+    overflow: overlay;
+    /* overflow-x: hidden; */
     -moz-osx-font-smoothing: grayscale;
+    /* text-rendering: optimizeSpeed; */
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    background-color: ${flat.light.background};
-    color: ${flat.dark.paragraph};
-    line-height: ${lineHeights.body};
-    ${'' /* font-family: ${fonts.Montserrat}; */}
-    font-family: "FF Meta VF", "Montserrat", Helvetica, Arial, sans-serif;
+    ${mixins.retina};
+    color: var(--text-normal);
+    background-color: var(--background-primary);
+    line-height: 1.45;
+
+    font-family: var(--font-sys);
+    font-variation-settings: var(--wght), var(--opsz), var(--grad), var(--yaxs);
     font-size: ${fontSizes.lg};
     ${media.phablet`font-size: ${fontSizes.md};`}
-    &.hidden {
-      overflow: hidden;
-    }
+
+    &.hidden,
     &.blur {
       overflow: hidden;
-      #root > * {
-        filter: blur(3px) grayscale(60%) saturate(2);
-        pointer-events: none;
-        user-select: none;
-      }
     }
-    &::-webkit-scrollbar  {
-      width: 0.25rem;
+
+    &.blur #root > * {
+      ${mixins.blur};
     }
-    &::-webkit-scrollbar-track {
-      ${'' /* background: ${flat.dark.background}; */}
-      ${'' /* background: inherit; */}
-      background: ${thumbBackground};
-    }
-    &::-webkit-scrollbar-thumb {
-      background: ${flat.dark.link};
+
+    /* ----------------------------------------------------------------------
+    ---- Selection Styles
+    ---------------------------------------------------------------------- */
+    & ::selection {
+      background: var(--selection-background);
+      color: var(--selection-text);
+      opacity: 1;
     }
   }
-  body,
-  div,
+
+  button {
+    --wght: 'wght' 565;
+    text-transform: none;
+    text-indent: 0px;
+    color: inherit;
+    font-style: inherit;
+    font-family: var(--font-sys);
+  }
+
   p,
+  div,
   th,
   td,
-  ul,
-  li,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  blockquote,
   figcaption,
   cite,
   i,
   em,
   b,
-  strong,
-  button,
-  p:first-line,
-  p:first-child {
-    font-family: "FF Meta VF", "Montserrat", Helvetica, Arial, sans-serif;
-    font-weight: normal;
+  strong {
+    --wght: 'wght' 350;
+    --opsz: 'opsz' 19;
     font-style: normal;
-    font-variation-settings:
-      'wght' var(--text-wght),
-      'ital' var(--text-ital);
+    font-family: var(--font-sys);
   }
+
+  ul,
+  li,
+  blockquote,
+  button {
+    /* font-family: var(--font-code); */
+    /* font-variant-ligatures: normal; */
+  }
+
   p {
-    --text-ital: 0;
-    margin-left: auto;
-    margin-right: auto;
-    ${'' /* max-width: 38rem; */}
-    ${'' /* transition: all linear 0.2s; */}
     hyphens: auto;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+    font-size: clamp(1.1rem, 2vw, 1.2rem);
   }
-  /* Variations and variables */
-  p {
-    font-size: calc( var(--p-font-size-min) * 1rem );
-    line-height: var(--p-line-height-min);
-    ${mediaMin.phone`
-      line-height: calc(( var(--p-line-height-min) * 1em ) + ( var(--p-line-height-max) - var(--p-line-height-min) ) * ((100vw - ( var(--bp-small) * 1em )) / ( var(--bp-large) - var(--bp-small) )));
-    `}
-    ${mediaMin.desktop`
-      font-size: calc(( var(--p-font-size-min) * 1em ) + ( var(--p-font-size-max) - var(--p-font-size-min) ) * ((100vw - ( var(--bp-large) * 1em )) / ( var(--bp-xlarge) - var(--bp-large) )));
-      line-height: var(--p-line-height-max);
-    `}
-    ${mediaMin.bigDesktop`
-      font-size: calc( var(--p-font-size-max) * 1em );
-      ${'' /* max-width: 42rem; */}
-    `}
+
+  /* ----------------------------------------------------------------------
+  ---- Generic Header Styles
+  ---------------------------------------------------------------------- */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    --wght: 'wght' 700;
+    --opsz: 'opsz' 20;
+    --yaxs: 'YAXS' 477;
+    font-family: var(--font-sys);
+    font-variation-settings: var(--wght), var(--opsz), var(--grad), var(--yaxs);
   }
-  /* Generic header styles */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "FF Meta VF", "Montserrat", Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    ${'' /* transition: all linear 0.2s;  */}
-    --text-wght: calc( var(--p-vf-wght) * var(--h1-vf-wght-multiplier-s) );
-  }
+
   h1 {
-    /* Set --text-wght value multiplier */
-    --text-wght: calc( var(--p-vf-wght) * var(--h1-vf-wght-multiplier-s) );
-    --text-ital: 0;
-
-    font-family: "FF Meta VF", "Montserrat", Helvetica, Arial, sans-serif;
-    font-size: calc( var(--h1-font-size-min) * 1em );
-    line-height: var(--h1-line-height-min);
-    ${'' /* margin: 1rem auto; */}
-    ${'' /* max-width: 50rem; */}
-    ${mediaMin.phone`
-      line-height: calc(( var(--h1-line-height-min) * 1em ) + ( var(--h1-line-height-max) - var(--h1-line-height-min) ) * ((100vw - ( var(--bp-small) * 1em )) / ( var(--bp-xlarge) - var(--bp-small) )));
-      font-size: calc(( var(--h1-font-size-min) * 1em ) + ( var(--h1-font-size-max) - var(--h1-font-size-min) ) * ((100vw - ( var(--bp-small) * 1em )) / ( var(--bp-xlarge) - var(--bp-small) )));
-    `}
-    ${mediaMin.tablet`
-      --text-wght: calc( var(--p-vf-wght) * var(--h1-vf-wght-multiplier-m) );
-    `}
-    ${mediaMin.desktop`
-      --text-wght: calc( var(--p-vf-wght) * var(--h1-vf-wght-multiplier-l) );
-      line-height: var(--h1-line-height-max);
-    `}
-    ${mediaMin.bigDesktop`
-      font-size: calc( var(--h1-font-size-max) * 1em );
-      line-height: var(--h1-line-height-max);
-    `}
+    --wght: 'wght' 488;
+    --grad: 'GRAD' 444;
+    --yaxs: 'YAXS' 444;
+    --opsz: 'opsz' 20;
+    font-family: var(--font-sys);
+    ${'' /* --text-wght: calc( var(--p-vf-wght) * var(--h1-vf-wght-multiplier-s)); */}
+    ${'' /* font-size: calc(var(--h1-font-size-min) * 1em); */}
+    ${'' /* line-height: var(--h1-line-height-min); */}
   }
+
   h2 {
-    /* Set --text-wght value multiplier */
-    --text-wght: calc( var(--p-vf-wght) * var(--h2-vf-wght-multiplier-s) );
-    --text-ital: 0;
+    --wght: 'wght' 522;
+    --opsz: 'opsz' 20;
+    --yaxs: 'YAXS' 444;
 
-    font-family: "FF Meta VF", "Montserrat", Helvetica, Arial, sans-serif;
-    font-size: calc( var(--h2-font-size-min) * 1em );
+    ${'' /* --text-wght: calc(var(--p-vf-wght) * var(--h2-vf-wght-multiplier-s)); */}
+    font-size: clamp(calc(var(--h2-font-size-min) * 1rem), 3.5vmin, 2.8rem);
     line-height: var(--h2-line-height-min);
-    ${'' /* margin: 1rem auto .5rem auto; */}
-    ${'' /* max-width: 38rem; */}
-    ${mediaMin.phone`
-      line-height: calc(( var(--h2-line-height-min) * 1em ) + ( var(--h2-line-height-max) - var(--h2-line-height-min) ) * ((100vw - ( var(--bp-small) * 1em )) / ( var(--bp-xlarge) - var(--bp-small) )));
-      font-size: calc(( var(--h2-font-size-min) * 1em ) + ( var(--h2-font-size-max) - var(--h2-font-size-min) ) * ((100vw - ( var(--bp-small) * 1em )) / ( var(--bp-xlarge) - var(--bp-small) )));
-    `}
-    ${mediaMin.tablet`
-      --text-wght: calc( var(--p-vf-wght) * var(--h2-vf-wght-multiplier-m) );
-    `}
-    ${mediaMin.bigDesktop`
-      --text-wght: calc( var(--p-vf-wght) * var(--h2-vf-wght-multiplier-l) );
-      font-size: calc( var(--h2-font-size-max) * 1em );
-      line-height: var(--h2-line-height-max);
-    `}
   }
+
   h3 {
-    /* Set --text-wght value multiplier */
-    --text-wght: calc( var(--p-vf-wght) * var(--h3-vf-wght-multiplier-s) );
-    --text-ital: 0;
+    --wght: 'wght' 444;
+    --opsz: 'opsz' 20;
+    --yaxs: 'YAXS' 422;
+    --grad: 'GRAD' 422;
 
-    ${'' /* color: #444466; */}
-    font-family: "FF Meta VF", "Montserrat", Helvetica, Arial, sans-serif;
-    font-size: calc( var(--h2-font-size-min) * 1em );
+    ${'' /* font-size: calc( var(--h2-font-size-min) * 1em ); */}
+    font-size: clamp(calc(var(--h2-font-size-min) * 1rem), 3vmin, 2.2rem);
     line-height: var(--h2-line-height-min);
-    ${'' /* margin: 1rem auto .5rem auto; */}
-    ${'' /* max-width: 38rem; */}
-    ${'' /* text-align: center; */}
-    ${mediaMin.phone`
-      line-height: calc(( var(--h3-line-height-min) * 1em ) + ( var(--h3-line-height-max) - var(--h3-line-height-min) ) * ((100vw - ( var(--bp-small) * 1em )) / ( var(--bp-xlarge) - var(--bp-small) )));
-      font-size: calc(( var(--h3-font-size-min) * 1em ) + ( var(--h3-font-size-max) - var(--h3-font-size-min) ) * ((100vw - ( var(--bp-small) * 1em )) / ( var(--bp-xlarge) - var(--bp-small) )));
-    `}
-    ${mediaMin.tablet`
-      --text-wght: calc( var(--p-vf-wght) * var(--h3-vf-wght-multiplier-m) );
-    `}
-    ${mediaMin.bigDesktop`
-      --text-wght: calc( var(--p-vf-wght) * var(--h3-vf-wght-multiplier-l) );
-      font-size: calc( var(--h3-font-size-max) * 1em );
-      line-height: var(--h3-line-height-max);
-    `}
   }
+
   h1,
   h2,
   h3,
   h4,
   h5 {
-    ${'' /* font-weight: 600; */}
-    color: ${flat.dark.headline};
+    color: var(--header-primary);
+    /* color: ${flat.dark.headline}; */
     margin: 0 0 10px 0;
   }
-  ::selection {
+
+  *::selection,
+  *::-webkit-selection,
+  *::-moz-selection {
     ${textSelectShadow};
   }
+
+  /* ----------------------------------------------------------------------
+  ---- Main React Container Grid
+  ---------------------------------------------------------------------- */
   #root {
-    min-height: 100vh;
+    height: 100%;
+    ${
+      '' /* min-height: 100vh;
     display: grid;
-    grid-template-rows: 1fr auto;
-    grid-template-columns: 100%;
-    ::selection {
+    grid-template-rows: 1fr;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%; */
+    }
+
+    &::-moz-selection,
+    &::selection {
       ${textSelectShadow};
     }
   }
+
   img {
     width: 100%;
     max-width: 100%;
-    vertical-align: middle;
     display: block;
     image-rendering: auto;
     image-rendering: high-quality;
   }
+
   svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
     vertical-align: middle;
+    ${'' /* fill: currentColor; */}
   }
+
   a {
-    display: inline-block;
-    text-decoration: none;
-    text-decoration-skip-ink: auto;
-    color: inherit;
-    position: relative;
-    transition: ${transition};
-    cursor: pointer;
-    &:hover,
-    &:focus {
-      color: ${flat.dark.tertiary};
-      outline: 0;
-    }
+    ${mixins.link};
   }
+
   button {
     cursor: pointer;
     border: 0;
     border-radius: 0;
+    font-family: var(--font-code);
+    font-variant-ligatures: normal;
+
     &:focus,
     &:active {
-      outline-color: ${flat.dark.button};
+      outline-color: var(--interactive-active);
+      /* outline-color: ${flat.dark.button}; */
     }
   }
+
   input,
   textarea {
     border-radius: 0;
-    outline: 0;
+
+    &,
     &:focus {
       outline: 0;
     }
+
     &::placeholder {
     }
+
     &:focus,
     &:active {
       &::placeholder {
@@ -524,56 +477,71 @@ const GlobalStyle = createGlobalStyle`
       }
     }
   }
-  p {
-    margin: 0 0 15px 0;
-  }
+
   ul,
   ol {
+    font-family: var(--font-code);
+    font-variant-ligatures: normal;
     padding: 0;
     margin: 0;
     list-style: none;
   }
-  .gatsby-image-outer-wrapper {
+
+  img.gatsby-image-outer-wrapper,
+  div.gatsby-image-outer-wrapper,
+  picture.gatsby-image-outer-wrapper {
     height: 100%;
   }
-  .fadeup {
-    &-enter {
-      opacity: 0.01;
-      transform: translateY(20px);
+
+  /* ----------------------------------------------------------------------
+  ---- Scroll Reveal Transition Styles
+  ---------------------------------------------------------------------- */
+  .fadeup-enter {
+    opacity: 0.01;
+    transform: translateY(20px);
+    transition: opacity 300ms ${easing}, transform 300ms ${easing};
+
+    &-active {
+      opacity: 1;
+      transform: translateY(0px);
       transition: opacity 300ms ${easing}, transform 300ms ${easing};
-      &-active {
-        opacity: 1;
-        transform: translateY(0px);
-        transition: opacity 300ms ${easing}, transform 300ms ${easing};
-      }
     }
   }
-  .fadedown {
-    &-enter {
-      opacity: 0.01;
+
+  .fadedown-enter {
+    opacity: 0.01;
       transform: translateY(-20px);
       transition: opacity 300ms ${easing}, transform 300ms ${easing};
+
       &-active {
         opacity: 1;
         transform: translateY(0px);
         transition: opacity 300ms ${easing}, transform 300ms ${easing};
       }
-    }
   }
+
   .fade-enter {
     opacity: 0.01;
     transition: opacity 1000ms ${easing};
+
     &-active {
       opacity: 1;
       transition: opacity 1000ms ${easing};
     }
   }
+
   .overline {
-    color: ${flat.dark.tertiary};
-    font-family: ${fonts.Montserrat};
-    font-size: ${fontSizes.md};
-    font-weight: normal;
+    color: var(--text-muted);
+    /* color: ${flat.dark.tertiary}; */
+    ${'' /* font-family: ${fonts.Montserrat}; */}
+    ${'' /* font-size: ${fontSizes.md}; */}
+    ${'' /* font-weight: normal; */}
   }
+
+  /* ----------------------------------------------------------------------
+  ---- Print Styles
+  ---------------------------------------------------------------------- */
+  ${'' /* ${printStyles}; */}
 `
 
 export default GlobalStyle

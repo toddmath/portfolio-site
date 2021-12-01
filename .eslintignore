@@ -1,0 +1,10 @@
+node_modules
+./node_modules/**/*
+.cache
+.netlify
+.vscode
+functions
+public
+loadershim.js
+jest.config.js
+__mocks__

@@ -1,18 +1,17 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { AnimatePresence } from 'framer-motion'
 // import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-// import { useProjectsQuery, useProjectsReveal } from '@hooks'
 import { useProjectsQuery } from '@hooks'
 import { Article, Flex, TechList } from '@components'
-import { IconGitHub, IconExternal, IconFolder } from '@components/icons'
+import { IconGitHub, IconExternal, Icon } from '@components/icons'
 
 import {
   StyledTitle,
   StyledFolder,
-  StyledGrid,
+  MotionGrid,
   StyledProjectInner,
-  StyledProject,
+  MotionProject,
   StyledProjectHeader,
   StyledProjectLinks,
   StyledIconLink,
@@ -21,15 +20,8 @@ import {
 } from './projects.styles'
 
 const Projects = ({ gridLimit = 6 }) => {
-  const revealTitle = useRef(null)
-  // const revealArchiveLink = useRef(null)
-  const revealProjects = useRef([])
-  const [projects, firstSix] = useProjectsQuery(gridLimit) // eslint-disable-line no-unused-vars
-  // useProjectsReveal(revealTitle, revealArchiveLink, revealProjects)
-  // const cleanKey = key => key.replace(/(\s+)/g, '')
-
-  // const observer = useObserver(revealTitle)
-  // console.log(observer)
+  // eslint-disable-next-line no-unused-vars
+  const [projects, firstSix] = useProjectsQuery(gridLimit)
 
   const variants = {
     visible: custom => ({
@@ -51,18 +43,19 @@ const Projects = ({ gridLimit = 6 }) => {
         flexDirection='column'
         flexGrow='1'
       >
-        <StyledTitle ref={revealTitle}>Other Noteworthy Projects</StyledTitle>
+        <StyledTitle>Other Noteworthy Projects</StyledTitle>
 
         <AnimatePresence>
-          <StyledGrid>
+          <MotionGrid>
             {projects?.map(({ node: { frontmatter: fm, html } }, i) => (
-              <StyledProject
+              <MotionProject
                 key={i}
                 custom={i}
                 initial={{ opacity: 0 }}
                 animate='visible'
                 variants={variants}
-                ref={el => (revealProjects.current[i] = el)}
+                whileTap={{ y: 0, scale: 0.95 }}
+                whileHover={{ y: -10 }}
                 aria-label={`${fm.title} Other Project Section`}
                 tabIndex='0'
               >
@@ -70,7 +63,8 @@ const Projects = ({ gridLimit = 6 }) => {
                   <header>
                     <StyledProjectHeader>
                       <StyledFolder role='presentation'>
-                        <IconFolder role='presentation' />
+                        <Icon name='folder' size='40' strokeWidth='1.5' />
+                        {/* <IconFolder role='presentation' /> */}
                       </StyledFolder>
                       <StyledProjectLinks>
                         {fm.github && (
@@ -83,6 +77,7 @@ const Projects = ({ gridLimit = 6 }) => {
                             <IconGitHub />
                           </StyledIconLink>
                         )}
+
                         {fm.external && (
                           <StyledIconLink
                             href={fm.external}
@@ -95,17 +90,20 @@ const Projects = ({ gridLimit = 6 }) => {
                         )}
                       </StyledProjectLinks>
                     </StyledProjectHeader>
+
                     <StyledProjectName role='banner'>{fm.title}</StyledProjectName>
-                    <StyledProjectDescription dangerouslySetInnerHTML={{ __html: html }} />
+                    <StyledProjectDescription
+                      dangerouslySetInnerHTML={{ __html: html }}
+                    />
                   </header>
 
                   <footer>
                     <TechList tech={fm.tech} />
                   </footer>
                 </StyledProjectInner>
-              </StyledProject>
+              </MotionProject>
             ))}
-          </StyledGrid>
+          </MotionGrid>
         </AnimatePresence>
       </Flex>
     </Article>

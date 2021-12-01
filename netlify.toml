@@ -14,7 +14,8 @@
   command = "gatsby build"
 
   # Directory with the serverless Lambda functions to deploy to AWS.
-  # functions = "project/functions/"
+  # functions = "functions"
+  # functions = "functions-build"
 
 # Production context: all deploys from the Production branch set in your site's
 # deploy contexts will inherit these settings.
