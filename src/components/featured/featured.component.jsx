@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import { getImage } from 'gatsby-plugin-image'
 
-// import { useReveals, useFeaturedQuery } from '@hooks'
 import { useFeaturedQuery } from '@hooks'
 import { ProjectLink, FeaturedLinks } from '@components'
 import { Heading } from '@styles'
@@ -14,7 +13,7 @@ import {
   StyledTechList,
   StyledFeaturedImg,
   StyledImgContainer,
-  StyledProject,
+  Project,
 } from './featured.styles'
 
 const cleanKey = key => key.replace(/(\s+)/g, '')
@@ -43,7 +42,7 @@ export default function Featured() {
       <div>
         {featuredProjects &&
           featuredProjects.map(({ node: { frontmatter: fm, html } }, i) => (
-            <StyledProject key={cleanKey(fm.title)}>
+            <Project key={cleanKey(fm.title)}>
               <StyledContent>
                 <StyledProjectName ref={ref => handleRefs(ref, revealTitles)}>
                   {fm.external ? (
@@ -78,7 +77,7 @@ export default function Featured() {
               >
                 <StyledFeaturedImg image={getImage(fm.cover)} alt={fm.title} />
               </StyledImgContainer>
-            </StyledProject>
+            </Project>
           ))}
       </div>
       {/* </div> */}

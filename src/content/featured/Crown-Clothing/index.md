@@ -1,5 +1,5 @@
 ---
-date: '2019-07-01'
+date: '2019-09-03'
 title: 'Crown Clothing'
 github: 'https://github.com/toddmath/crwn-clothing'
 cover: './crown-clothing.jpeg'
@@ -7,9 +7,10 @@ external: 'https://www.crown-clothes.com/'
 tech:
   - React
   - Redux
-  - Redux-thunk
+  - Redux-Saga
   - Styled-Components
   - Jest
+  - Firebase
   - Netlify
 show: 'true'
 ---

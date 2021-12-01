@@ -1,9 +1,8 @@
 import React, { useRef } from 'react'
 
 import { email } from '@config'
-// import { useContactQuery, useReveal } from '@hooks'
 import { useContactQuery } from '@hooks'
-import { Article, Button } from '@components'
+import { Section, Button } from '@components'
 
 import { StyledHeading, StyledButtonContainer } from './contact.styles'
 
@@ -13,7 +12,7 @@ export default function Contact() {
   // useReveal(revealContainer)
 
   return (
-    <Article
+    <Section
       ariaLabel='Contact me section'
       textAlign='center'
       maxWidth='845px'
@@ -38,6 +37,6 @@ export default function Contact() {
           Say Hi
         </Button>
       </StyledButtonContainer>
-    </Article>
+    </Section>
   )
 }

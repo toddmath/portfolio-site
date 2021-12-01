@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 
 // import { useProjectsQuery, useProjectsReveal } from '@hooks'
 import { useProjectsQuery } from '@hooks'
-import { Article, Flex, TechList } from '@components'
+import { Section, Flex, TechList } from '@components'
 import { IconGitHub, IconExternal, IconFolder } from '@components/icons'
 
 import {
@@ -20,6 +20,16 @@ import {
   StyledProjectDescription,
 } from './projects.styles'
 
+const variants = {
+  visible: custom => ({
+    opacity: 1,
+    transition: { delay: custom * 0.2 },
+  }),
+  initial: {
+    opacity: 0,
+  },
+}
+
 const Projects = ({ gridLimit = 6 }) => {
   const revealTitle = useRef(null)
   // const revealArchiveLink = useRef(null)
@@ -31,15 +41,8 @@ const Projects = ({ gridLimit = 6 }) => {
   // const observer = useObserver(revealTitle)
   // console.log(observer)
 
-  const variants = {
-    visible: custom => ({
-      opacity: 1,
-      transition: { delay: custom * 0.2 },
-    }),
-  }
-
   return (
-    <Article
+    <Section
       ariaLabel='Additional projects section'
       maxWidth='1045px'
       bigDesktopStyles={`max-width: 845px;`}
@@ -59,9 +62,9 @@ const Projects = ({ gridLimit = 6 }) => {
               <StyledProject
                 key={i}
                 custom={i}
-                initial={{ opacity: 0 }}
-                animate='visible'
                 variants={variants}
+                initial='initial'
+                animate='visible'
                 ref={el => (revealProjects.current[i] = el)}
                 aria-label={`${fm.title} Other Project Section`}
                 tabIndex='0'
@@ -108,7 +111,7 @@ const Projects = ({ gridLimit = 6 }) => {
           </StyledGrid>
         </AnimatePresence>
       </Flex>
-    </Article>
+    </Section>
   )
 }
 

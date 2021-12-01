@@ -3,18 +3,11 @@ import { theme, mixins, media } from '@styles'
 
 const {
   flat,
-  fontSizes: { xs },
+  fontSizes,
   fonts: { SFMono },
 } = theme
 
 const { flexCenter, flexBetween } = mixins
-
-// const footerBorder = styledTheme([
-//   `1px solid ${flat.dark.cardBackground}`,
-//   `1px solid ${flat.dark.headerBorder}`,
-// ])
-
-// const footerBg = styledTheme([flat.dark.cardBackground, flat.dark.stroke])
 
 export const StyledContainer = styled.footer`
   ${flexCenter};
@@ -33,6 +26,7 @@ export const StyledSocial = styled.div`
   max-width: 270px;
   margin: 0 auto 10px;
   display: none;
+
   ${media.tablet`display: block;`};
 `
 
@@ -42,21 +36,23 @@ export const StyledSocialList = styled.ul`
 
 export const StyledSocialLink = styled.a`
   padding: 10px;
+
   svg {
     width: 20px;
     height: 20px;
   }
 `
 
-export const StyledMetadata = styled.div`
+export const Metadata = styled.div`
   margin: 10px 0;
   font-family: ${SFMono};
-  font-size: ${xs};
+  font-size: ${fontSizes.md};
   line-height: 1;
 `
 
-export const StyledGitHubLink = styled.a`
+export const GitHubLink = styled.a`
   color: ${flat.dark.cardHeadline};
+
   &:hover,
   &:focus,
   &:active {
@@ -66,6 +62,7 @@ export const StyledGitHubLink = styled.a`
 
 export const StyledGitHubInfo = styled.div`
   margin-top: 10px;
+
   svg {
     display: inline-block;
     height: 15px;

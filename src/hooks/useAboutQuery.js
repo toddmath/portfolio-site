@@ -12,11 +12,12 @@ export function useAboutQuery() {
               avatar {
                 childImageSharp {
                   gatsbyImageData(
-                    width: 600
+                    width: 900
                     quality: 90
                     tracedSVGOptions: { color: "#4a83ff" }
                     placeholder: TRACED_SVG
                     layout: CONSTRAINED
+                    formats: [AUTO, WEBP, AVIF]
                   )
                 }
               }
@@ -29,18 +30,13 @@ export function useAboutQuery() {
     }
   `)
 
-  const image = getImage(data.allMarkdownRemark.edges[0].node.frontmatter.avatar)
+  const { node } = data.allMarkdownRemark.edges[0]
+  const image = getImage(node.frontmatter.avatar)
 
   const {
-    frontmatter: {
-      title,
-      skills,
-      // avatar: {
-      //   childImageSharp: { fluid },
-      // },
-    },
+    frontmatter: { title, skills },
     html,
-  } = data.allMarkdownRemark.edges[0].node
+  } = node
 
   return {
     title,

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import Helmet from 'react-helmet'
 
 import { useSiteMetadata } from '@hooks'
@@ -41,8 +41,8 @@ const Head = ({ description, title }) => {
 }
 
 Head.propTypes = {
-  description: PropTypes.string,
-  title: PropTypes.string,
+  description: T.string,
+  title: T.string,
 }
 
 export default Head

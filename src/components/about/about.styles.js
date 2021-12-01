@@ -32,6 +32,7 @@ export const StyledFlexContainer = styled.div`
   ${flexBetween};
   align-items: flex-start;
   flex-wrap: nowrap;
+
   ${media.tablet`
     flex-wrap: wrap;
     flex-direction: row;
@@ -44,6 +45,7 @@ export const StyledGrid = styled.div`
   gap: 8px;
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+
   ${media.tablet`
     grid-template-rows: repeat(2, minMax(300px, 1fr));
   `}
@@ -52,9 +54,11 @@ export const StyledGrid = styled.div`
 export const StyledGridContent = styled.div`
   width: 100%;
   grid-column: span 5;
+
   a {
     ${linkCenterUL};
   }
+
   ${media.desktop`
     grid-column: 1 / -1;
     grid-row: span 1;
@@ -64,17 +68,11 @@ export const StyledGridContent = styled.div`
 export const StyledContent = styled.div`
   width: 100%;
   flex-basis: 800px;
+
   a {
     ${linkCenterUL};
   }
 `
-
-// export const SkillsContainer = styled.ul`
-//   display: grid;
-//   grid-template-columns: repeat(2, minmax(140px, 200px));
-//   overflow: hidden;
-//   margin-top: 20px;
-// `
 
 export const SkillsGridList = styled.ul`
   display: grid;
@@ -94,6 +92,7 @@ export const SkillGridItem = styled.li`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
   &:before {
     content: '▹';
     position: absolute;
@@ -106,23 +105,6 @@ export const SkillGridItem = styled.li`
   }
 `
 
-// export const Skill = styled.li`
-//   position: relative;
-//   margin-bottom: 10px;
-//   padding-left: 20px;
-//   font-family: ${fonts.SFMono};
-//   font-size: ${fontSizes.smish};
-//   color: ${colors.grey};
-//   &:before {
-//     content: '▹';
-//     position: absolute;
-//     left: 0;
-//     color: ${flat.dark.tertiary};
-//     font-size: ${fontSizes.md};
-//     line-height: 15px;
-//   }
-// `
-
 export const StyledGridPic = styled.div`
   grid-column: -1 / -4;
   align-self: start;
@@ -130,6 +112,7 @@ export const StyledGridPic = styled.div`
   max-width: 300px;
   width: 100%;
   margin-left: auto;
+
   ${media.desktop`
     width: 100%;
     grid-column: 1 / -1;
@@ -138,6 +121,7 @@ export const StyledGridPic = styled.div`
     justify-self: center;
     margin: 60px auto;
   `};
+
   ${media.phablet`width: 80%;`};
 `
 
@@ -149,6 +133,7 @@ export const StyledPic = styled.div`
   margin-left: 2rem;
   flex-basis: 300px;
   flex-shrink: 0.5;
+
   ${media.tablet`
       margin: 60px auto 0 auto;
       align-self: center;
@@ -156,27 +141,31 @@ export const StyledPic = styled.div`
       justify-items: center;
       justify-content: center;
   `};
+
   ${media.desktop`width: 100%;`};
+
   ${media.phablet`width: 80%;`};
 `
 
-export const StyledAvatar = styled(GatsbyImage)`
+export const Avatar = styled(GatsbyImage)`
   position: relative;
   border-radius: ${theme.borderRadius};
   transition: ${theme.transition};
   ${img};
+
   img {
     border-radius: ${borderRadius};
   }
 `
 
-export const StyledAvatarLink = styled.a`
+export const AvatarLink = styled.a`
   ${mixins.boxShadow};
   width: 100%;
   ${willow};
   position: relative;
   border-radius: ${borderRadius};
   transition: ${theme.transition};
+
   &:before,
   &:after {
     transition: ${theme.transition};

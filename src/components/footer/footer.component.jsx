@@ -9,8 +9,8 @@ import {
   StyledSocial,
   StyledSocialList,
   StyledSocialLink,
-  StyledMetadata,
-  StyledGitHubLink,
+  Metadata,
+  GitHubLink,
   StyledGitHubInfo,
   StyledGitHubInfoInner,
 } from './footer.styles'
@@ -22,8 +22,8 @@ const Footer = () => {
     <StyledContainer>
       <StyledSocial>
         <StyledSocialList>
-          {socialMedia?.map(({ name, url }, i) => (
-            <li key={i}>
+          {socialMedia?.map(({ name, url }) => (
+            <li key={name}>
               <StyledSocialLink
                 href={url}
                 target='_blank'
@@ -38,8 +38,8 @@ const Footer = () => {
         </StyledSocialList>
       </StyledSocial>
 
-      <StyledMetadata>
-        <StyledGitHubLink
+      <Metadata>
+        <GitHubLink
           href='https://github.com/toddmath/portfolio-site'
           target='_blank'
           rel='nofolow noopener noreferrer'
@@ -60,8 +60,8 @@ const Footer = () => {
               </StyledGitHubInfoInner>
             )}
           </StyledGitHubInfo>
-        </StyledGitHubLink>
-      </StyledMetadata>
+        </GitHubLink>
+      </Metadata>
     </StyledContainer>
   )
 }

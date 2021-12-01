@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { theme, mixins, media, mediaMin, Article, styledTheme } from '@styles'
+import { theme, mixins, media, mediaMin, Section, styledTheme } from '@styles'
 
 const { flat, fontSizes, fonts, transition } = theme
 const { flexCenter, inlineLink, bigButton } = mixins
@@ -10,7 +10,7 @@ const headlineText = styledTheme([flat.dark.paragraph, theme.mode.dark.header])
 
 const titleStyles = css`
   h2 {
-    --text-wght: calc( var(--p-vf-wght) * var(--h2-vf-wght-multiplier-s) * 0.8 );
+    --text-wght: calc(var(--p-vf-wght) * var(--h2-vf-wght-multiplier-s) * 0.8);
     ${'' /* --h2-font-size-min: 2; */}
     ${'' /* font-size: 4rem; */}
     ${'' /* line-height: 1; */}
@@ -18,7 +18,7 @@ const titleStyles = css`
     ${'' /* font-weight: 500; */}
     color: ${headlineText};
     ${'' /* ${media.tablet` */}
-      /* font-size: 3.5rem; */
+    /* font-size: 3.5rem; */
       /* line-height: 0.9; */
     ${'' /* `}; */}
     ${'' /* ${media.thone`font-size: 3.3rem;`} */}
@@ -63,7 +63,7 @@ const subTitleStyles = css`
   }
 `
 
-export const StyledContainer = styled(Article)`
+export const StyledContainer = styled(Section)`
   ${flexCenter};
   flex-direction: column;
   align-items: flex-start;

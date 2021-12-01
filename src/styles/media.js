@@ -36,8 +36,9 @@ export const toEm = px => `${(Number(px) / 16).toFixed(2)}em`
  * Advnaced media query builder. Allows different media types and max / min-width queries.
  * @param {string} [type='screen'] media type supplied to media query - ie `screen`, `print`.
  * @param {boolean} [max=true] If true, `max-width` media query, if false `min-width`.
- * @returns {string} Suplied CSS rules wrapped inside styled components `css` function.
+ * @returns {Object.<string, string>} Supplied CSS rules wrapped inside styled components `css` function.
  * @example
+ * ```javascript
  * // Inside a styled component:
  * display: flex;
  * align-content: center;
@@ -47,13 +48,14 @@ export const toEm = px => `${(Number(px) / 16).toFixed(2)}em`
  * `}
  * ...
  * `;
+ * ```
  */
 export const mediaType = (type = 'screen', max = true) =>
   Object.keys(sizes).reduce((acc, key) => {
     acc[key] = (...args) => css`
       @media ${type.length > 0 && `${type} and`} (${max ? 'max' : 'min'}-width: ${toEm(
-      sizes[key]
-    )}) {
+          sizes[key]
+        )}) {
         ${css(...args)};
       }
     `

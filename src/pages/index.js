@@ -1,12 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
-// import { Main } from '@styles'
-// import { ThemeToggleProvider } from '@context'
-import { Layout, Hero, About, Featured, Projects, Contact } from '@components'
+import { Layout, Hero, About, Featured, Contact } from '@components'
 import { useSal } from '@hooks'
 
-const IndexPage = ({ location }) => {
+function IndexPage({ location }) {
   useSal()
 
   return (
@@ -14,14 +12,13 @@ const IndexPage = ({ location }) => {
       <Hero />
       <About />
       <Featured />
-      <Projects />
       <Contact />
     </Layout>
   )
 }
 
 IndexPage.propTypes = {
-  location: PropTypes.object,
+  location: T.object,
 }
 
 export default IndexPage
