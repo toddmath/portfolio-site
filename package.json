@@ -41,6 +41,7 @@
     "terser": "^4.6.11"
   },
   "devDependencies": {
+    "@netlify/plugin-a11y": "^1.0.0-alpha.5",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
