@@ -1,17 +1,10 @@
 import styled, { keyframes, css } from 'styled-components'
-// import styledTheme from 'styled-theming'
 
 import { theme, styledTheme } from '@styles'
 
 const { flat } = theme
 
-// export const backgroundColor = styledTheme('mode', {
-//   light: theme.flat.dark.background,
-//   dark: theme.flat.dark.paragraph,
-// })
-
 const sunStroke = styledTheme(['rgba(245, 124, 0, 1)', flat.dark.button])
-// const sunShineStroke = styledTheme([])
 
 const AniStrokeDashOffset = keyframes`
   from: {
@@ -57,6 +50,8 @@ export const LogoWrapper = styled.div`
 `
 
 export const StyledMoon = styled.div`
+  cursor: pointer;
+
   path {
     stroke-width: 20px;
     transition: ${theme.transition};
@@ -67,6 +62,7 @@ export const StyledMoon = styled.div`
     /* animation-name: ${({ themeMode }) => (themeMode === 'light' ? drawIn : drawOut)}; */
     animation-duration: 1s;
     animation-direction: ${({ themeMode }) => (themeMode === 'dark' ? 'normal' : 'reverse')};
+
     &.sun {
       stroke: ${sunStroke};
       stroke-dasharray: 1000;
@@ -82,7 +78,7 @@ export const StyledMoon = styled.div`
               stroke-dashoffset: 0;
               animation-direction: reverse;
             `}
-      }
+    }
     &.sunshine {
       stroke: ${sunStroke};
       animation-delay: 750ms;
@@ -107,14 +103,14 @@ export const StyledMoon = styled.div`
     animation-name: ${drawIn};
     animation-duration: 1s;
     ${({ themeMode }) =>
-      themeMode === 'dark'
-        ? css`
-            stroke-dashoffset: 1000;
-            animation-direction: normal;
-          `
-        : css`
-            stroke-dashoffset: 0;
-            animation-direction: reverse;
-          `}
+    themeMode === 'dark'
+      ? css`
+          stroke-dashoffset: 1000;
+          animation-direction: normal;
+        `
+      : css`
+          stroke-dashoffset: 0;
+          animation-direction: reverse;
+        `}
   } */
 `

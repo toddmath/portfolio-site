@@ -42,7 +42,9 @@ export const StyledContainer = styled.header`
   padding: 0px 50px;
   /* transition: transform 250ms var(--navCubicBenz), box-shadow 250ms var(--navCubicBenz), border 250ms var(--navCubicBenz); */
   /* transition-property: transform; */
-  transition: border-bottom 0.35s var(--navCubicBenz), box-shadow 0.35s var(--navCubicBenz), height 0.35s var(--navCubicBenz), transform 0.35s var(--navCubicBenz), background 0s var(--navCubicBenz) !important;
+  transition: border-bottom 0.35s var(--navCubicBenz), box-shadow 0.35s var(--navCubicBenz),
+    height 0.35s var(--navCubicBenz), transform 0.35s var(--navCubicBenz),
+    background 0s var(--navCubicBenz) !important;
   z-index: 11;
   filter: none !important;
   pointer-events: auto !important;
@@ -224,7 +226,8 @@ export const StyledLink = styled.div`
 // `
 
 export const StyledButtonContainer = styled.div`
+  height: 100%;
   display: inline-flex;
   align-items: stretch;
-  transition-delay: ${props => `${props.$delay}ms` || '100ms'};
+  transition-delay: 100ms;
 `
