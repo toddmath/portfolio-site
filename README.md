@@ -20,7 +20,7 @@
 
 <p align="center">
   <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+    <img alt="Gatsby" src="https://avatars.githubusercontent.com/u/12551863?s=200&v=4" width="60" />
   </a>
 </p>
 
