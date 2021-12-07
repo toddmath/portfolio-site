@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 import { useGithubInfo } from '@hooks'
 import { socialMedia } from '@config'
@@ -7,7 +8,7 @@ import { FormattedIcon, IconStar, IconFork } from '@components/icons'
 import {
   StyledContainer,
   StyledSocial,
-  StyledSocialList,
+  MotionSocialList,
   StyledSocialLink,
   Metadata,
   GitHubLink,
@@ -21,9 +22,15 @@ const Footer = () => {
   return (
     <StyledContainer>
       <StyledSocial>
-        <StyledSocialList>
+        <MotionSocialList>
           {socialMedia?.map(({ name, url }) => (
-            <li key={name}>
+            <motion.li
+              key={name}
+              layout
+              layoutId={name}
+              whileHover={{ scale: 0.75, color: 'var(--interactive-hover)' }}
+              transition={{ type: 'spring', damping: 7, stiffness: 100 }}
+            >
               <StyledSocialLink
                 href={url}
                 target='_blank'
@@ -33,9 +40,9 @@ const Footer = () => {
               >
                 <FormattedIcon name={name} />
               </StyledSocialLink>
-            </li>
+            </motion.li>
           ))}
-        </StyledSocialList>
+        </MotionSocialList>
       </StyledSocial>
 
       <Metadata>
@@ -44,18 +51,22 @@ const Footer = () => {
           target='_blank'
           rel='nofolow noopener noreferrer'
         >
-          <div>Designed by Todd Matheson</div>
-
+          Designed by Todd Matheson
+          {/* <div>Designed by Todd Matheson</div> */}
           <StyledGitHubInfo>
             {stars > 0 && (
               <StyledGitHubInfoInner>
-                <IconStar />
+                <motion.div whileHover={{ scale: 1.2, color: 'var(--interactive-hover)' }}>
+                  <IconStar />
+                </motion.div>
                 <span>{stars}</span>
               </StyledGitHubInfoInner>
             )}
             {forks > 0 && (
               <StyledGitHubInfoInner>
-                <IconFork />
+                <motion.div>
+                  <IconFork />
+                </motion.div>
                 <span>{forks}</span>
               </StyledGitHubInfoInner>
             )}

@@ -9,7 +9,7 @@ import {
   StyledSubtitle,
   StyledOverline,
   StyledDescription,
-  StyledContainer,
+  HeroContainer,
   ButtonContainer,
 } from './hero.styles'
 
@@ -22,7 +22,7 @@ export default function Hero() {
   const emailBody = encode(`Hi Todd, my name is ...\n\nI just wanted to say ...`)
 
   return (
-    <StyledContainer
+    <HeroContainer
       maxWidth='1045px'
       bigDesktopStyles={`max-width: 820px;`}
       desktopStyles={`max-width: 696px;`}
@@ -50,6 +50,6 @@ export default function Hero() {
           </Button>
         </ButtonContainer>
       </>
-    </StyledContainer>
+    </HeroContainer>
   )
 }

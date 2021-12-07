@@ -6,24 +6,17 @@ import { AnimatePresence } from 'framer-motion'
 import { navLinks } from '@config'
 import { MotionNavList, MotionNavListItem, NavLink } from './nav-links.styles'
 
-const NavLinks = ({ isMounted }) => {
-  // const spring = { type: 'spring', damping: 8, stiffness: 65 }
-  // const list = {
-  //   visible: {
-  //     opacity: 1,
-  //     transition: {
-  //       when: 'beforeChildren',
-  //       staggerChildren: 0.3,
-  //     },
-  //   },
-  // }
-  const variants = {
-    visible: custom => ({
-      opacity: 1,
-      transition: { delay: custom * 0.2 },
-    }),
-  }
+const variants = {
+  visible: custom => ({
+    opacity: 1,
+    transition: { delay: custom * 0.2 },
+  }),
+  initial: {
+    opacity: 0,
+  },
+}
 
+const NavLinks = ({ isMounted }) => {
   return (
     <MotionNavList role='list'>
       <AnimatePresence>
@@ -32,12 +25,12 @@ const NavLinks = ({ isMounted }) => {
           navLinks.map(({ url, name }, i) => (
             <MotionNavListItem
               key={`NavLink-${name}`}
-              initial={{ opacity: 0 }}
+              // layout
+              // layoutId={`NavLink-${name}`}
+              initial='initial'
               custom={i}
               animate='visible'
               variants={variants}
-              // layoutTransition={spring}
-              // transition={spring}
               role='listitem'
               aria-posinset={i + 1}
             >

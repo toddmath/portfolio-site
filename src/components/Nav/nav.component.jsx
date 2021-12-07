@@ -1,13 +1,12 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-// import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-import { navLinks } from '@config'
+// import { navLinks } from '@config'
 import { useNav } from '@hooks'
 import { Menu, NavLinks, Button, ThemeToggle, Fade } from '@components'
 
 import {
-  StyledContainer,
+  Header,
   StyledNav,
   StyledHamburger,
   StyledHamburgerBox,
@@ -20,7 +19,7 @@ const Nav = () => {
   const { menuOpen, isMounted, scrollDirection, toggleMenu } = useNav()
 
   return (
-    <StyledContainer scrollDirection={scrollDirection}>
+    <Header scrollDirection={scrollDirection}>
       <Helmet>
         <body className={menuOpen ? 'blur' : ''} />
       </Helmet>
@@ -54,7 +53,7 @@ const Nav = () => {
         aria-expanded={menuOpen}
         aria-haspopup='menu'
       />
-    </StyledContainer>
+    </Header>
   )
 }
 

@@ -3,12 +3,11 @@ import styled from 'styled-components'
 import { theme } from '@styles'
 
 const {
-  flat,
   fontSizes: { xs },
   fonts: { SFMono },
 } = theme
 
-export const StyledTechList = styled.ul`
+export const TechUl = styled.ul`
   flex-grow: 1;
   display: flex;
   align-items: flex-end;
@@ -16,11 +15,12 @@ export const StyledTechList = styled.ul`
   margin-top: 20px;
 `
 
-export const StyledTechItem = styled.li`
-  font-family: ${SFMono};
+export const TechItem = styled.li`
+  /* font-family: ${SFMono}; */
   font-size: ${xs};
-  color: ${flat.dark.secondary};
+  color: var(--text-muted);
   line-height: 1.75;
+
   &:not(:last-of-type) {
     margin-right: 15px;
   }

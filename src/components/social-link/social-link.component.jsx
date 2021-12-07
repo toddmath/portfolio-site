@@ -1,46 +1,48 @@
-import React, { useState, memo } from 'react'
-import PropTypes from 'prop-types'
-import { useSpring } from 'react-spring'
+import React from 'react'
+import T from 'prop-types'
 
 import { FormattedIcon } from '@components/icons'
-import { StyledLink } from './social-link.styles'
+import { MotionLink } from './social-link.styles'
+
+const variant = {
+  initial: {
+    scale: 1.0,
+  },
+  linkHover: {
+    scale: 1.1,
+    transition: {
+      type: 'spring',
+    },
+  },
+  hover: {
+    scale: 1.3,
+    transition: { type: 'spring' },
+  },
+}
 
 function SocialLink({ url, name, isHovered }) {
-  const [linkHovered, setLinkHovered] = useState(false)
-  const handleOnOver = () => setLinkHovered(true)
-  const handleOnOut = () => setLinkHovered(false)
-
-  const props = useSpring({
-    scale: isHovered ? (linkHovered ? '1.1' : '1.5') : '1',
-    opacity: isHovered ? 1 : 0.9,
-    config: {
-      tension: linkHovered ? 550 : 450,
-      friction: linkHovered ? 45 : 30,
-      mass: linkHovered ? 5 : 3,
-    },
-  })
-
   return (
-    <StyledLink
+    <MotionLink
+      layout='size'
+      layoutId={name}
       href={url}
       aria-label={name}
       target='_blank'
       rel='nofollow noopener noreferrer'
-      onMouseOver={handleOnOver}
-      onFocus={handleOnOver}
-      onMouseLeave={handleOnOut}
-      onBlur={handleOnOut}
-      style={props}
+      variants={variant}
+      initial='initial'
+      whileHover='linkHover'
+      animate={isHovered ? 'hover' : 'initial'}
     >
       <FormattedIcon name={name} />
-    </StyledLink>
+    </MotionLink>
   )
 }
 
 SocialLink.propTypes = {
-  isHovered: PropTypes.bool.isRequired,
-  name: PropTypes.string,
-  url: PropTypes.string.isRequired,
+  isHovered: T.bool.isRequired,
+  name: T.string,
+  url: T.string.isRequired,
 }
 
-export default memo(SocialLink)
+export default SocialLink

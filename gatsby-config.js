@@ -41,6 +41,17 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-plugin-google-fonts-v2`,
+      options: {
+        fonts: [
+          {
+            // hack necessary @see <https://github.com/pocorschi/gatsby-plugin-google-fonts-v2/issues/5#issuecomment-768460473>
+            family: 'Nunito:ital,wght@0,200..1000;1,200..1000&subset=latin',
+          },
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-lodash',
       options: {
         disabledFeatures: ['shorthands', 'cloning', 'chaining', 'exotics'],
@@ -51,6 +62,7 @@ module.exports = {
       options: {
         displayName: true,
         fileName: false,
+        pure: true,
       },
     },
     {

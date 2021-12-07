@@ -1,39 +1,38 @@
 import React, { useState } from 'react'
+import { LayoutGroup } from 'framer-motion'
 
-import { useReducedMotion } from '@hooks'
 import { socialMedia } from '@config'
 
-import { SocialLink } from '@components'
+import { SocialLink, Fade } from '@components'
 import { StyledContainer, StyledList } from './social.styles'
 
-const Social = () => {
+function Social() {
   const [isHovered, setIsHovered] = useState(false)
-  const reducedMotion = useReducedMotion()
 
-  const handleOnOver = evt => {
-    if (evt) evt.preventDefault()
-    if (!reducedMotion) {
-      setIsHovered(true)
-    }
+  const onHover = () => {
+    setIsHovered(true)
   }
 
-  const handleOnLeave = evt => {
-    if (evt) evt.preventDefault()
+  const onLeave = () => {
     setIsHovered(false)
   }
 
   return (
     <StyledContainer>
-      <StyledList
-        onMouseOver={handleOnOver}
-        onMouseLeave={handleOnLeave}
-        onFocus={handleOnOver}
-        onnBlur={handleOnLeave}
-      >
-        {socialMedia?.map(({ url, name }, i) => (
-          <SocialLink key={i} url={url} name={name} isHovered={isHovered} />
-        ))}
-      </StyledList>
+      <Fade>
+        <LayoutGroup id='social_aside'>
+          <StyledList
+            onFocus={onHover}
+            onBlur={onLeave}
+            onMouseOver={onHover}
+            onMouseLeave={onLeave}
+          >
+            {socialMedia?.map(({ url, name }) => (
+              <SocialLink key={name} url={url} name={name} isHovered={isHovered} />
+            ))}
+          </StyledList>
+        </LayoutGroup>
+      </Fade>
     </StyledContainer>
   )
 }

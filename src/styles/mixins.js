@@ -10,7 +10,6 @@ const {
   link,
   transition,
   lineHeights,
-  fonts: { SFMono },
   fontSizes: { sm, smish, md, lg },
 } = theme
 
@@ -30,23 +29,29 @@ const rippleEffect = keyframes`
 `
 
 const buttonStyles = css`
-  --mainColor: ${flat.dark.button};
+  --maincolor: var(--interactive-normal);
   box-sizing: border-box;
-  color: var(--mainColor);
+  color: var(--maincolor);
   background-color: transparent;
-  border: 1px solid var(--mainColor);
+  border: 1px solid var(--maincolor);
   border-radius: ${borderRadius};
-  font-family: ${SFMono};
+  font-family: var(--font-variable);
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
   transition: ${transition};
+
   &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--mainColor);
-    color: ${flat.dark.buttonText};
+  &:focus {
+    background-color: var(--background-modifier-hovver);
+    color: var(--interactive-hover);
   }
+
+  &:active {
+    background-color: var(--background-modifier-active);
+    color: var(--interactive-active);
+  }
+
   &:after {
     display: none !important;
   }
@@ -55,7 +60,9 @@ const buttonStyles = css`
 const figStyles = css`
   overflow: hidden;
   display: block;
-  transition: ${transition};
+  /* transition: ${transition}; */
+  transition: filter 200ms ease;
+
   &:after,
   &:before {
     content: '';
@@ -67,17 +74,21 @@ const figStyles = css`
     position: absolute;
     pointer-events: none;
     border-radius: ${borderRadius};
-    transition: ${transition};
+    transition: 400ms ease;
   }
+
   &:before {
     z-index: 2;
   }
+
   &:after {
     z-index: 3;
   }
+
   &:hover,
   &:focus {
     filter: none;
+
     &:after,
     &:before {
       opacity: 0;
@@ -127,16 +138,19 @@ const mixins = {
     position: relative;
     transition: ${transition};
     cursor: pointer;
-    &:hover,
-    &:active,
-    &:focus {
-      color: ${flat.dark.link};
+
+    &:hover {
+      color: var(--text-link);
       outline: 0;
+    }
+
+    &:focus {
+      outline: 3px dotted var(--text-link);
     }
   `,
 
   inlineLink: css`
-    --mainColor: ${flat.dark.link};
+    --mainColor: var(--text-link);
     display: inline-block;
     text-decoration: none;
     text-decoration-skip-ink: auto;
@@ -145,15 +159,18 @@ const mixins = {
     cursor: pointer;
     color: var(--mainColor);
     line-height: 18.8px;
+
     &:hover,
     &:focus,
     &:active {
       color: var(--mainColor);
       outline: 0;
+
       &:after {
         width: 100%;
       }
     }
+
     &:after {
       content: '';
       display: block;
@@ -169,13 +186,15 @@ const mixins = {
 
   linkCenterUL: css`
     --ulHeight: 1px;
-    --mainColor: ${flat.dark.link};
-    --textColor: ${flat.dark.paragraph};
+    --mainColor: var(--text-link);
+    /* --textColor: ${flat.dark.paragraph}; */
     position: relative;
     color: var(--mainColor);
     text-decoration: none;
     cursor: pointer;
-    line-height: calc(${lineHeights.body} - var(--ulHeight));
+    /* line-height: calc(${lineHeights.body} - var(--ulHeight)); */
+    line-height: inherit;
+
     &:before {
       content: '';
       position: absolute;
@@ -191,11 +210,13 @@ const mixins = {
       );
       visibility: hidden;
       transform: scaleX(0) scaleY(3.5);
-      transition: all 300ms ease-in-out 0s;
+      transition: all 300ms ease-out 0s;
     }
+
     &:hover,
     &:focus {
-      color: var(--mainColor);
+      color: var(--interactive-hover);
+
       &:before {
         visibility: visible;
         transform: scaleX(1.05) scaleY(1);
@@ -253,6 +274,7 @@ const mixins = {
     line-height: 1.2;
     overflow: hidden;
     position: relative;
+
     > .content {
       position: relative;
       z-index: 2;
@@ -285,11 +307,14 @@ const mixins = {
     --shadowColor: ${flat.dark.shadow};
     --shadowBlur: -15px;
     --shadowSpread: 30px;
-    box-shadow: 0 10px var(--shadowSpread) var(--shadowBlur) var(--shadowColor);
+    /* box-shadow: 0 10px var(--shadowSpread) var(--shadowBlur) var(--shadowColor); */
+    box-shadow: var(--elevation-medium);
     transition: ${transition};
+
     &:hover,
     &:focus {
-      box-shadow: 0 20px var(--shadowSpread) var(--shadowBlur) var(--shadowColor);
+      box-shadow: var(--elevation-high);
+      /* box-shadow: 0 20px var(--shadowSpread) var(--shadowBlur) var(--shadowColor); */
     }
   `,
 
@@ -305,10 +330,11 @@ const mixins = {
     ${media.tiny`
       font-size: ${smish};
     `};
+
     &:before {
       display: block;
       content: '0' counter(item) '.';
-      color: ${flat.dark.tertiary};
+      color: var(--header-secondary);
       font-size: ${md};
       margin-bottom: 5px;
     }
@@ -361,8 +387,8 @@ const mixins = {
   `,
 
   textSelectShadow: css`
-    --highlite: ${flat.dark.highlight};
-    --textFG: ${flat.dark.paragraph};
+    --highlite: var(--text-link);
+    --textFG: var(--text-normal);
     position: relative;
     color: inherit;
     background: none repeat scroll 0% 0% transparent;

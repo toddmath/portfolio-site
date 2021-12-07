@@ -1,0 +1,9 @@
+/build/**
+/node_modules/**
+/coverage/**
+.cache
+/.cache/**
+package.json
+package-lock.json
+yarn-lock.json
+/public/**

@@ -1,48 +1,56 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
-import { animated } from 'react-spring'
+import { Mail as Icon } from '@styled-icons/feather/Mail'
+import { media } from '@styles'
 
-import { theme, media } from '@styles'
-
-const {
-  flat,
-  fontSizes: { xs },
-  fonts: { SFMono },
-} = theme
-
-export const StyledContainer = styled.aside`
-  width: 40px;
+export const EmailContainer = styled.aside`
+  /* width: 40px; */
   position: fixed;
   bottom: 0;
   right: 40px;
+
   ${media.desktop`right: 25px;`};
   ${media.tablet`display: none;`};
 `
 
-export const StyledLinkWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+export const LinkWrapper = styled.div`
+  display: grid;
+  gap: 1ch;
   position: relative;
-  perspective: 1000rem;
+
   &:after {
     content: '';
     display: block;
     width: 1px;
-    height: 90px;
+    height: 10ch;
     margin: 0 auto;
-    background-color: ${flat.dark.secondary};
+    background-color: var(--background-accent);
   }
 `
 
-export const StyledEmailLink = styled(animated.a)`
-  transition: unset;
-  font-family: ${SFMono};
-  font-size: ${xs};
-  letter-spacing: 0.5px;
+export const EmailLink = styled(motion.a)`
+  font-size: calc(var(--p-font-size-min) * 0.9em);
+  display: block;
   writing-mode: vertical-rl;
-  margin: 20px auto;
-  padding: 10px;
-  color: ${flat.dark.link};
-  perspective: 50rem;
+  color: var(--interactivee-normal);
+  perspective: 10rem;
+
+  &:hover {
+    color: var(--interactive-hover);
+  }
+`
+
+export const EmailLinkContainer = styled.div`
+  color: var(--interactive-normal);
+`
+
+export const EmailIcon = styled(Icon).attrs(({ size, title }) => ({
+  size: size || '22',
+  title,
+}))`
+  color: var(--interactive-normal);
+  stroke: currentColor;
+  fill: var(--background-floating);
+  box-shadow: var(--elevation-small);
 `

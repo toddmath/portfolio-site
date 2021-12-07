@@ -1,21 +1,21 @@
 import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
-import { StyledTechList, StyledTechItem } from './tech-list.styles'
+import { TechUl, TechItem } from './tech-list.styles'
 
 const TechList = ({ tech }) => (
-  <StyledTechList role='list'>
+  <TechUl role='list'>
     {tech.length &&
       tech.map(t => (
-        <StyledTechItem key={t} role='listitem'>
+        <TechItem key={t} role='listitem'>
           {t}
-        </StyledTechItem>
+        </TechItem>
       ))}
-  </StyledTechList>
+  </TechUl>
 )
 
 TechList.propTypes = {
-  tech: PropTypes.arrayOf(PropTypes.string),
+  tech: T.arrayOf(T.string),
 }
 
 export default memo(TechList)
