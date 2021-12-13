@@ -10,9 +10,14 @@ export const StyledContainer = styled.aside`
   position: fixed;
   bottom: 0;
   left: 40px;
-  color: ${flat.dark.headline};
-  ${media.desktop`left: 25px;`};
-  ${media.tablet`display: none;`};
+  color: var(--interactive-normal);
+
+  ${media.desktop`
+    left: 25px;
+  `};
+  ${media.tablet`
+    display: none;
+  `};
 `
 
 export const StyledList = styled(motion.ul)`
@@ -25,6 +30,7 @@ export const StyledList = styled(motion.ul)`
   grid-auto-rows: min-content;
   gap: 1ch;
 
+  color: var(--interactive-normal);
   transition-timing-function: unset;
 
   &:after {

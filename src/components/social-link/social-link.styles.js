@@ -1,18 +1,21 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
-const linkStyles = css`
-  padding: 0;
-  /* padding: 1ch; */
-  color: var(--text-link);
-  svg {
-    width: 2ch;
-    height: 2ch;
-  }
-`
-
 export const MotionLink = styled(motion.a)`
-  ${linkStyles};
-  transition-timing-function: unset;
-  transition: unset;
+  padding: 0;
+  color: var(--interactive-normal);
+  transition: color 400ms ease, background-color 400ms ease;
+  /* transition: unset; */
+
+  svg {
+    color: var(--interactive-normal);
+  }
+
+  &:hover {
+    color: var(--interactive-hover);
+
+    svg {
+      color: var(--interactive-hover);
+    }
+  }
 `

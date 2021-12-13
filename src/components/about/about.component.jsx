@@ -3,7 +3,8 @@ import React from 'react'
 import { useAboutQuery } from '@hooks'
 import { github } from '@config'
 
-import { Section, Heading, Flex } from '@components'
+import { Heading } from '@styles'
+import { Section, Flex } from '@components'
 import {
   StyledFlexContainer,
   StyledContent,

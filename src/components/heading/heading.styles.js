@@ -71,6 +71,7 @@ export const StyledHeading = styled.h2`
   color: ${props => props.color || headingColor};
   text-shadow: ${headingShadow};
   line-height: 1.2;
+
   &:before {
     counter-increment: section;
     content: '0' counter(section) '.';
@@ -84,6 +85,7 @@ export const StyledHeading = styled.h2`
     bottom: 4px;
     ${media.tablet`font-size: ${fontSizes.lg};`};
   }
+
   &:after {
     content: '';
     display: block;

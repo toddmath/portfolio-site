@@ -8,7 +8,7 @@ import { srConfig } from '@config'
 /**
  * Custom react hook that takes an array of ref's and passes it to scrollreveal.
  * @param {React.MutableRefObject} refs React ref instantiated with array.
- * @param {{ delay?: number, distance?: string, opacity?: number }}
+ * @param {{ delay?: number, distance?: string, opacity?: number, duration?: number }}
  */
 export default function useReveals(
   refs,

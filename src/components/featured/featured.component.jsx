@@ -6,44 +6,53 @@ import { ProjectLink, FeaturedLinks } from '@components'
 import { Heading } from '@styles'
 
 import {
-  StyledContainer,
-  StyledContent,
+  FeaturedContainer,
+  FeaturedContent,
   StyledProjectName,
   StyledDescription,
   StyledTechList,
   StyledFeaturedImg,
   StyledImgContainer,
   Project,
+  FeaturedHeading,
 } from './featured.styles'
 
+/**
+ * Simple helper function to take out all spaces from key
+ * @param {string} key Key to sanitize
+ */
 const cleanKey = key => key.replace(/(\s+)/g, '')
+
+/**
+ * Checks whether the index is odd
+ * @param {number} i The index to check
+ * @returns {boolean}
+ **/
 const isOdd = i => i % 2 === 1
 
 export default function Featured() {
+  const featuredProjects = useFeaturedQuery()
   const revealTitles = useRef([])
   const revealDescriptions = useRef([])
-  const featuredProjects = useFeaturedQuery()
-
   // useReveals(revealTitles)
   // useReveals(revealDescriptions, { delay: 280, distance: '0px', opacity: 0.25 })
   const handleRefs = (ref, array) => array.current.push(ref)
 
   return (
-    <StyledContainer
+    <FeaturedContainer
       maxWidth='1045px'
       bigDesktopStyles={`max-width: 845px;`}
       desktopStyles={`max-width: 696px;`}
     >
-      {/* <div data-sal='fade' data-sal-duration='2000' data-sal-easeing='easeInQuart'> */}
-      <Heading id='projects' ref={ref => handleRefs(ref, revealTitles)}>
+      <FeaturedHeading id='projects' ref={ref => handleRefs(ref, revealTitles)}>
         Some Things I&apos;ve Built
-      </Heading>
+      </FeaturedHeading>
 
-      <div>
-        {featuredProjects &&
-          featuredProjects.map(({ node: { frontmatter: fm, html } }, i) => (
+      {/* <div className='projects-container'> */}
+      {featuredProjects
+        ? featuredProjects.map(({ node: { frontmatter: fm, html } }, i) => (
             <Project key={cleanKey(fm.title)}>
-              <StyledContent>
+              <FeaturedContent>
                 <StyledProjectName ref={ref => handleRefs(ref, revealTitles)}>
                   {fm.external ? (
                     <ProjectLink to={fm.external} label='Demo'>
@@ -67,8 +76,12 @@ export default function Featured() {
                   </StyledTechList>
                 )}
 
-                <FeaturedLinks isOdd={isOdd(i)} github={fm.github} external={fm.external} />
-              </StyledContent>
+                <FeaturedLinks
+                  isodd={isOdd(i).toString()}
+                  github={fm.github}
+                  external={fm.external}
+                />
+              </FeaturedContent>
 
               <StyledImgContainer
                 href={fm.external ? fm.external : fm.github || '#'}
@@ -78,9 +91,9 @@ export default function Featured() {
                 <StyledFeaturedImg image={getImage(fm.cover)} alt={fm.title} />
               </StyledImgContainer>
             </Project>
-          ))}
-      </div>
+          ))
+        : null}
       {/* </div> */}
-    </StyledContainer>
+    </FeaturedContainer>
   )
 }

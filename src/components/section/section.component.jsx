@@ -7,6 +7,7 @@ function Section({
   ariaLabel,
   maxWidths,
   maxWidth = '1045px',
+  minHeight = '100vh',
   bigDesktopStyles,
   desktopStyles,
   width,
@@ -20,6 +21,7 @@ function Section({
     <SectionOuter
       aria-label={ariaLabel}
       maxWidth={maxWidth}
+      minHeight={minHeight}
       bigDesktopStyles={bigDesktopStyles}
       desktopStyles={desktopStyles}
       maxWidths={maxWidths}
@@ -37,21 +39,19 @@ function Section({
 Section.propTypes = {
   ariaLabel: T.string,
   maxWidth: T.string,
+  minHeight: T.string,
   bigDesktopStyles: T.string,
   desktopStyles: T.string,
-  maxWidths: T.oneOfType([
-    T.shape({
-      giant: T.string,
-      bigDesktop: T.string,
-      desktop: T.string,
-      tablet: T.string,
-      thone: T.string,
-      phablet: T.string,
-      phone: T.string,
-      tiny: T.string,
-    }),
-    T.string,
-  ]),
+  maxWidths: T.shape({
+    giant: T.string,
+    bigDesktop: T.string,
+    desktop: T.string,
+    tablet: T.string,
+    thone: T.string,
+    phablet: T.string,
+    phone: T.string,
+    tiny: T.string,
+  }),
   width: T.string,
   textAlign: T.string,
   margin: T.node,

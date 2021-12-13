@@ -3,6 +3,7 @@ import React, { memo } from 'react'
 import { AnimatePresence } from 'framer-motion'
 
 // import { Fade } from '@components'
+
 import { navLinks } from '@config'
 import { MotionNavList, MotionNavListItem, NavLink } from './nav-links.styles'
 
@@ -14,6 +15,9 @@ const variants = {
   initial: {
     opacity: 0,
   },
+  exit: {
+    opacity: 0,
+  },
 }
 
 const NavLinks = ({ isMounted }) => {
@@ -21,13 +25,13 @@ const NavLinks = ({ isMounted }) => {
     <MotionNavList role='list'>
       <AnimatePresence>
         {isMounted &&
-          navLinks &&
           navLinks.map(({ url, name }, i) => (
             <MotionNavListItem
               key={`NavLink-${name}`}
               // layout
               // layoutId={`NavLink-${name}`}
               initial='initial'
+              exit='exit'
               custom={i}
               animate='visible'
               variants={variants}

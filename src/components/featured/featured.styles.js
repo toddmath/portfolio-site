@@ -2,34 +2,42 @@ import styled from 'styled-components'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Section from '../section/section.component'
-import { theme, mixins, media, styledTheme } from '@styles'
+import { theme, mixins, media, Heading } from '@styles'
 
 const { flexCenter, linkCenterUL, img, willow } = mixins
 const {
   colors,
-  flat,
-  fontSizes: { smish, lg },
-  fonts: { SFMono },
+  fontSizes: { smish },
   borderRadius,
   margin,
   easing,
 } = theme
 
-const techColor = styledTheme([flat.dark.paragraph, flat.dark.background])
-const projectTitleColor = styledTheme([flat.dark.headline, flat.dark.cardParagraph])
+export const FeaturedHeading = styled(Heading)`
+  position: ;
+`
 
-export const StyledContainer = styled(Section)`
+export const FeaturedContainer = styled(Section)`
   --projBenz: ${easing};
   ${flexCenter};
   flex-direction: column;
   align-items: flex-start;
-  transition: transform 0.25s var(--projBenz), background 0s var(--projBenz);
+  padding: 0;
+  max-width: unset !important;
+  /* transition: transform 0.25s var(--projBenz), background 0s var(--projBenz); */
 `
 
-export const StyledContent = styled.div`
+export const FeaturedContent = styled.div`
   position: relative;
   grid-column: 1 / 8;
   grid-row: 1 / -1;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'title' 'desc' 'tech' 'link';
+  gap: 2ch;
+
+  max-inline-size: 35ch;
 
   ${media.thone`
     grid-column: 1 / -1;
@@ -37,21 +45,37 @@ export const StyledContent = styled.div`
     z-index: 5;
   `};
 
-  ${media.phablet`padding: 30px 25px 20px;`};
+  ${media.phablet`
+    padding: 30px 25px 20px;
+  `};
+
+  .projects-container {
+    position: relative;
+  }
 `
 
-export const StyledProjectName = styled.h4`
-  z-index: 100;
-  font-size: 28px;
+export const StyledProjectName = styled.h3`
+  grid-area: title;
+  z-index: 1;
+  font-size: 2rem;
   font-weight: 600;
-  margin: 0 0 20px;
-  color: ${projectTitleColor};
+  font-style: normal;
+  margin: 0;
+  margin-bottom: 1ch;
+  line-height: 1;
+  color: var(--header-secondary);
 
-  ${media.tablet`font-size: 24px;`};
-  ${media.thone`color: ${flat.dark.headline};`};
+  ${media.tablet`
+    font-size: 24px;
+  `};
+  ${media.thone`
+    color: var(--header-secondary);
+  `};
 
   a {
-    ${media.tablet`display: block;`};
+    ${media.tablet`
+      display: block;
+    `};
 
     &:hover,
     &:active {
@@ -60,27 +84,24 @@ export const StyledProjectName = styled.h4`
   }
 `
 
-const descriptionBorderColor = styledTheme([
-  `2px solid ${flat.dark.cardBackground}`,
-  `2px solid ${flat.dark.headline}`,
-])
-
 export const StyledDescription = styled.div`
-  box-shadow: 0 10px 30px -15px ${flat.dark.shadow};
+  grid-area: desc;
+  box-shadow: var(--elevation-medium);
   position: relative;
   z-index: 2;
-  padding: 25px;
-  background-color: ${flat.dark.cardBackground};
-  color: ${flat.dark.cardParagraph};
-  font-size: ${lg};
+  padding: 2ch;
+  background-color: var(--background-semi-transparent);
+  backdrop-filter: blur(5px);
+  color: var(--text-normal);
+  font-size: 1rem;
   border-radius: ${borderRadius};
-  border: ${descriptionBorderColor};
 
   ${media.thone`
-    background-color: ${flat.dark.semiCardBackground};
+    background-color: var(--background-semi-transparent);
     padding: 20px;
     box-shadow: none;
     width: 100%;
+
     &:hover {
       box-shadow: none;
     }
@@ -96,17 +117,21 @@ export const StyledDescription = styled.div`
 `
 
 export const StyledTechList = styled.ul`
+  grid-area: tech;
   position: relative;
   z-index: 2;
   display: flex;
   flex-wrap: wrap;
-  margin: 25px 0 10px;
+  margin: 0;
+  /* margin: 25px 0 10px; */
+  /* background-color: var(--background-semi-transparent);
+  background-filter: blur(5px); */
 
   li {
-    font-family: ${SFMono};
     font-size: ${smish};
-    color: ${techColor};
-    margin-bottom: 7px;
+    font-weight: 520;
+    color: var(--text-normal);
+    margin-bottom: 2ch;
     white-space: nowrap;
 
     &:not(:last-of-type) {
@@ -114,7 +139,7 @@ export const StyledTechList = styled.ul`
     }
 
     ${media.thone`
-      color: ${colors.lightestSlate};
+      /* color: ${colors.lightestSlate}; */
       margin-right: 10px;
     `};
   }
@@ -133,15 +158,18 @@ export const StyledTechList = styled.ul`
 `
 
 export const StyledLinkWrapper = styled.div`
+  grid-area: link;
   display: flex;
   align-items: center;
   position: relative;
-  margin-top: 10px;
-  margin-left: -10px;
-  color: ${flat.dark.link};
+  margin: 0;
+  /* margin-top: 10px;
+  margin-left: -10px; */
+  color: var(--text-link);
 
   a {
-    padding: 10px;
+    padding: 0 1ch;
+    /* padding: 10px; */
 
     svg {
       width: 22px;
@@ -171,7 +199,7 @@ export const StyledFeaturedImg = styled(GatsbyImage)`
 `
 
 export const StyledImgContainer = styled.a`
-  ${mixins.boxShadow};
+  /* ${mixins.boxShadow}; */
   grid-column: 6 / -1;
   grid-row: 1 / -1;
   ${willow};
@@ -188,14 +216,26 @@ export const StyledImgContainer = styled.a`
 `
 
 export const Project = styled.article`
+  /* scroll-snap-align: start; */
+  position: sticky;
+  top: 12ch;
+  background-color: var(--background-secondary-semi-transparent);
+  backdrop-filter: blur(10px);
+  padding: 2ch;
+  border-radius: ${borderRadius};
+  box-shadow: var(--elevation-medium);
+
   transition: inherit;
+
+  max-inline-size: 75ch;
+  margin-inline: auto;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: center;
 
   &:not(:last-of-type) {
-    margin-bottom: 100px;
+    margin-bottom: 8rem;
   }
 
   ${media.thone`
@@ -210,7 +250,7 @@ export const Project = styled.article`
       display: block;
     }
 
-    ${StyledContent} {
+    ${FeaturedContent} {
       width: 100%;
       display: block;
       padding: 0;
@@ -218,7 +258,8 @@ export const Project = styled.article`
     }
 
     ${StyledDescription} {
-      padding: 2em;
+      padding: 2ch;
+      /* padding: 2em; */
     }
 
     ${StyledLinkWrapper} {
@@ -226,11 +267,15 @@ export const Project = styled.article`
     }
   `};
 
-  ${media.tablet`align-items: start;`};
+  ${media.tablet`
+    align-items: start;
+  `};
 
   &:nth-of-type(odd) {
-    ${StyledContent} {
-      grid-column: 6 / -1;
+    ${FeaturedContent} {
+      grid-column: -1 / -8;
+      justify-self: end;
+      /* grid-column: 6 / -1; */
       text-align: right;
 
       ${media.thone`
@@ -238,7 +283,9 @@ export const Project = styled.article`
         text-align: unset;
       `};
 
-      ${media.phablet`padding: 30px 25px 20px;`};
+      ${media.phablet`
+        padding: 30px 25px 20px;
+      `};
     }
 
     ${StyledTechList} {

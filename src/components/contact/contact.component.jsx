@@ -1,14 +1,15 @@
-import React, { useRef } from 'react'
+import React from 'react'
 
 import { email } from '@config'
 import { useContactQuery } from '@hooks'
 import { Section, Button } from '@components'
+import { Heading } from '@styles'
 
-import { StyledHeading, StyledButtonContainer } from './contact.styles'
+import { StyledButtonContainer } from './contact.styles'
 
 export default function Contact() {
   const { title, html } = useContactQuery()
-  const revealContainer = useRef(null)
+  /* const revealContainer = useRef(null) */
   // useReveal(revealContainer)
 
   return (
@@ -16,13 +17,14 @@ export default function Contact() {
       ariaLabel='Contact me section'
       textAlign='center'
       maxWidth='845px'
-      margin='0 auto 30px'
+      minHeight='unset'
+      margin='10ch auto 30px'
       desktopStyles={`max-width: 696px;`}
       tabletStyles={`margin-bottom: 20px; padding-bottom: 50px;`}
     >
-      <StyledHeading id='contact' ref={revealContainer}>
+      <Heading id='contact' mb='2ch'>
         {title}
-      </StyledHeading>
+      </Heading>
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <StyledButtonContainer>
         <Button

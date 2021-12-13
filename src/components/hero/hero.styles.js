@@ -6,59 +6,86 @@ import { theme, mixins, media, mediaMin, Section } from '@styles'
 const { transition } = theme
 const { flexCenter, inlineLink, bigButton } = mixins
 
-/* const overlineColor = styledTheme([flat.dark.paragraph, flat.dark.cardParagraph]) */
-/* const headlineText = styledTheme([flat.dark.paragraph, theme.mode.dark.header]) */
-
 const titleStyles = css`
-  h2 {
-    margin: 0;
-    color: var(--header-primary);
-    transition: unset;
-  }
+  margin: 0;
+  color: var(--header-primary);
+  transition: unset;
 `
 
 const subTitleStyles = css`
-  h3 {
-    margin: 0 0;
-    margin-left: 0.5ch;
-    color: var(--header-primary);
+  margin: 0 0;
+  margin-left: 0.5ch;
+  color: var(--header-primary);
 
-    ${media.tablet`margin: 0 auto 0 0.5rem;`};
+  ${media.tablet`margin: 0 auto 0 0.5rem;`};
 
-    transition: unset;
-    line-height: calc(var(--h2-line-height-min) * 0.9);
+  transition: unset;
+  line-height: calc(var(--h2-line-height-min) * 0.9);
 
-    ${mediaMin.phone`
+  ${mediaMin.phone`
       line-height: calc((var(--h3-line-height-min) * 1em) + (var(--h3-line-height-max) - var(--h3-line-height-min)) * ((100vw - (var(--bp-small) * 1em )) / (var(--bp-xlarge) - var(--bp-small))));
       font-size: calc((var(--h3-font-size-min) * 1em ) + (var(--h3-font-size-max) - var(--h3-font-size-min)) * ((100vw - (var(--bp-small) * 1em )) / (var(--bp-xlarge) - var(--bp-small))));
     `}
 
-    /* ${mediaMin.tablet`
-      --text-wght: calc(var(--p-vf-wght) * var(--h3-vf-wght-multiplier-m));
-    `} */
-
-    ${mediaMin.bigDesktop`
+  ${mediaMin.bigDesktop`
       font-size: calc(var(--h3-font-size-max) * 1em);
       line-height: calc(var(--h3-line-height-max) * 0.8);
     `}
-  }
 `
 
 export const HeroContainer = styled(Section)`
   ${flexCenter};
   flex-direction: column;
   align-items: flex-start;
+  gap: 2ch;
   min-height: 100vh;
-  width: 100vw;
+  max-width: 70ch;
+  width: 100%;
+  /* width: 100vw; */
 
-  ${media.tablet`padding-top: 150px;`};
+  ${media.tablet`
+    padding-top: 150px;
+  `};
+
+  /* ${media.desktop`
+    max-width: 60ch;
+  `}; */
+
+  ${media.desktop`
+    max-width: 60ch;
+    `}
 
   div {
     width: 100%;
   }
 
-  ${titleStyles};
-  ${subTitleStyles};
+  /* h1 { */
+  /*   ${titleStyles}; */
+  /*   width: 100%; */
+  /*   display: block; */
+  /*   font-size: 3rem; */
+  /*   font-weight: 500; */
+  /* } */
+  /**/
+  /* p.subtitle { */
+  /*   ${subTitleStyles}; */
+  /* } */
+  /**/
+  /* .overline { */
+  /*   width: 100%; */
+  /*   display: block; */
+  /*   font-size: 1.4rem; */
+  /* } */
+
+  h2 {
+    ${titleStyles};
+  }
+
+  h3 {
+    ${subTitleStyles};
+  }
+  /* ${titleStyles};
+  ${subTitleStyles}; */
 `
 
 export const StyledOverline = styled.h1`
@@ -79,8 +106,10 @@ export const StyledOverline = styled.h1`
 export const StyledDescription = styled.div`
   margin-top: 1.5rem;
   width: 50%;
-  max-width: calc(var(--bp-small) * 1.4em);
-  transition: color 400ms ease, background-color 400ms ease;
+  max-width: 50ch;
+  word-break: break-word;
+  /* max-width: calc(var(--bp-small) * 1.4em); */
+  /* transition: color 400ms ease, background-color 400ms ease; */
   /* transition: ${transition}; */
 
   a {
@@ -88,8 +117,8 @@ export const StyledDescription = styled.div`
   }
 
   p {
-    margin-left: 0.3rem;
-    ${media.tablet`margin-left: 0.5rem;`}
+    transition: color 400ms ease, background-color 400ms ease;
+    /* margin-left: 0.3rem; */
   }
 `
 

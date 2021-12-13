@@ -40,7 +40,7 @@ Heading.propTypes = {
   align: T.string,
   width: T.string,
   color: T.string,
-  children: T.oneOfType([T.element, T.arrayOf(T.element), T.arrayOf(T.string), T.string]),
+  children: T.node,
 }
 
 // Heading.defaultProps = {

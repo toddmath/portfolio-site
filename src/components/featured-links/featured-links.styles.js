@@ -1,35 +1,24 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
-import { theme, mixins, media } from '@styles'
-
-const { flat } = theme
-
-export const StyledLinkWrapper = styled.div`
-  --margin: 10px;
-  --negativeMargin: -10px;
-  --iconSize: 22px;
+export const LinkWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
-  position: relative;
-  margin-top: var(--margin);
-  color: ${flat.dark.link};
-  justify-content: ${props => (props.isOdd ? 'flex-start' : 'flex-end')};
-  margin-left: ${props => (props.isOdd ? 'var(--negativeMargin)' : '0')};
-  margin-right: ${props => (props.isOdd ? '0' : 'var(--negativeMargin)')};
+  gap: 2ch;
+  /* color: var(--interactive-normal); */
+  margin-inline: 0;
+  margin-block: 0;
+  justify-content: ${p => (p.$isodd === 'true' ? 'flex-start' : 'flex-end')};
+
   a {
-    padding: var(--margin);
-    transition: unset;
-    svg {
-      width: var(--iconSize);
-      height: var(--iconSize);
-      ${mixins.boxShadow};
-      transition: shadow 250ms ${theme.easing};
-    }
+    padding: 1px;
+    color: var(--interactive-normal);
+    transition: color 400ms ease;
+    /* transition: color 400ms ease; */
   }
-  ${media.thone`
-    margin: 0;
-    a {
-      padding: calc(var(--margin) / 1.5) var(--margin);
-    }
-  `}
+
+  a:hover {
+    color: var(--text-link);
+    transition: color 100ms ease;
+  }
 `

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+/* import { motion } from 'framer-motion' */
 
 import { theme, media, styledTheme } from '@styles'
 
@@ -36,6 +37,7 @@ const textTitleStyles = css`
   ${titleStyles};
   font-size: 68px;
   margin: 0;
+
   ${media.desktop`font-size: 68px;`};
   ${media.tablet`font-size: 56px;`};
   ${media.phablet`font-size: 50px;`};
@@ -47,6 +49,7 @@ const textSubtitleStyles = css`
   font-size: 56px;
   margin: 0 0;
   letter-spacing: -0.048rem;
+
   ${media.desktop`font-size: 52px;`};
   ${media.tablet`font-size: 48px;`};
   ${media.phablet`font-size: 44px;`};

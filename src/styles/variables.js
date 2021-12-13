@@ -18,6 +18,7 @@ export const lightVariables = css`
   --background-accent: #747f8d;
   --background-floating: #fff;
   --background-semi-transparent: rgba(255, 255, 255, 0.5);
+  --background-secondary-semi-transparent: rgba(242, 243, 245, 0.7);
   --background-mobile-primary: #f8f9f9;
   --background-mobile-secondary: #fff;
   --background-modifier-hover: rgba(116, 127, 141, 0.08);
@@ -76,6 +77,7 @@ export const darkVariables = css`
   --background-accent: #4f545c;
   --background-floating: #18191c;
   --background-semi-transparent: rgba(54, 57, 63, 0.5);
+  --background-secondary-semi-transparent: rgba(47, 49, 54, 0.7);
   --background-mobile-primary: #36393f;
   --background-mobile-secondary: #2f3136;
   --background-modifier-hover: rgba(79, 84, 92, 0.16);

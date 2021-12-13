@@ -243,6 +243,11 @@ const GlobalStyle = createGlobalStyle`
     ${themeVariables}
   }
 
+  html,
+  body {
+    scroll-snap-type: y proximity;
+  }
+
   html {
     box-sizing: border-box;
     width: 100%;
@@ -297,8 +302,10 @@ const GlobalStyle = createGlobalStyle`
     color: var(--text-normal);
     line-height: 1.45;
     font-family: var(--font-variable);
-    font-size: ${fontSizes.lg};
-    ${media.phablet`font-size: ${fontSizes.md};`}
+    /* font-size: ${fontSizes.lg}; */
+    font-size: 1rem;
+
+    /* ${media.phablet`font-size: ${fontSizes.md};`} */
 
     &.hidden {
       overflow: hidden;
@@ -410,7 +417,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   svg {
-    fill: currentColor;
+    /* fill: currentColor; */
     vertical-align: middle;
   }
 
