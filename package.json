@@ -42,7 +42,7 @@
     "scrollreveal": "^4.0.6",
     "styled-components": "^5.1.0",
     "styled-theming": "^2.2.0",
-    "terser": "^4.6.11"
+    "terser": "^4.8.1"
   },
   "devDependencies": {
     "@netlify/plugin-a11y": "^1.0.0-alpha.5",
